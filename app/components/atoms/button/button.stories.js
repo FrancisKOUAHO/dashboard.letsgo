@@ -5,11 +5,9 @@ const buttonClicked = e => {
   alert("Button clicked")
 };
 
-export const basicButton = () => <Button> Basic button </Button>
-export const functionButton = () => (
-  <Button onClick={buttonClicked}> Click me </Button>
-)
-export const LinkedButton = () => <button href="/route"> Linked button </button>
+export const primaryButton = () => <Button color={'primary'}> primary </Button>
+export const secondaryButton = () => <Button color={'secondary'}> secondary </Button>
+export const functionButton = () => <Button onClick={buttonClicked}> Click me </Button>
 
 
 export default {
