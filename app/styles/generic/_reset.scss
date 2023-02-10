@@ -1,3 +1,5 @@
+@use '../settings/' as *;
+
 *, *:before, *:after {
   box-sizing: border-box;
 }
@@ -6,6 +8,7 @@ html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockq
   margin: 0;
   padding: 0;
   border: 0;
+  font-weight: $xw-300;
   vertical-align: baseline;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -57,5 +60,5 @@ select {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: $primary-color;
 }

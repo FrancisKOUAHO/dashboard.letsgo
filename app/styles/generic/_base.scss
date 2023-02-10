@@ -77,6 +77,7 @@ p {
 
 a {
   position: relative;
+  color: $primary-color;
 
   &.hover-underline {
     &::after {

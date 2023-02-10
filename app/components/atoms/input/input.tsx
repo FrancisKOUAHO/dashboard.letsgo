@@ -1,0 +1,31 @@
+import { FunctionComponent } from "react";
+import InputProps from "../../../types/InputProps";
+
+const Input: FunctionComponent<InputProps> = ({type, label, placeholder}) => {
+  
+  if (type="text") 
+    return (
+      <>
+        <label>{label}</label>
+        <input type={type} className={`c-input`} placeholder={placeholder} />
+      </>
+    )
+
+  if(type="password")
+    return (
+      <>
+        <label>{label}</label>
+        <input type={type} className={`c-input`} placeholder={placeholder} />
+        <input type="checkbox"/>Afficher mot de passe
+      </>
+    )
+
+  return (
+    <>
+      <label>{label}</label>
+      <input type={type} placeholder={placeholder} />
+    </>
+  )
+}
+
+export default Input

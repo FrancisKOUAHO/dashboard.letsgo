@@ -1,4 +1,4 @@
-import {FunctionComponent} from "react";
+import { FunctionComponent } from "react";
 import ButtonProps from "../../../types/ButtonProps";
 
 const Button: FunctionComponent<ButtonProps> = ({children, onClick, href, color= 'primary'}) => {
