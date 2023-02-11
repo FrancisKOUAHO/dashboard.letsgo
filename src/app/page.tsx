@@ -1,4 +1,4 @@
-import Button from '../app/components/atoms/button/button'
+import Button from './components/atoms/button/button'
 import Input from './components/atoms/input/input'
 import Illustration from './assets/illustrationLogin1.png'
 import React from "react";
@@ -44,7 +44,7 @@ const Home = () => {
                                   <Input name="password" type="password" placeholder={'Mot de passe'}/>
                               </div>
                               <div className="mt-4 text-right">
-                                  <a href="#">{"Mot de passe oublié ?"}</a>
+                                  <a href="src/app#">{"Mot de passe oublié ?"}</a>
                               </div>
                               <div className="mt-5 text-center intro-x xl:mt-8 xl:text-left">
                                   <Button type="submit" color={'primary'}> Connexion </Button>

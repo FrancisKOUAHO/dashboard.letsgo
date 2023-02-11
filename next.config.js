@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -9,6 +10,10 @@ const nextConfig = {
   images: {
     domains: ['http://localhost:3030'],
   },
-}
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
+};
 
-export default nextConfig;
+
+module.exports = nextConfig
