@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Logo from "../assets/logostarbuck.png";
-import IllustrationUrl from "../assets/illustrationLogin1.svg";
+import Logo from "../assets/LetsGo.png";
+import IllustrationUrl from "../assets/illustrationLogin1.png";
 import Input from "../components/atoms/input/input";
 import Button from "../components/atoms/button/button";
 
@@ -17,7 +17,7 @@ export default async function ForgetPassword() {
                             <span className="ml-3 text-lg text-white"> {'Let\'sGo'} </span>
                         </a>
                         <div className="my-auto">
-                            <IllustrationUrl src={Logo} alt="illustrationUrl" className="w-1/2 -mt-16 -intro-x" />
+                            <Image src={IllustrationUrl} alt="illustrationUrl" className="w-1/2 -mt-16 -intro-x" />
                             <div className="mt-10 text-3xl font-medium leading-tight text-white -intro-x">
                                 Quelques clics de plus pour
                                 <br />
