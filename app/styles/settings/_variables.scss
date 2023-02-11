@@ -56,6 +56,38 @@ $x6-large: 36px;
 $x7-large: 48px;
 $x8-large: 60px;
 
+/* Weight text */
+$xw-100: 100;
+$xw-200: 200;
+$xw-300: 300;
+$xw-400: 400;
+$xw-500: 500;
+$xw-600: 600;
+$xw-700: 700;
+$xw-800: 800;
+$xw-900: 900;
+
+/* Margin top */
+$mt-5: 5px;
+$mt-10: 10px;
+$mt-15: 15px;
+$mt-20: 20px;
+$mt-25: 25px;
+$mt-30: 30px;
+$mt-60: 60px;
+
+/* Margin bottom */
+$mb-5: 5px;
+$mb-10: 10px;
+$mb-15: 15px;
+$mb-20: 20px;
+$mb-25: 25px;
+$mb-30: 30px;
+$mb-60: 60px;
+
+/* Padding */
+$px-large: 0 80px;
+
 /* Responsive breakpoints */
 $desktop: (min-width: 1024px);
 $tablet: (min-width: 768px) and (max-width: 1023px);
