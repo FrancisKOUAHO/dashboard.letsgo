@@ -40,8 +40,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         }
       }
     } catch (error: any) {
-      console.log(error.response.status);
-      setMessage(error)
+      setMessage(error.response.data.message)
     }
   };
 
@@ -57,8 +56,8 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       if (response.status === 200) {
         setUser(response.data);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      setMessage(error.response.data.message)
     }
   };
   const register = async (email: File | string, password: File | string) => {
