@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Logo from "../../assets/logostarbuck.png";
-import IllustrationUrl from "../../assets/illustrationLogin1.svg";
-import Input from "../../components/atoms/input/input";
-import Button from "../../components/atoms/button/button";
+import Logo from "../assets/logostarbuck.png";
+import IllustrationUrl from "../assets/illustrationLogin1.svg";
+import Input from "../components/atoms/input/input";
+import Button from "../components/atoms/button/button";
 
 export default async function ForgetPassword() {
     return (
@@ -14,7 +14,7 @@ export default async function ForgetPassword() {
                     }}>
                         <a className="flex items-center pt-5 -intro-x">
                             <img alt="Logo" className="w-[60px]" src="/LetsGo.svg" />
-                            <span className="ml-3 text-lg text-white"> Let'sGo </span>
+                            <span className="ml-3 text-lg text-white"> {'Let\'sGo'} </span>
                         </a>
                         <div className="my-auto">
                             <IllustrationUrl src={Logo} alt="illustrationUrl" className="w-1/2 -mt-16 -intro-x" />
@@ -28,7 +28,7 @@ export default async function ForgetPassword() {
                     <div className="flex h-screen py-5 my-10 xl:h-auto xl:py-0 xl:my-0">
                         <div className="w-full px-5 py-8 mx-auto my-auto bg-white rounded-md shadow-md xl:ml-20 dark:bg-darkmode-600 xl:bg-transparent sm:px-8 xl:p-0 xl:shadow-none sm:w-3/4 lg:w-2/4 xl:w-auto">
                             <div className="mt-2 intro-x text-slate-400">
-                                Saisissez l'adresse électronique utilisée lors de votre inscription et nous vous enverrons les instructions pour réinitialiser votre mot de passe.
+                                {'Saisissez l\'adresse électronique utilisée lors de votre inscription et nous vous enverrons les instructions pour réinitialiser votre mot de passe.\n'}
                             </div>
                             <form>
                                 <div className="mt-8 intro-x">
