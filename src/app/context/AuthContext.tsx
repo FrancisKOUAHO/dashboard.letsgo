@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import {
   createContext,
@@ -7,6 +7,9 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { useRouter } from "next/router";
+
+
 import api from '../config/api';
 
 export const AuthContext = createContext<any>({});
@@ -14,6 +17,7 @@ export const AuthContext = createContext<any>({});
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
+
   const [user, setUser] = useState(null);
   const [token, setToken] = useState<any>(null);
   const [message, setMessage] = useState<string>('');
@@ -26,6 +30,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (response.status === 200) {
+        console.log("response.data", response.data)
         localStorage.setItem('token', response.data.token);
         setToken(response.data.token);
         const token = localStorage.getItem('token');
@@ -34,8 +39,9 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
           me(token);
         }
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.response.status);
+      setMessage(error)
     }
   };
 
