@@ -16,7 +16,6 @@ const Input: FunctionComponent<InputProps> = ({type, label, placeholder, name}) 
       <>
         <label>{label}</label>
         <input name={name} type={type} className={`c-input`} placeholder={placeholder} />
-        <input type="checkbox"/>Afficher mot de passe
       </>
     )
 
