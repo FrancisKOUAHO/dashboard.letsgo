@@ -5,11 +5,11 @@
   flex-direction: row;
   height: 100vh;
 
-  nav.c-login-navbar {
+  .c-login-navbar {
     position: absolute;
   }
 
-  div.c-login-left {
+  .c-login-left {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +29,7 @@
 
   }
 
-  form.c-login-right {
+  .c-login-right {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
