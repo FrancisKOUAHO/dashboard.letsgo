@@ -1,7 +1,7 @@
 import searchInputProps from "../../../types/searchInputProps";
 import {FunctionComponent} from "react";
 
-const searchInput: FunctionComponent<searchInputProps>= ({label, onClear, placeholder, onClick}) => {
+const searchInput: FunctionComponent<searchInputProps>= ({}) => {
     return (
       <div>
         <input

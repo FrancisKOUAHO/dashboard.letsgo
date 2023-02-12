@@ -1,8 +1,9 @@
+
 type searchInputProps = {
     label?: string;
     onClear?: (() => void);
     placeholder?: string;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => boolean;
+    onClick?: (event: MouseEvent) => void;
 };
 
 export default searchInputProps;
