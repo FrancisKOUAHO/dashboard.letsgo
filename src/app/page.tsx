@@ -20,7 +20,9 @@ const Home = () => {
         const form = event.currentTarget;
         const values = Object.fromEntries(new FormData(form));
         login(values.email, values.password)
-        toast(`${message}`, {position: toast.POSITION.TOP_RIGHT});
+        if (message !== null) {
+            toast(`${message}`, {position: toast.POSITION.TOP_RIGHT});
+        }
     }
 
     return (
