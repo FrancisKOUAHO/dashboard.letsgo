@@ -171,7 +171,7 @@ const page = () => {
           </nav>
           <div className="relative mr-3 intro-x sm:mr-6">
             <div className="relative z-10 hidden sm:block">
-              <SearchBar value=""  label="" placeholder="" />
+              <SearchBar />
             </div>
           </div>
           <div className="relative mr-4 intro-x sm:mr-6" data-headlessui-state="">
