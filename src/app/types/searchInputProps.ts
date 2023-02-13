@@ -1,4 +1,3 @@
-
 type searchInputProps = {
     label?: string;
     onClear?: (() => void);
