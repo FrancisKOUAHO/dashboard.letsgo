@@ -1,27 +1,16 @@
-import React from "react";
-import searchInputProps from "../../../types/searchInputProps";
+import { FunctionComponent } from "react";
+import searchBarProps from "../../../types/searchBarProps";
 import { AiOutlineSearch } from "react-icons/ai";
 
-type SearchBarProps = searchInputProps & {
-    value: string;
-};
-
-const SearchBar: React.FC<SearchBarProps> = ({
-                                                 label,
-                                                 onClear,
-                                                 placeholder = "Search",
-                                                 value,
-
-                                             }) => {
+const SearchBar: FunctionComponent<searchBarProps> = ({label, onClear, placeholder = "Search", ...rest}) => {
     return (
-        <div className="relative z-100">
+        <div className="relative z-100 c-searchbar ">
             <input
                 type="text"
-                className="border rounded-lg py-2 px-4 pr-12 focus:outline-none focus:ring focus:border-blue-300"
+                className="w-56 h-[2.25rem]  rounded-full  pr-8 pl-4 border-none focus:w-72 "
                 placeholder={placeholder}
-                value={value}
             />
-            <button type="button" className="absolute inset-y-0 right-[8px] flex items-center px-2 bg-white hover:bg-gray-100">
+            <button type="button" className="absolute inset-y-0 right-[8px] flex items-center px-2 bg-white hover:bg-gray-100 inset-y-4">
              <AiOutlineSearch />
             </button>
         </div>

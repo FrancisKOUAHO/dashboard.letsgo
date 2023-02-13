@@ -5,14 +5,12 @@ export default {
     component: SearchBar,
 };
 
-const Template = (args) => <SearchBar {...args} />;
+const searchBarRoundedBasic = (args) => <SearchBar {...args} />;
 
-export const Default = Template.bind({});
+export const Default = searchBarRoundedBasic.bind({});
 Default.args = {
     label: "Search",
     placeholder: "Search",
     value: "",
-    onChange: action("onChange"),
-    onClick: action("onClick"),
 };
 
