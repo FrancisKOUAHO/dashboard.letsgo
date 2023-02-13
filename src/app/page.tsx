@@ -54,8 +54,8 @@ const Home = () => {
                           </div>
                           <form onSubmit={handlerSubmit}>
                               <div className="mt-8 intro-x space-y-4">
-                                  <Input name="email" type="text" placeholder={'Email'}/>
-                                  <Input name="password" type="password" placeholder={'Mot de passe'}/>
+                                  <Input className="c-input" name="email" type="text" placeholder={'Email'}/>
+                                  <Input className="c-input" name="password" type="password" placeholder={'Mot de passe'}/>
                               </div>
                               <div className="mt-4 text-right">
                                   <Link href="forget-password">{"Mot de passe oublié ?"}</Link>
