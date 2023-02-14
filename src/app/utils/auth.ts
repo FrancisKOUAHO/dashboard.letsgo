@@ -7,8 +7,6 @@ export const isAuthorized = async (role: string) => {
 
   const user = localStorage.getItem('userRole')
 
-  console.log("test user role", user)
-
   if (!user || user !== role) {
     await Router.push('/');
     return false;
