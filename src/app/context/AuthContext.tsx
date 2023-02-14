@@ -55,7 +55,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       if (response.status === 200) {
         localStorage.setItem('userRole', response.data.role)
         setUser(response.data);
-        await router.push('/')
       }
     } catch (error: any) {
       setMessage(error.response.data.message)

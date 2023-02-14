@@ -1,4 +1,4 @@
-import Input from "./input";
+import Input from "./sidebar";
 
 export const InputText = () => <Input type={'text'} label={'Input Text'} />
 export const InputPassword = () => <Input type={'password'} label={'Input Password'} />
