@@ -1,5 +1,5 @@
 import Input from "./sidebar";
-import {AiOutlineHome} from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import Link from "next/link";
 
 export const LinkSideBar = () => <Link href="#"> <AiOutlineHome/> Tableau de bord</Link>
