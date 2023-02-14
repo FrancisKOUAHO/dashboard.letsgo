@@ -4,7 +4,7 @@ import { AiOutlineUser } from "react-icons/ai";
 const page = () => {
   return (
     <div className="c-navbar">
-      <div className="w-full fixed bg-primary/90 z-[60] border-b border-white/[0.08] -mt-5 -mx-3 sm:-mx-8 mb-6 dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0">
+      <div className="">
         <div className="h-[70px] px-3 sm:px-8 flex items-center">
           <a className="flex mr-auto">
             <Image src="/LetsGo.png" alt="LetsGo" width="100" height="100" className="w-6"/>
@@ -160,9 +160,12 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className=" h-[70px] md:h-[65px] border-b border-white/[0.08] mt-12 md:mt-0 -mx-3 sm:-mx-8 md:-mx-0 px-3 md:border-b-0 relative md:fixed md:inset-x-0 md:top-0 sm:px-8 md:px-10 md:pt-10 md:bg-gradient-to-b md:from-slate-100 md:to-transparent dark:md:from-darkmode-700 before:content-[''] before:absolute before:h-[65px] before:inset-0 before:top-0 before:mx-7 before:bg-[#4376FF] before:mt-3 before:rounded-xl before:hidden before:md:block before:dark:bg-darkmode-600/30 after:content-[''] after:absolute after:inset-0 after:h-[65px] after:mx-3 after:bg-[#4376FF4D] after:mt-5 after:rounded-xl after:shadow-md after:hidden after:md:block after:dark:bg-darkmode-600">
+      <div className=" md:h-[65px] md:mt-0  md:-mx-0  md:border-b-0 md:fixed md:inset-x-0 md:top-0   md:px-10 md:pt-10
+      sm:-mx-8 sm:px-8
+      before:absolute  before:inset-0  before:mx-7 before:bg-[#4376FF4D] before:mt-3 before:rounded-xl before:md:block
+      after:absolute after:inset-0 after:h-[65px] after:mx-3 after:bg-[#4376FF] after:mt-5 after:rounded-xl  ">
         <div className="flex items-center h-full">
-          <a href="#" className="router-link-active router-link-exact-active -intro-x hidden md:flex xl:w-[180px]">
+          <a href="#" className=" z-10 router-link-active router-link-exact-active -intro-x hidden md:flex xl:w-[180px]">
             <Image className="w-6" src="/LetsGo.png"  alt="LetsGo" width="100" height="100"/>
             <span className="ml-3 text-lg text-white hidden xl:block font-[500]"> {"LETSGO"} </span>
           </a>
@@ -174,7 +177,7 @@ const page = () => {
                 <SearchBar  />
             </div>
           </div>
-          <div className="relative mr-4 intro-x sm:mr-6" data-headlessui-state="">
+          <div className="relative mr-4 intro-x sm:mr-6 z-10" data-headlessui-state="">
             <div
                 className="cursor-pointer relative text-white/70 outline-none block before:content-[''] before:w-[8px] before:h-[8px] before:rounded-full before:absolute before:top-[-2px] before:right-0 before:bg-danger"
                 id="headlessui-popover-button-1" aria-expanded="false" data-headlessui-state="">
@@ -186,7 +189,7 @@ const page = () => {
               </svg>
             </div>
             </div>
-          <div className="relative">
+          <div className="relative z-10">
             <div className="cursor-pointer block w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit zoom-in intro-x"  id="headlessui-menu-button-3" aria-haspopup="menu" aria-expanded="false" data-headlessui-state="">
               <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
             </div>
