@@ -3,7 +3,7 @@ import Image from "next/image";
 import { AiOutlineUser } from "react-icons/ai";
 const page = () => {
   return (
-    <div className="py-5 md:py-0 bg-[#4376FF]">
+    <div className="c-navbar">
       <div className="w-full fixed bg-primary/90 z-[60] border-b border-white/[0.08] -mt-5 -mx-3 sm:-mx-8 mb-6 dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0">
         <div className="h-[70px] px-3 sm:px-8 flex items-center">
           <a className="flex mr-auto">
