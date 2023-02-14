@@ -2,6 +2,7 @@
 
 import {isAuthorized} from "@/app/utils/auth";
 import SearchBar from "@/app/components/atoms/searchBar/searchBar";
+import Sidebar from "@/app/components/organisms/input/sidebar";
 import Image from "next/image";
 import { AiOutlineUser } from "react-icons/ai";
 
@@ -13,6 +14,7 @@ const page = () => {
   }
 
   return (
+    <>
     <div className="py-5 md:py-0 bg-[#4376FF]">
       <div className="w-full fixed bg-primary/90 z-[60] border-b border-white/[0.08] -mt-5 -mx-3 sm:-mx-8 mb-6 dark:bg-darkmode-800/90 md:hidden before:content-[''] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out before:invisible before:opacity-0">
         <div className="h-[70px] px-3 sm:px-8 flex items-center">
@@ -29,7 +31,7 @@ const page = () => {
             </svg>
           </a>
         </div>
-        <div className="h-screen z-20 top-0 left-0 w-[270px] -ml-[100%] bg-primary transition-all duration-300 ease-in-out dark:bg-darkmode-800 [&[data-simplebar]]:fixed [&_.simplebar-scrollbar]:before:bg-black/50">
+        <div className="h-screen z-20 top-0 left-0 w-[270px] -ml-[100%] bg-primary transition-all duration-300 ease-in-out dark:bg-darkmode-800 [&[data-simplebar]]:fixed [&_.simplebar-scrollbar]:before:bg-black/50 z-10">
           <div className="simplebar-wrapper m-0">
             <div className="simplebar-mask">
               <div className="simplebar-offset right-0 bottom-0">
@@ -170,7 +172,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className=" h-[70px] md:h-[65px] border-b border-white/[0.08] mt-12 md:mt-0 -mx-3 sm:-mx-8 md:-mx-0 px-3 md:border-b-0 relative md:fixed md:inset-x-0 md:top-0 sm:px-8 md:px-10 md:pt-10 md:bg-gradient-to-b md:from-slate-100 md:to-transparent dark:md:from-darkmode-700 before:content-[''] before:absolute before:h-[65px] before:inset-0 before:top-0 before:mx-7 before:bg-[#4376FF] before:mt-3 before:rounded-xl before:hidden before:md:block before:dark:bg-darkmode-600/30 after:content-[''] after:absolute after:inset-0 after:h-[65px] after:mx-3 after:bg-[#4376FF4D] after:mt-5 after:rounded-xl after:shadow-md after:hidden after:md:block after:dark:bg-darkmode-600">
+      <div className=" h-[70px] md:h-[65px] border-b border-white/[0.08] mt-12 md:mt-0 -mx-3 sm:-mx-8 md:-mx-0 px-3 md:border-b-0 relative md:fixed md:inset-x-0 md:top-0 sm:px-8 md:px-10 md:pt-10 md:bg-gradient-to-b md:from-slate-100 md:to-transparent dark:md:from-darkmode-700 before:content-[''] before:absolute before:h-[65px] before:inset-0 before:top-0 before:mx-7 before:bg-[#4376FF] before:mt-3 before:rounded-xl before:hidden before:md:block before:dark:bg-darkmode-600/30 after:content-[''] after:absolute after:inset-0 after:h-[65px] after:mx-3 after:bg-[#4376FF4D] after:mt-5 after:rounded-xl after:shadow-md after:hidden after:md:block after:dark:bg-darkmode-600 z-10">
         <div className="flex items-center h-full">
           <a href="#" className="router-link-active router-link-exact-active -intro-x hidden md:flex xl:w-[180px]">
             <Image className="w-6" src="/LetsGo.png"  alt="LetsGo" width="100" height="100"/>
@@ -204,6 +206,8 @@ const page = () => {
         </div>
       </div>
     </div>
+    <Sidebar/>
+    </>
   )
 }
 
