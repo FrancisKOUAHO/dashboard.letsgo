@@ -2,7 +2,7 @@
 
 import {isAuthorized} from "@/app/utils/auth";
 import SearchBar from "@/app/components/atoms/searchBar/searchBar";
-import Sidebar from "@/app/components/organisms/input/sidebar";
+import Sidebar from "@/app/components/organisms/sidebar/sidebar";
 import Image from "next/image";
 import { AiOutlineUser } from "react-icons/ai";
 

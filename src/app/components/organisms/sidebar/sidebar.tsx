@@ -1,39 +1,40 @@
 import { FunctionComponent } from "react";
 import SidebarProps from "../../../types/SidebarProps";
 import { AiOutlineHome, AiOutlineAppstore, AiOutlineProfile, AiOutlineUser, AiOutlineTag, AiOutlineMessage, AiOutlineCalendar } from "react-icons/ai";
+import Link from "next/link";
 
 const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
     return (
       <>
         <div className="c-sidebar">
-          <a href="#">
+          <Link href="#">
             <AiOutlineHome/>
             Tableau de bord
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <AiOutlineAppstore/>
             Catégories
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <AiOutlineProfile/>
             Réservations
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <AiOutlineUser/>
             Utilisateurs
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <AiOutlineTag/>
             Activités
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <AiOutlineMessage/>
             Chat
-          </a>
-          <a href="#">
+          </Link>
+          <Link href="#">
             <AiOutlineCalendar/>
             Calendrier
-          </a>
+          </Link>
         </div>
       </>
     )

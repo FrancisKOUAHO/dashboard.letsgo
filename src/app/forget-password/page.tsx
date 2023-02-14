@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Logo from "../assets/LetsGo.png";
 import IllustrationUrl from "../assets/illustrationLogin1.png";
 import Input from "../components/atoms/input/input";
 import Button from "../components/atoms/button/button";
