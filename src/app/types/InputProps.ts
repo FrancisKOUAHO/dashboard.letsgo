@@ -6,8 +6,6 @@ type InputProps = {
   placeholder?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => boolean;
   name?: string;
-  className?: string;
-  style?: React.CSSProperties;
 };
 
 export default InputProps;
