@@ -6,6 +6,7 @@ type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
   type?: 'button' | 'submit' | 'reset';
+  className?: string
 };
 
 export default ButtonProps;

@@ -1,4 +1,5 @@
 import {isAuthorized} from "@/app/utils/auth";
+import LayoutCustom from "@/app/layouts/layoutCustom";
 
 const page = () => {
   const authorized = isAuthorized('partner');
@@ -8,9 +9,9 @@ const page = () => {
   }
 
   return (
-    <div>
-      <h1>dashboard Dashboard</h1>
-    </div>
+    <LayoutCustom>
+      <h1>dashboard partner</h1>
+    </LayoutCustom>
   )
 }
 

@@ -6,4 +6,13 @@ const Button: FunctionComponent<ButtonProps> = ({children, onClick, href, color=
   return <a href={href}>{children}</a>
 }
 
-export default Button
+const ButtonIcon: FunctionComponent<ButtonProps> = ({className, children, onClick, href, color= 'primary', type}) =>{
+  return (
+    <button type={type} className={className} onClick={onClick}>{children}</button>
+  )
+}
+
+export {
+  Button,
+  ButtonIcon
+}
