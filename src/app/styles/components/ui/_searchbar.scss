@@ -1,33 +1,3 @@
-@use '../../settings/index' as *;
-
-.c-searchbar {
-  position: relative;
-  z-index: 100;
-
-  &__input{
-    width: 288px;
-    height: 2.25rem;
-    border-radius: 9999px; /* large value to make it a circle */
-    padding-right: 8px;
-    padding-left: 16px;
-    border: none;
-  }
-
-  .search-button {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 8px;
-    display: flex;
-    align-items: center;
-    padding-left: 8px; /* équivalent à pl-2 dans Tailwind */
-    padding-right: 8px; /* équivalent à pr-2 dans Tailwind */
-    background-color: #fff;
-    margin-top: 16px; /* équivalent à inset-y-4 dans Tailwind */
-    margin-bottom: 16px; /* équivalent à inset-y-4 dans Tailwind */
-
-    &:hover {
-      background-color: #f4f4f4; /* ou utilisez la palette de couleurs hover:bg-gray-100 de Tailwind */
-    }
-  }
+c-searchbar{
+  background-color: green;
 }
