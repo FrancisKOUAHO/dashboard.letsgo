@@ -31,7 +31,7 @@ export default async function ForgetPassword() {
                             </div>
                             <form>
                                 <div className="mt-8 intro-x">
-                                    <Input className="c-input" type={'text'} placeholder={'Email'}/>
+                                    <Input type={'text'} placeholder={'Email'}/>
                                 </div>
                                 <div className="mt-5 text-center intro-x xl:mt-8 xl:text-left">
                                     <Button color={'primary'}> Envoyer le lien de réiniatialisation </Button>

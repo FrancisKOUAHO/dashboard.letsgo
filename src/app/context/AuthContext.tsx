@@ -1,7 +1,13 @@
 "use client"
 
-import {createContext, ReactNode, useContext, useEffect, useState,} from 'react';
-import {useRouter} from 'next/navigation';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { useRouter } from 'next/navigation';
 
 import api from '../config/api';
 
@@ -9,7 +15,7 @@ export const AuthContext = createContext<any>({});
 
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthContextProvider = ({children}: { children: ReactNode }) => {
+export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   const [user, setUser] = useState(null);
@@ -49,14 +55,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
       });
       if (response.status === 200) {
         setUser(response.data);
-        localStorage.setItem('userRole', response.data.role)
-        if (response.data.role === "admin") {
-          await router.push('admin/dashboard')
-        }
-        if (response.data.role === "partner") {
-          await router.push('partner/dashboard')
-        }
-
+        await router.push('/')
       }
     } catch (error: any) {
       setMessage(error.response.data.message)
