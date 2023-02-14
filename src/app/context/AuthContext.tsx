@@ -30,7 +30,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (response.status === 200) {
-        console.log("response.data", response.data)
         localStorage.setItem('token', response.data.token);
         setToken(response.data.token);
         const token = localStorage.getItem('token');
