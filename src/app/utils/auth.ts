@@ -1,3 +1,5 @@
+'use client'
+
 import Router from 'next/router';
 
 export const isAuthorized = async (role: string) => {
@@ -8,7 +10,7 @@ export const isAuthorized = async (role: string) => {
   const user = localStorage.getItem('userRole')
 
   if (!user || user !== role) {
-    await Router.push('/');
+     await Router.replace('/')
     return false;
   }
 

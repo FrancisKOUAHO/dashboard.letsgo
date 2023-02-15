@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { AiOutlineSearch, AiOutlineUser } from "react-icons/ai";
+import {AiOutlineSearch, AiOutlineUser} from "react-icons/ai";
 import Input from "@/app/components/atoms/input/input";
-import { ButtonIcon } from "@/app/components/atoms/button/button";
+import {ButtonIcon} from "@/app/components/atoms/button/button";
+import Dropdown from "@/app/components/atoms/dropdown/dropdown";
 
 const TopBar = () => {
 
@@ -59,11 +60,26 @@ const TopBar = () => {
             </div>
           </div>
           <div className="relative z-10">
-            <div
-              className="cursor-pointer block w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit zoom-in intro-x"
-              aria-haspopup="menu" aria-expanded="false">
+            <Dropdown list={[
+              {
+                label: 'Francis KOUAHO',
+                link: '/booking',
+                icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
+              },
+              {
+                label: 'Profil',
+                link: '/customer-history',
+                icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
+              },
+              {
+                label: 'Aide',
+                link: '/account/profile',
+                icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
+              },
+              {label: 'Déconnexion', icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>},
+            ]}>
               <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
-            </div>
+            </Dropdown>
           </div>
         </div>
       </div>
