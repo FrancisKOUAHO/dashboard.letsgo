@@ -1,3 +1,5 @@
+'use client'
+
 import {isAuthorized} from "@/app/utils/auth";
 import LayoutCustom from "@/app/layouts/layoutCustom";
 
