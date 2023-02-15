@@ -1,0 +1,28 @@
+@use '../../settings/index' as *;
+
+.c-iconText{
+  --tw-text-opacity: 1;
+  margin-top: 1.25rem;
+
+  .allicon{
+    margin-right: 8px;
+  }
+
+  div:nth-child(2){
+    align-items: center;
+    display: flex;
+    margin-top: 0.5rem;
+  }
+
+  div:nth-child(3){
+    align-items: center;
+    display: flex;
+    margin-top: 0.5rem;
+  }
+
+  div:nth-child(4){
+    align-items: center;
+    display: flex;
+    margin-top: 0.5rem;
+  }
+}
