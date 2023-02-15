@@ -1,6 +1,6 @@
 import Card from "./card";
 import Image from "next/image";
-import Avatar from '../../../assets/img_avatar.png';
+import Avatar from '../../../assets/pexel.jpg';
 export const BaseCard = () => {
     return(
         <Card className="c-card">

@@ -2,7 +2,7 @@ import {FunctionComponent} from "react";
 import CardProps from "../../../types/CardProps"
 import IconText from "@/app/components/atoms/iconText/iconText";
 import {ButtonIcon} from "@/app/components/atoms/button/button";
-import {AiOutlineEye} from "react-icons/ai";
+import {AiOutlineEye, AiOutlineForm, AiOutlineDelete} from "react-icons/ai";
 const Card: FunctionComponent<CardProps> = ({ className, image, price, numberOfPlaces, children}) => {
     return(
             <div className={className}>
@@ -10,11 +10,11 @@ const Card: FunctionComponent<CardProps> = ({ className, image, price, numberOfP
                 <IconText/>
                 <div className="c-flex-button">
                     <div>
-                        <ButtonIcon name="apercu"/>
+                        <ButtonIcon className="c-button-icon" name="apercu"><AiOutlineEye className="all-icon"/></ButtonIcon>
                     </div>
                     <div>
-                        <ButtonIcon  color="secondary" name="Modifier"/>
-                        <ButtonIcon color="danger" name="Supprimer"/>
+                        <ButtonIcon  className="c-button-icon" color="secondary" name="Modifier"><AiOutlineForm className="all-icon"/></ButtonIcon>
+                        <ButtonIcon  className="c-button-icon" color="danger" name="Supprimer"><AiOutlineDelete className="all-icon"/></ButtonIcon>
                     </div>
                 </div>
             </div>

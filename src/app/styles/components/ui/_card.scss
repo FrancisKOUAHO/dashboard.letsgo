@@ -7,6 +7,7 @@
   border-color: transparent;
   border-radius: 0.375rem;
   padding: 20px;
+  font-size: 14px;
 
   img{
     width: 13rem;
@@ -21,7 +22,11 @@
     padding-top: 1.5rem;
     align-items: center;
     width: 100%;
-    margin-top: 10%;
+    margin-top: 5%;
+
+    .all-icon{
+      font-size:19px;
+    }
 
     div:nth-child(1){
       width: 100%;

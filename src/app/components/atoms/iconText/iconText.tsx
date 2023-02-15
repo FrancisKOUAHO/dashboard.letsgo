@@ -1,25 +1,38 @@
-import {FunctionComponent} from "react";
-import {AiOutlineTeam, AiOutlineEuroCircle,AiOutlineCheckSquare} from "react-icons/ai";
-const iconText = () => {
-    return(
+import { AiOutlineTeam, AiOutlineEuroCircle, AiOutlineCheckSquare } from "react-icons/ai";
+import { FunctionComponent, useState } from "react";
+
+const IconText = () => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const handleToggleExpand = () => {
+        setIsExpanded(!isExpanded);
+    };
+
+    return (
         <div className="c-iconText">
             <div>
-                <h2>Accrobranche</h2>
+                <h2>
+                    {isExpanded
+                        ? "Visite guidée et dégustation de Champagne à Pierry (51)"
+                        : "Visite guidée et..."}
+                    <button onClick={handleToggleExpand}>
+                        {isExpanded ? "Voir moins" : "Voir plus"}
+                    </button>
+                </h2>
             </div>
             <div>
-                <AiOutlineEuroCircle className="allicon"/>
+                <AiOutlineEuroCircle className="all-icon" />
                 <p>Prix : <span>17 $</span></p>
             </div>
             <div>
-                <AiOutlineTeam className="allicon"/>
+                <AiOutlineTeam className="all-icon" />
                 <p>Place disponible : <span>55</span></p>
             </div>
             <div>
-                <AiOutlineCheckSquare className="allicon"/>
-                <p>Satuts : <span>Active</span></p>
+                <AiOutlineCheckSquare className="all-icon" />
+                <p>Statut : <span>Active</span></p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default iconText
+export default IconText;
