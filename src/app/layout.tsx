@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import {ToastContainer} from 'react-toastify';
 import {Hydrate, QueryClient, QueryClientProvider,} from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
 
 
 import AuthContextProvider from "./context/AuthContext";
@@ -28,7 +28,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
   return (
     <html lang="fr">
     <head/>
-    <body>
+    <body className="bg-slate-100">
     <AuthContextProvider>
       <QueryClientProvider client={queryClient}>
         <Hydrate>
