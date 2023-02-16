@@ -3,7 +3,7 @@
 import {isAuthorized} from "@/app/utils/auth";
 import LayoutCustom from "@/app/layouts/layoutCustom";
 
-const Page = () => {
+const page = () => {
   const authorized = isAuthorized('admin');
 
   if (!authorized) {
@@ -12,9 +12,9 @@ const Page = () => {
 
   return (
     <LayoutCustom>
-      <h1>dashboard admin</h1>
+      <h1>Activity</h1>
     </LayoutCustom>
   )
 }
 
-export default Page
+export default page

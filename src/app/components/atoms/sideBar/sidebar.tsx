@@ -9,6 +9,7 @@ import {
   AiOutlineTag,
   AiOutlineUser
 } from "react-icons/ai";
+import Link from "next/link";
 
 const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
     return (
@@ -29,10 +30,10 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             <AiOutlineUser/>
             Utilisateurs
           </a>
-          <a href="src/app/components/atoms/sidebar#">
+          <Link href={'admin/activities'}>
             <AiOutlineTag/>
             Activités
-          </a>
+          </Link>
           <a href="src/app/components/atoms/sidebar#">
             <AiOutlineMessage/>
             Chat
