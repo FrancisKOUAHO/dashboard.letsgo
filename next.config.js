@@ -8,7 +8,7 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   images: {
-    domains: ['http://localhost:3030'],
+    domains: [''],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],

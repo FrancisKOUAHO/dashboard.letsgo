@@ -30,7 +30,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             <AiOutlineUser/>
             Utilisateurs
           </a>
-          <Link href={'admin/activities'}>
+          <Link href={'activities'}>
             <AiOutlineTag/>
             Activités
           </Link>
