@@ -4,14 +4,15 @@ import { isAuthorized } from "@/app/utils/auth";
 import LayoutCustom from "@/app/layouts/layoutCustom";
 import { Button } from "@/app/components/atoms/button/button";
 import Input from "@/app/components/atoms/input/input";
-import { useActivities } from "@/app/hooks/useActivities";
 import LoadingSpinner from "@/app/components/atoms/loadingspinner/LoadingSpinner";
 import Image from "next/image";
 import Card from "@/app/components/atoms/card/card";
+import { useActivities } from "@/app/hooks/useActivities";
 
 
-const page = () => {
+const Page = () => {
   const authorized = isAuthorized('admin')
+
   const { data, status, error } = useActivities()
 
   if (!authorized) {
@@ -50,9 +51,9 @@ const page = () => {
 
         <div className="c-activities__container">
           {
-            data && data.data.map((activity: any) =>{
+            data && data.data.map((activity: any, index: number) =>{
               return(
-                <Card className="c-card">
+                <Card className="c-card" key={index}>
                   <Image src="" width="100" height="100" alt={""}/>
                 </Card>
               )
@@ -64,4 +65,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

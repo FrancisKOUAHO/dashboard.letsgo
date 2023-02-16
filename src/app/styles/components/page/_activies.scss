@@ -30,6 +30,11 @@
 
   &__container {
     display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
   }
 
 }
