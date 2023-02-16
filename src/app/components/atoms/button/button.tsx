@@ -1,18 +1,9 @@
 import { FunctionComponent } from "react";
 import ButtonProps from "../../../types/ButtonProps";
-
-
-
-const buttonColors = {
-  primary: '#007bff',
-  secondary: '#000000FF',
-  danger: '#dc3545'
-}
-
 const ButtonIcon: FunctionComponent<ButtonProps> = ({className, name, children, onClick, href, color = 'primary', type}) =>{
   return (
 
-      <button type={type} className={className} onClick={onClick}>
+      <button type={type} className={className} onClick={onClick} style={{color}}>
         {children}{name}
       </button>
   )
