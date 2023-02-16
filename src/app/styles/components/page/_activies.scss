@@ -7,9 +7,7 @@
     font-weight: 400;
   }
 
-  &__container {
-
-
+  &__title {
     div:nth-child(1) {
       display: flex;
       justify-content: space-between;
@@ -29,4 +27,9 @@
       }
     }
   }
+
+  &__container {
+    display: flex;
+  }
+
 }

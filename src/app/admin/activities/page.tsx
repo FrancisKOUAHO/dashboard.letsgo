@@ -29,13 +29,11 @@ const page = () => {
       <div className="c-activities">
         <h2>Tous les activités</h2>
 
-        <div className="c-activities__container">
-
+        <div className="c-activities__title">
           <div>
             <Button color="primary" isActive={true}>
               Ajouter
             </Button>
-
             <div>
               <div>
                 <Input className="c-input" type="text" placeholder="Rechercher une activité..."/>
@@ -47,8 +45,19 @@ const page = () => {
                 </svg>
               </div>
             </div>
-
           </div>
+        </div>
+
+        <div className="c-activities__container">
+          {
+            data && data.data.map((activity: any) =>{
+              return(
+                <Card className="c-card">
+                  <Image src="" width="100" height="100" alt={""}/>
+                </Card>
+              )
+            })
+          }
         </div>
       </div>
     </LayoutCustom>
