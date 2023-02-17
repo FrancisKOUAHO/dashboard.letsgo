@@ -5,7 +5,6 @@ import LayoutCustom from "@/app/layouts/layoutCustom";
 import {Button} from "@/app/components/atoms/button/button";
 import Input from "@/app/components/atoms/input/input";
 import LoadingSpinner from "@/app/components/atoms/loadingspinner/LoadingSpinner";
-import Image from "next/image";
 import Card from "@/app/components/atoms/card/card";
 import {useActivities} from "@/app/hooks/useActivities";
 import IconText from "@/app/components/atoms/iconText/iconText";
@@ -22,21 +21,12 @@ const Page = () => {
 
   const [page, setPage] = useState(1);
 
-  const handlePageChange = (pageNumber: number) => {
-    setPage(pageNumber);
-  };
-
   if (!authorized) {
     return <div>Not Authorized</div>;
   }
 
   if (status === "loading") return <LoadingSpinner/>;
   if (error === "error") return <div>Erreur...</div>;
-
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedActivities = data?.data.slice(startIndex, endIndex);
-
 
   return (
     <LayoutCustom>
@@ -78,8 +68,8 @@ const Page = () => {
               .map((activity: any, index: number) => {
                 return (
                   <Card className="c-card" key={index}>
-                    <Image
-                      src="https://letsg0.fr/img/LetsGo.svg"
+                    <img
+                      src={activity.image}
                       width="100"
                       height="100"
                       alt=""
@@ -89,7 +79,7 @@ const Page = () => {
                     />
                     <IconText
                       title={activity.name}
-                      price="15"
+                      price={activity.price}
                       numberOfPlaces="2"
                       status="Confirmer"
                     />
