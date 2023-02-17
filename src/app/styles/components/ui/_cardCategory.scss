@@ -9,7 +9,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    box-shadow: 0px 0px 0px 2px #fff, 1px 1px 5px rgba(0,0,0,.32);
+    box-shadow: 0 0 0 2px #fff, 1px 1px 5px rgba(0,0,0,.32);
     border-radius: 9999px;
     max-width: 100%;
   }
@@ -32,10 +32,10 @@
 
       td{
         vertical-align: middle;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
+        padding: 0.75rem 1.25rem;
+        --tw-shadow: 20px 3px 20px #0000000b;
+        --tw-shadow-colored: 20px 3px 20px var(--tw-shadow-color);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, #0000),var(--tw-shadow);
       }
 
       .td-first{
@@ -134,11 +134,8 @@
       tr{
         th{
           font-weight: 500;
-          padding-left: 1.25rem;
-          padding-right: 1.25rem;
-          padding-top: 0.75rem;
-          padding-bottom: 0.75rem;
-          border-bottom-width: 0px;
+          padding: 0.75rem 1.25rem;
+          border-bottom-width: 0;
           white-space: nowrap;
         }
 
