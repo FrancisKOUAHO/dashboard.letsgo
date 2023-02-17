@@ -6,7 +6,8 @@ import ButtonProps from "../../../types/ButtonProps";
 const buttonColors = {
   primary: '#007bff',
   secondary: '#000000FF',
-  danger: '#dc3545'
+  danger: '#dc3545',
+  greyC: '#64748B'
 }
 
 const ButtonIcon: FunctionComponent<ButtonProps> = ({className, name, children, onClick, href, color = 'primary', type}) =>{
