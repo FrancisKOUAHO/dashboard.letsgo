@@ -40,5 +40,6 @@
 .c-button-icon{
   display: flex;
   gap: 5px;
+  align-items: center;
   $colors: 'primary' $primary-color, 'secondary' $secondary-color, 'red' $primary-mastercard-color
 }
