@@ -7,16 +7,14 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useRouter } from 'next/navigation';
 
-import api from '../config/api';
+import { api } from '../config/api';
 
 export const AuthContext = createContext<any>({});
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const router = useRouter();
 
   const [user, setUser] = useState(null);
   const [token, setToken] = useState<any>(null);

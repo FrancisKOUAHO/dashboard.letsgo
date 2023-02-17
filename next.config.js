@@ -8,7 +8,7 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   images: {
-    domains: ['http://localhost:3030'],
+    domains: ['res.cloudinary.com'],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],

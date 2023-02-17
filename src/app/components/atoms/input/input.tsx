@@ -22,7 +22,7 @@ const Input: FunctionComponent<InputProps> = ({className, type, label, placehold
   return (
     <>
       <label>{label}</label>
-      <input name={name} type={type} placeholder={placeholder} />
+      <input name={name} type={type} className={className} placeholder={placeholder} />
     </>
   )
 }
