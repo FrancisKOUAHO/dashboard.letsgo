@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import api from "@/app/config/api";
+import { api } from "@/app/config/api";
 
 const fetchActivities = async () => {
   const response = await api.get(`/activities/get_activities`);
