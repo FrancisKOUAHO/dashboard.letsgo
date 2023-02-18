@@ -9,7 +9,7 @@ const LayoutCustom: FunctionComponent<LayoutCustomProps> = ({children}) => {
       <TopBar/>
       <div className="flex overflow-hidden ml-64 mr-8">
         <Sidebar/>
-        <main>
+        <main className="w-full">
           {children}
         </main>
       </div>

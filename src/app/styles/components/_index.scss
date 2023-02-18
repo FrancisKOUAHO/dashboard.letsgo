@@ -1,4 +1,5 @@
 @forward 'page/login';
+@forward 'page/activies';
 
 @forward 'ui/button';
 @forward 'ui/input';
@@ -8,5 +9,6 @@
 @forward 'ui/topbar';
 @forward 'ui/dropdown';
 @forward "ui/cardStats";
+@forward 'ui/loading-spinner';
 @forward "ui/cardCategory";
 
