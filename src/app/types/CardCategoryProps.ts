@@ -1,7 +1,11 @@
 import React from "react";
 
-type CardCategoryProps = {
+export type CardCategoryProps = {
     className?: string;
+    children?: React.ReactNode;
+}
+
+export type CardCategoryTrProps = {
     image?: string;
     name?: string;
     slug?: string;
@@ -9,5 +13,3 @@ type CardCategoryProps = {
     action?: string;
     children?: React.ReactNode;
 }
-
-export default CardCategoryProps

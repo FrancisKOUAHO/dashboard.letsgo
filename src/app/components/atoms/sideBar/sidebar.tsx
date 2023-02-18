@@ -14,31 +14,31 @@ import Link from "next/link";
 const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
     return (
         <div className="c-sidebar">
-          <a href="src/app/components/atoms/sidebar#">
+          <a href="/admin/dashboard">
             <AiOutlineHome/>
             Tableau de bord
           </a>
-          <a href="src/app/components/atoms/sidebar#">
+          <Link href={'/admin/dashboard/categories'}>
             <AiOutlineAppstore/>
             Catégories
-          </a>
-          <a href="src/app/components/atoms/sidebar#">
+          </Link>
+          <Link href={'/admin/dashboard/reservations'}>
             <AiOutlineProfile/>
             Réservations
-          </a>
-          <a href="src/app/components/atoms/sidebar#">
+          </Link>
+          <a href="/admin/dashboard/users">
             <AiOutlineUser/>
             Utilisateurs
           </a>
-          <Link href={'activities'}>
+          <Link href={'/admin/dashboard/activities'}>
             <AiOutlineTag/>
             Activités
           </Link>
-          <a href="src/app/components/atoms/sidebar#">
+          <a href="/admin/dashboard/chat">
             <AiOutlineMessage/>
             Chat
           </a>
-          <a href="src/app/components/atoms/sidebar#">
+          <a href="/admin/dashboard/calendar">
             <AiOutlineCalendar/>
             Calendrier
           </a>

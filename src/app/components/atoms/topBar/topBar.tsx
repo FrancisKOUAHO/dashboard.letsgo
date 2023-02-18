@@ -3,6 +3,7 @@ import {AiOutlineSearch, AiOutlineUser, AiOutlineBell} from "react-icons/ai";
 import Input from "@/app/components/atoms/input/input";
 import {ButtonIcon} from "@/app/components/atoms/button/button";
 import Dropdown from "@/app/components/atoms/dropdown/dropdown";
+import Link from "next/link";
 
 const TopBar = () => {
 
@@ -12,10 +13,10 @@ const TopBar = () => {
       </div>
       <div className="c-above-topbar">
         <div className="c-above-topbar-left">
-          <a href="#">
+          <Link href={'/admin/dashboard'}>
             <Image src="/LetsGo_white.png" alt="LetsGo Logo" width="35" height="100"/>
             <span>Let&apos;s Go</span>
-          </a>
+          </Link>
         </div>
         <div className="c-above-topbar-right">
           <Input className="c-input c-input-rounded" type={'text'} placeholder={'Rechercher...'}/>

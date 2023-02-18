@@ -11,22 +11,19 @@ import IconText from "@/app/components/atoms/iconText/iconText";
 import {useState} from "react";
 
 const Page = () => {
-  const authorized = isAuthorized("admin");
+  const authorized = isAuthorized("admin")
 
-  const {data, status, error} = useActivities();
+  const {data, status, error} = useActivities()
 
-  const itemsPerPage = 8;
-  const totalActivities = data?.data.length;
-  const pageCount = Math.ceil(totalActivities / itemsPerPage);
+  const itemsPerPage = 8
+  const totalActivities = data?.data.length
+  const pageCount = Math.ceil(totalActivities / itemsPerPage)
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
 
-  if (!authorized) {
-    return <div>Not Authorized</div>;
-  }
-
-  if (status === "loading") return <LoadingSpinner/>;
-  if (error === "error") return <div>Erreur...</div>;
+  if (!authorized) return <div>Not Authorized</div>
+  if (status === "loading") return <LoadingSpinner/>
+  if (error === "error") return <div>Erreur...</div>
 
   return (
     <LayoutCustom>
