@@ -1,9 +1,20 @@
 import { FunctionComponent } from "react";
 import ButtonProps from "../../../types/ButtonProps";
+
+const buttonColors = {
+  primary: '#007bff',
+  secondary: '#000000FF',
+  danger: '#dc3545',
+  greyC: '#64748B'
+}
+
 const ButtonIcon: FunctionComponent<ButtonProps> = ({className, name, children, onClick, href, color = 'primary', type}) =>{
+  const buttonStyle = {
+    color: buttonColors[color]
+  }
   return (
 
-      <button type={type} className={className} onClick={onClick} style={{color}}>
+      <button type={type} className={className} onClick={onClick} style={buttonStyle}>
         {children}{name}
       </button>
   )
@@ -37,8 +48,6 @@ const Button: FunctionComponent<ButtonProps> = ({
     </button>
   );
 };
-
-
 
 
 export {

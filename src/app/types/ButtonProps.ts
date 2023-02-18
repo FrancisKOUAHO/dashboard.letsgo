@@ -2,11 +2,11 @@ import React, {CSSProperties} from 'react';
 
 type ButtonProps = {
   href?: string;
+  color?: 'primary' | 'secondary' | 'danger' | 'greyC' ;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
   className?: string,
   name?: string,
-  color?: any;
   isActive?: boolean;
   minWidth?: number;
   minHeight?: number;
