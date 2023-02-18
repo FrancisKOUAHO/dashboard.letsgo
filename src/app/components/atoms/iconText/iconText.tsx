@@ -22,7 +22,7 @@ const IconText: FunctionComponent<IconTextProps> = ({className, title, price, nu
             </div>
             <div>
                 <AiOutlineEuroCircle className="all-icon" />
-                <p>Prix : <span>{price}$</span></p>
+                <p>Prix : <span>{price}</span></p>
             </div>
             <div>
                 <AiOutlineTeam className="all-icon" />
