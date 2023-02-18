@@ -1,6 +1,6 @@
 "use client"
 
-import {isAuthorized} from "@/app/utils/auth";
+import {IsAuthorized} from "@/app/utils/auth";
 import LayoutCustom from "@/app/layouts/layoutCustom";
 import {Button} from "@/app/components/atoms/button/button";
 import Input from "@/app/components/atoms/input/input";
@@ -11,7 +11,7 @@ import IconText from "@/app/components/atoms/iconText/iconText";
 import {useState} from "react";
 
 const Page = () => {
-  const authorized = isAuthorized("admin")
+  const authorized = IsAuthorized("admin")
 
   const {data, status, error} = useActivities()
 

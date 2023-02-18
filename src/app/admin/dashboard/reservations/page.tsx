@@ -1,15 +1,14 @@
 "use client"
 
 import LayoutCustom from "@/app/layouts/layoutCustom";
-import {isAuthorized} from "@/app/utils/auth";
+import {IsAuthorized} from "@/app/utils/auth";
 import { ReservationContent, TitleTable} from "@/app/components/atoms/cardCategory/table";
 import {useReservations} from "@/app/hooks/useReservations";
 import LoadingSpinner from "@/app/components/atoms/loadingspinner/LoadingSpinner";
-import categories from "@/app/types/Categories";
 import {useState} from "react";
 
 const Page = () => {
-  const authorized = isAuthorized("admin");
+  const authorized = IsAuthorized("admin");
 
   const {data, status, error} = useReservations()
 

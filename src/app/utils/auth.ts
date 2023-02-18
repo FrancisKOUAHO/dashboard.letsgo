@@ -1,8 +1,11 @@
 'use client'
 
-import Router from 'next/router';
+import {useRouter} from "next/navigation";
 
-export const isAuthorized = async (role: string) => {
+
+export const IsAuthorized = async (role: string) => {
+  const router = useRouter();
+
   if (!process.browser) {
     return false;
   }
@@ -10,7 +13,7 @@ export const isAuthorized = async (role: string) => {
   const user = localStorage.getItem('userRole')
 
   if (!user || user !== role) {
-     await Router.replace('/')
+     await router.replace('/')
     return false;
   }
 

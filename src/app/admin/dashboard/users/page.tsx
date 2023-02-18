@@ -1,10 +1,10 @@
 'use client'
 
 import LayoutCustom from "@/app/layouts/layoutCustom";
-import {isAuthorized} from "@/app/utils/auth";
+import {IsAuthorized} from "@/app/utils/auth";
 
 const Page = () => {
-  const authorized = isAuthorized("admin");
+  const authorized = IsAuthorized("admin");
 
   if (!authorized) return <div>Not Authorized</div>
 

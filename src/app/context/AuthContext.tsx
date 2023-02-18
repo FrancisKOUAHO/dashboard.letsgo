@@ -50,6 +50,12 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
       if (response.status === 200) {
         localStorage.setItem('userRole', response.data.role)
         setUser(response.data);
+
+        if (response.data.role === 'admin') {
+          router.push('/admin/dashboard')
+        } else if (response.data.role === 'partner') {
+          router.push('/partner/dashboard')
+        }
       }
     } catch (error: any) {
       setMessage(error.response.data.message)
@@ -66,6 +72,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
     setToken(null);
     setUser(null);
     router.push('/')
