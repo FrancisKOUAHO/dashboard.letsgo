@@ -4,8 +4,10 @@ import Input from "@/app/components/atoms/input/input";
 import {ButtonIcon} from "@/app/components/atoms/button/button";
 import Dropdown from "@/app/components/atoms/dropdown/dropdown";
 import Link from "next/link";
+import {useAuth} from "@/app/context/AuthContext";
 
 const TopBar = () => {
+  const { logout } = useAuth()
 
   return (
     <nav className="c-topbar">
@@ -38,9 +40,13 @@ const TopBar = () => {
                 {
                   label: 'Aide',
                   link: '/account/profile',
-                  icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
+                  icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>,
                 },
-                {label: 'Déconnexion', icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>},
+                {
+                  label: 'Déconnexion',
+                  icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>,
+                  onclick: () => logout()
+                },
               ]}>
                 <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
               </Dropdown>

@@ -1,20 +1,17 @@
 "use client"
 
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import {createContext, ReactNode, useContext, useEffect, useState,} from 'react';
 
-import { api } from '../config/api';
+import {api} from '../config/api';
+import {useRouter} from "next/navigation";
 
 export const AuthContext = createContext<any>({});
 
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
+export const AuthContextProvider = ({children}: { children: ReactNode }) => {
+  const router = useRouter();
+
 
   const [user, setUser] = useState(null);
   const [token, setToken] = useState<any>(null);
@@ -71,6 +68,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem('token');
     setToken(null);
     setUser(null);
+    router.push('/')
   };
 
   useEffect(() => {
