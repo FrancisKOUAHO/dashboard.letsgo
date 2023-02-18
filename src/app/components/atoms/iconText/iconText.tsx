@@ -2,7 +2,7 @@ import { AiOutlineTeam, AiOutlineEuroCircle, AiOutlineCheckSquare } from "react-
 import { FunctionComponent, useState } from "react";
 import IconTextProps from "@/app/types/iconTextProps";
 
-const IconText: FunctionComponent<IconTextProps> = ({className, title, price, numberOfPlaces, status}) => {
+const IconText: FunctionComponent<IconTextProps> = ({ title, price, numberOfPlaces, status}) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const handleToggleExpand = () => {
         setIsExpanded(!isExpanded);
