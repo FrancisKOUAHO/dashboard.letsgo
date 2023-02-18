@@ -4,7 +4,7 @@ import LayoutCustom from "@/app/layouts/layoutCustom";
 import {isAuthorized} from "@/app/utils/auth";
 import {useCategories} from "@/app/hooks/useCategories";
 import LoadingSpinner from "@/app/components/atoms/loadingspinner/LoadingSpinner";
-import {CardCategory, TrContent} from "@/app/components/atoms/cardCategory/cardCategory";
+import {CategoryContent, TitleTable} from "@/app/components/atoms/cardCategory/table";
 import categories from "@/app/types/Categories";
 import {useState} from "react";
 
@@ -30,7 +30,14 @@ const Page = () => {
       <div className="c-categories">
         <h2>{"Toutes les catégories d'activités"}</h2>
 
-        <CardCategory className="c-cardCategory">
+        <TitleTable
+          className="c-cardCategory"
+          title="Image"
+          title_2="Nom de la catégorie"
+          title_3="slug"
+          title_4="Statut"
+          title_5="Actions"
+        >
           {
             data &&
             data.data
@@ -38,12 +45,12 @@ const Page = () => {
               .map((category: categories, index: number) => {
                 return (
                   <>
-                    <TrContent key={index} name={category.name} image={category.image}/>
+                    <CategoryContent key={index} name={category.name} image={category.image}/>
                   </>
                 )
               })
           }
-        </CardCategory>
+        </TitleTable>
 
         {data && (
           <nav className="c-activities__navigation">

@@ -1,29 +1,29 @@
 import {FunctionComponent} from "react";
-import { CardCategoryProps, CardCategoryTrProps } from "@/app/types/CardCategoryProps";
+import {CategoriesProps, ReservationContentProps, TitleTableProps} from "@/app/types/CardCategoryProps";
 import {ButtonIcon} from "@/app/components/atoms/button/button";
-import {AiOutlineDelete, AiOutlineEye, AiOutlineForm, AiOutlineBook} from "react-icons/ai";
-import {color} from "@storybook/theming";
+import {AiOutlineDelete, AiOutlineForm, AiOutlineBook} from "react-icons/ai";
+import Link from "next/link";
 
-export const CardCategory: FunctionComponent<CardCategoryProps> = ({className, children}) => {
+export const TitleTable: FunctionComponent<TitleTableProps> = ({title, title_2, title_3, title_4, title_5, className, children}) => {
     return(
         <div className={className}>
             <table className={className}>
                 <thead className="thead-1">
                 <tr>
                     <th>
-                        Image
+                      {title}
                     </th>
                     <th>
-                        {"Nom de la catégorie"}
+                      {title_2}
                     </th>
                     <th>
-                        Slug
+                      {title_3}
                     </th>
                     <th className="th-last">
-                        Statut
+                      {title_4}
                     </th>
                     <th className="th-last">
-                        Actions
+                      {title_5}
                     </th>
                 </tr>
                 </thead>
@@ -36,7 +36,7 @@ export const CardCategory: FunctionComponent<CardCategoryProps> = ({className, c
 }
 
 
-export const TrContent: FunctionComponent<CardCategoryTrProps> = ({image, name, slug, status, action}) => {
+export const CategoryContent: FunctionComponent<CategoriesProps> = ({image, name, slug, status, action}) => {
     return (
       <tr className="tr-content">
           <td className="td-first">
@@ -73,5 +73,42 @@ export const TrContent: FunctionComponent<CardCategoryTrProps> = ({image, name, 
           </td>
       </tr>
     )
+
+}
+
+
+export const ReservationContent: FunctionComponent<ReservationContentProps> = ({reference, activite, montant, acheteur}) => {
+  return (
+    <tr className="tr-content">
+      <td className="td-first">
+        <Link href="#" className="a-second text-sm">
+          {`${reference?.slice(0, 10)}...`}
+        </Link>
+      </td>
+      <td className="td-second">
+        <a className="a-second">
+          {acheteur}
+        </a>
+      </td>
+      <td className="td-third">
+        <p className="a-third">
+          {activite}
+        </p>
+      </td>
+      <td className="td-beforelast">
+        <p>{montant}</p>
+      </td>
+      <td className="td-last">
+        <div className="td-last-button">
+          <a className="a-last-button">
+            <ButtonIcon  className="c-button-icon" color="secondary" name="Modifier"><AiOutlineForm className="all-icon"/></ButtonIcon>
+          </a>
+          <a className="a-last-button-2">
+            <ButtonIcon  className="c-button-icon" color="danger" name="Supprimer"><AiOutlineDelete className="all-icon"/></ButtonIcon>
+          </a>
+        </div>
+      </td>
+    </tr>
+  )
 
 }
