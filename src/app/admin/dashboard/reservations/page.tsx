@@ -4,7 +4,7 @@ import LayoutCustom from "@/app/layouts/layoutCustom";
 import {IsAuthorized} from "@/app/utils/auth";
 import { ReservationContent, TitleTable} from "@/app/components/atoms/cardCategory/table";
 import {useReservations} from "@/app/hooks/useReservations";
-import LoadingSpinner from "@/app/components/atoms/loadingspinner/LoadingSpinner";
+import LoadingSpinner from "@/app/components/atoms/loadingspinner/loadingSpinner";
 import {useState} from "react";
 
 const Page = () => {
@@ -21,8 +21,6 @@ const Page = () => {
   if (!authorized) return <div>Not Authorized</div>
   if (status === "loading") return <LoadingSpinner/>
   if (error === "error") return <div>Erreur...</div>
-
-  console.log("reservation", data)
 
   return (
     <LayoutCustom>

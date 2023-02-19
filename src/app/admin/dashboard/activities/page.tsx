@@ -4,16 +4,36 @@ import {IsAuthorized} from "@/app/utils/auth";
 import LayoutCustom from "@/app/layouts/layoutCustom";
 import {Button} from "@/app/components/atoms/button/button";
 import Input from "@/app/components/atoms/input/input";
-import LoadingSpinner from "@/app/components/atoms/loadingspinner/LoadingSpinner";
+import LoadingSpinner from "@/app/components/atoms/loadingspinner/loadingSpinner";
 import Card from "@/app/components/atoms/card/card";
 import {useActivities} from "@/app/hooks/useActivities";
 import IconText from "@/app/components/atoms/iconText/iconText";
 import {useState} from "react";
+import Modal from "@/app/components/atoms/modal/modal";
+import {ActivitySchedule, DetailsActivity, InformationActivity} from "@/app/components/atoms/forms/information";
+
+type FormValues = {
+  firstName: string,
+  lastName: string,
+  email: string,
+};
+
 
 const Page = () => {
   const authorized = IsAuthorized("admin")
 
   const {data, status, error} = useActivities()
+
+  let [isOpen, setIsOpen] = useState(false)
+
+  const closeModal = (): void => {
+    setIsOpen(false)
+  }
+
+  const openModal = (): void => {
+    setIsOpen(true)
+  }
+
 
   const itemsPerPage = 8
   const totalActivities = data?.data.length
@@ -21,8 +41,29 @@ const Page = () => {
 
   const [page, setPage] = useState(1)
 
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formValues, setFormValues] = useState<FormValues>({
+    firstName: '',
+    lastName: '',
+    email: '',
+  });
+
+  const handleNext = (values: FormValues) => {
+    setCurrentStep(currentStep + 1);
+    setFormValues({ ...formValues, ...values });
+  };
+
+  const handlePrevious = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
+  const handleSubmit = (values: FormValues) => {
+    console.log("Form submitted with values:", values);
+    // TODO: Submit form data to backend
+  };
+
   if (!authorized) return <div>Not Authorized</div>
-  if (status === "loading") return <LoadingSpinner/>
+  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
   if (error === "error") return <div>Erreur...</div>
 
   return (
@@ -32,7 +73,7 @@ const Page = () => {
 
         <div className="c-activities__title">
           <div>
-            <Button color="primary" isActive={true}>
+            <Button color="primary" isActive={true} onClick={openModal}>
               Ajouter
             </Button>
             <div>
@@ -105,13 +146,18 @@ const Page = () => {
               <li>
                 <button
                   onClick={() => setPage(page+1)}
-                  className="transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-indigo-100">Next
+                  className="transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-indigo-100">Suivant
                 </button>
               </li>
             </ul>
           </nav>
         )}
       </div>
+      <Modal closeModal={closeModal} isOpen={isOpen} name="Ajouter une activité">
+        {currentStep === 1 && <InformationActivity onNext={handleNext}/>}
+        {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onSubmit={() => handleSubmit(formValues)} onNext={handleNext} />}
+        {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onSubmit={() => handleSubmit(formValues)} />}
+      </Modal>
     </LayoutCustom>
   )
 }
