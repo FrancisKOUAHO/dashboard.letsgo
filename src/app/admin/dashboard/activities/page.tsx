@@ -12,10 +12,35 @@ import {useState} from "react";
 import Modal from "@/app/components/atoms/modal/modal";
 import {ActivitySchedule, DetailsActivity, InformationActivity} from "@/app/components/atoms/forms/information";
 
+
 type FormValues = {
-  firstName: string,
-  lastName: string,
-  email: string,
+  address: string,
+  cancellation_conditions: string,
+  category_id: string,
+  city: string,
+  description: string,
+  duration: string,
+  name: string,
+  practical_information: string,
+  price: string,
+  compagny: string,
+  programme: string,
+  schedule: Object
+}
+
+const initialFormValues: FormValues = {
+  address: "",
+  cancellation_conditions: "",
+  category_id: "",
+  city: "",
+  description: "",
+  duration: "",
+  name: "",
+  practical_information: "",
+  price: "",
+  compagny: "",
+  programme: "",
+  schedule: ""
 };
 
 
@@ -42,11 +67,7 @@ const Page = () => {
   const [page, setPage] = useState(1)
 
   const [currentStep, setCurrentStep] = useState(1);
-  const [formValues, setFormValues] = useState<FormValues>({
-    firstName: '',
-    lastName: '',
-    email: '',
-  });
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
   const handleNext = (values: FormValues) => {
     setCurrentStep(currentStep + 1);
@@ -154,7 +175,7 @@ const Page = () => {
         )}
       </div>
       <Modal closeModal={closeModal} isOpen={isOpen} name="Ajouter une activité">
-        {currentStep === 1 && <InformationActivity onNext={handleNext}/>}
+        {currentStep === 1 && <InformationActivity onNext={handleNext} />}
         {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onSubmit={() => handleSubmit(formValues)} onNext={handleNext} />}
         {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onSubmit={() => handleSubmit(formValues)} />}
       </Modal>

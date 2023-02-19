@@ -3,7 +3,7 @@ import React, {CSSProperties} from 'react';
 type ButtonProps = {
   href?: string;
   color?: 'primary' | 'secondary' | 'danger' | 'greyC' ;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: any;
   children?: React.ReactNode;
   className?: string,
   name?: string,
@@ -15,6 +15,7 @@ type ButtonProps = {
   type?: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean,
   style?: CSSProperties,
+  value?: string,
 };
 
 export default ButtonProps;

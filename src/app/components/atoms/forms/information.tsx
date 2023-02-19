@@ -4,47 +4,52 @@ import {Button} from "@/app/components/atoms/button/button";
 import React, {useState} from "react";
 import Input from "@/app/components/atoms/input/input";
 import TextArea from "@/app/components/atoms/textArea/textArea";
-import { FaBeer } from 'react-icons/fa';
-
-
 
 interface FormValues {
   address: string,
-  cancellation_conditions:string,
-  category_id:string,
+  cancellation_conditions: string,
+  category_id: string,
   city: string,
   description: string,
-  duration : string,
-  name : string,
-  practical_information : string,
-  price : string,
+  duration: string,
+  name: string,
+  practical_information: string,
+  price: string,
   compagny: string,
-  programme : string,
-  schedule: object
+  programme: string,
+  schedule: Object
 }
 
 const initialFormValues: FormValues = {
-  address: "119 rue saint sebastien",
-  cancellation_conditions:"test",
-  category_id:"d6dd2b41-f820-4515-b693-03a302a8a26b",
-  city: "eazeaz",
-  description: "test",
-  duration : "18:57",
-  name : "test",
-  practical_information : "test",
-  price : "29",
-  compagny: "test",
-  programme : "test",
-  schedule : {"dates": [{"date": "1-1-2023", "hours": ["09:00", "10:00"]}]}
+  address: "",
+  cancellation_conditions: "",
+  category_id: "",
+  city: "",
+  description: "",
+  duration: "",
+  name: "",
+  practical_information: "",
+  price: "",
+  compagny: "",
+  programme: "",
+  schedule: ""
 };
+
 
 const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void }) => {
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setFormValues({
+      ...formValues,
+      address: "19999",
+    });
+    console.log(formValues)
     onNext(formValues);
   };
+
+  console.log(formValues)
   return (
     <form onSubmit={handleSubmit} className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
       <div
@@ -253,14 +258,16 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
     </form>
   )
 }
-const DetailsActivity = ({onPrevious,onSubmit, onNext}: { onPrevious: () => void, onSubmit: (values: FormValues) => void, onNext: (values: FormValues) => void }) => {
+
+const DetailsActivity = ({ onPrevious, onNext }: { onPrevious: () => void, onSubmit: (values: FormValues) => void, onNext: (values: FormValues) => void }) => {
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
   const [currentStep, setCurrentStep] = useState(2);
 
   const handleNext = (values: FormValues) => {
     setCurrentStep(currentStep + 1);
-    setFormValues({ ...formValues, ...values });
+    setFormValues({...formValues, ...values});
+    onNext({...formValues, ...values});
   };
 
   const handlePrevious = () => {
@@ -269,26 +276,35 @@ const DetailsActivity = ({onPrevious,onSubmit, onNext}: { onPrevious: () => void
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onNext(formValues);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const values: any = Object.fromEntries(formData.entries());
+    console.log("values", values);
+    setFormValues({
+      ...formValues,
+      ...values,
+    });
+    onNext(values);
+    console.log("formValues", formValues);
   };
 
   return (
     <form onSubmit={handleSubmit} className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
       <div
         className="flex items-center pb-5 text-base font-medium border-b border-slate-200/60 dark:border-darkmode-400"> {"Détails de l'activité"}</div>
-      <TextArea name="input"
+      <TextArea name="description"
                 title="Description de l'activité"
                 description="Assurez-vous que la description du produit fournit une explication détaillée de votre produit afin qu'il soit facile de comprendre et de trouver votre produit."
       />
-      <TextArea name="input"
+      <TextArea name="programme"
                 title="Au programme"
                 description="Assurez-vous que la description du produit fournit une explication détaillée de votre produit afin qu'il soit facile de comprendre et de trouver votre produit."
       />
-      <TextArea name="input"
+      <TextArea name="cancellation_conditions"
                 title="Conditions d'annulation"
                 description="Assurez-vous que la description du produit fournit une explication détaillée de votre produit afin qu'il soit facile de comprendre et de trouver votre produit."
       />
-      <TextArea name="input"
+      <TextArea name="practical_information"
                 title="informations pratiques"
                 description="Assurez-vous que la description du produit fournit une explication détaillée de votre produit afin qu'il soit facile de comprendre et de trouver votre produit."
       />
@@ -307,18 +323,65 @@ const DetailsActivity = ({onPrevious,onSubmit, onNext}: { onPrevious: () => void
 
 const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, onSubmit: (values: FormValues) => void }) => {
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+  console.log("formValues", formValues);
+
+  const [date, setDate] = useState<string>("");
+  const [hour, setHour] = useState<string>("");
+
+  const [schedule, setSchedule] = useState<{ dates: { date: string, hours: string[] }[] }>({dates: []});
+
+  const handleAddSchedule = (event: any) => {
+    event.preventDefault();
+
+    console.log('add schedule', date, hour)
+
+    if (!date || !hour) {
+      console.log("Veuillez entrer une date et une heure");
+      return;
+    }
+
+    const newSchedule = {
+      date,
+      hours: [hour]
+    };
+
+    // Vérifiez si une entrée avec la même date existe déjà dans la liste
+    const existingEntryIndex = schedule.dates.findIndex(s => s.date === date);
+
+    if (existingEntryIndex !== -1) {
+      // Si une entrée existe déjà pour cette date, ajoutez simplement l'heure à la liste des heures
+      schedule.dates[existingEntryIndex].hours.push(hour);
+      setSchedule({
+        dates: [...schedule.dates]
+      });
+    } else {
+      // Sinon, créez une nouvelle entrée avec la date et l'heure
+      setSchedule({
+        dates: [...schedule.dates, newSchedule]
+      });
+    }
+
+    // Réinitialiser les valeurs de date et d'heure après la soumission du formulaire
+    setDate("");
+    setHour("");
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setFormValues({
+      ...formValues,
+      schedule: schedule
+    });
+    console.log('submit', formValues)
     onSubmit(formValues);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
+    <form className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
       <div
         className="flex items-center pb-5 text-base font-medium border-b border-slate-200/60 dark:border-darkmode-400"
       >
-        calendrier de l'activité
+        {"Horaires de l'activité"}
       </div>
       <div className="mt-5">
         <div className="block sm:flex flex-col items-start pt-2 mt-2 xl:flex-row first:mt-0 first:pt-0"
@@ -337,8 +400,9 @@ const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, on
                 <div className="block sm:flex items-center mt-5 first:mt-0"><label
                   className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right sm:w-20">Date</label>
                   <div className="flex items-center flex-1 xl:pr-20">
-                    <div className="flex flex-1"><Input
-                      className="c-input" type="date" placeholder="Size"/>
+                    <div className="flex flex-1"><input className="c-input" value={date} name="date"
+                                                        onChange={e => setDate(e.target.value)}
+                                                        type="date" placeholder="Size"/>
                       <div
                         className="py-2 px-3 bg-slate-100 border shadow-sm border-slate-200 text-slate-600 dark:bg-darkmode-900/20 dark:border-darkmode-900/20 dark:text-slate-400 rounded-none [&amp;:not(:first-child)]:border-l-transparent first:rounded-l last:rounded-r"
                       >1
@@ -348,8 +412,10 @@ const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, on
                   <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right sm:w-20"
                   >Heure</label>
                   <div className="flex items-center flex-1 xl:pr-20">
-                    <div className="flex flex-1"><Input
-                      className="c-input" type="time" placeholder="Size"/>
+                    <div className="flex flex-1"><input
+                      value={hour} name="hour" onChange={e => setHour(e.target.value)}
+                      className="c-input"
+                      type="time" placeholder="Size"/>
                       <div
                         className="py-2 px-3 bg-slate-100 border shadow-sm border-slate-200 text-slate-600 dark:bg-darkmode-900/20 dark:border-darkmode-900/20 dark:text-slate-400 rounded-none [&amp;:not(:first-child)]:border-l-transparent first:rounded-l last:rounded-r"
                       >1
@@ -358,30 +424,19 @@ const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, on
                   </div>
                 </div>
                 <div className="mt-5 xl:ml-20 xl:pl-5 xl:pr-20 first:mt-0">
-                  <button
-                    className="transition duration-200 border shadow-sm inline-flex items-center justify-center py-2 px-3 rounded-md font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&amp;:hover:not(:disabled)]:bg-opacity-90 [&amp;:hover:not(:disabled)]:border-opacity-90 [&amp;:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-primary text-primary dark:border-primary [&amp;:hover:not(:disabled)]:bg-primary/10 w-full border-dashed"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         className="stroke-1.5 w-4 h-4 mr-2">
-                      <line x1="12" y1="5" x2="12" y2="19"></line>
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    Ajouter une nouvelle Option
-                  </button>
+                  <Button color="primary" onClick={handleAddSchedule}>Ajouter</Button>
                 </div>
               </div>
+              <pre>{JSON.stringify(schedule, null, 2)}</pre>
             </div>
           </div>
         </div>
       </div>
       <div className="flex flex-col justify-between gap-2 mt-12 md:flex-row">
-        <Button color="primary" onClick={onPrevious}>
+        <Button color="primary" onClick={onPrevious} isActive={true}>
           Précédent
         </Button>
-        <Button color="primary" isActive={true} type="submit">
-          Enregistrer
-        </Button>
+        <Button type="submit" color="primary" onClick={handleSubmit}>Enregistrer</Button>
       </div>
     </form>
   )

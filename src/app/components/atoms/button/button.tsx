@@ -33,6 +33,7 @@ const Button: FunctionComponent<ButtonProps> = ({
                                                   children,
                                                   type,
                                                   style,
+                                                  value
                                                 }) => {
   return (
     <button
@@ -42,6 +43,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       style={{ minWidth: `${minWidth}px`, minHeight: `${minHeight}px`, ...style }}
       onClick={onClick}
       type={type}
+      value={value}
       disabled={disabled}
     >
       {children}
