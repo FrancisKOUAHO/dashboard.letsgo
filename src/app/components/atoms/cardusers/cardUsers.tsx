@@ -1,6 +1,5 @@
 import {FunctionComponent} from "react";
 import CardUsersProps from "@/app/types/CardUsersProps";
-import {Button} from "@/app/components/atoms/button/button";
 
 const CardUsers:FunctionComponent<CardUsersProps> = ({className, name, role, children}) => {
     return(
