@@ -1,5 +1,6 @@
 import {FunctionComponent} from "react";
 import CardUsersProps from "@/app/types/CardUsersProps";
+import Link from "next/link";
 
 const CardUsers:FunctionComponent<CardUsersProps> = ({className, name, role, children}) => {
     return(
@@ -17,11 +18,11 @@ const CardUsers:FunctionComponent<CardUsersProps> = ({className, name, role, chi
                     </div>
                 </div>
                 <div>
-                    <a>
-                        <button className="c-a-button">Message</button>
-                    </a>
-                    <a>
-                        <button className="c-a2-button">Profil</button>
+                    <Link className="c-a-button" href="#">
+                        Message
+                    </Link>
+                    <a className="c-a2-button" href="#">
+                        Profil
                     </a>
                 </div>
             </div>

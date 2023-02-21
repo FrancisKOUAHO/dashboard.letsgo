@@ -27,7 +27,7 @@ const Page = () => {
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
   if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen"><div>Erreur...</div></div></LayoutCustom>
 
-
+  console.log(data)
   return (
     <LayoutCustom>
       <div className="c-users">
@@ -43,7 +43,7 @@ const Page = () => {
                 data.data.map((user: any, index: number) => {
                   return (
                     <CardUsers className="c-cardUsers" key={index} name={user.full_name} role={user.role}>
-                        <img className="cardUsers-Image" src={user.image} alt={user.full_name}/>
+                        <img className="cardUsers-Image" src={user.photo} alt={user.full_name} width="100" height="100"/>
                     </CardUsers>
                   )
                 })
