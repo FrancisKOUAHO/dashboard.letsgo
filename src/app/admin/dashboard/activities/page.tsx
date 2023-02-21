@@ -7,13 +7,18 @@ import Input from "@/app/components/atoms/input/input";
 import LoadingSpinner from "@/app/components/atoms/loadingspinner/loadingSpinner";
 import Card from "@/app/components/atoms/card/card";
 import {useActivities} from "@/app/hooks/useActivities";
-import IconText from "@/app/components/atoms/iconText/iconText";
+import IconText from "@/app/components/atoms/icontext/iconText";
 import {useState} from "react";
 import Modal from "@/app/components/atoms/modal/modal";
-import {ActivitySchedule, DetailsActivity, InformationActivity} from "@/app/components/atoms/forms/information";
+import {
+  ActivitySchedule,
+  DetailsActivity,
+  InformationActivity,
+  UploadImage
+} from "@/app/components/atoms/forms/information";
 
 
-type FormValues = {
+interface FormValues {
   address: string,
   cancellation_conditions: string,
   category_id: string,
@@ -21,6 +26,7 @@ type FormValues = {
   description: string,
   duration: string,
   name: string,
+  image: File | null,
   practical_information: string,
   price: string,
   compagny: string,
@@ -36,6 +42,7 @@ const initialFormValues: FormValues = {
   description: "",
   duration: "",
   name: "",
+  image: new File([], ''),
   practical_information: "",
   price: "",
   compagny: "",
@@ -45,11 +52,21 @@ const initialFormValues: FormValues = {
 
 
 const Page = () => {
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+
   const authorized = IsAuthorized("admin")
 
   const {data, status, error} = useActivities()
 
   let [isOpen, setIsOpen] = useState(false)
+
+  const itemsPerPage = 8
+  const totalActivities = data?.data.length
+  const pageCount = Math.ceil(totalActivities / itemsPerPage)
+
+  const [page, setPage] = useState(1)
+
+  const [currentStep, setCurrentStep] = useState(1);
 
   const closeModal = (): void => {
     setIsOpen(false)
@@ -59,19 +76,9 @@ const Page = () => {
     setIsOpen(true)
   }
 
-
-  const itemsPerPage = 8
-  const totalActivities = data?.data.length
-  const pageCount = Math.ceil(totalActivities / itemsPerPage)
-
-  const [page, setPage] = useState(1)
-
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
-
   const handleNext = (values: FormValues) => {
     setCurrentStep(currentStep + 1);
-    setFormValues({ ...formValues, ...values });
+    setFormValues({...formValues, ...values});
   };
 
   const handlePrevious = () => {
@@ -176,8 +183,9 @@ const Page = () => {
       </div>
       <Modal closeModal={closeModal} isOpen={isOpen} name="Ajouter une activité">
         {currentStep === 1 && <InformationActivity onNext={handleNext} />}
-        {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onSubmit={() => handleSubmit(formValues)} onNext={handleNext} />}
-        {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onSubmit={() => handleSubmit(formValues)} />}
+        {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onNext={handleNext} />}
+        {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onNext={handleNext} />}
+        {currentStep === 4 && <UploadImage onPrevious={handlePrevious}  onsubmit={() => handleSubmit(formValues)}/>}
       </Modal>
     </LayoutCustom>
   )
