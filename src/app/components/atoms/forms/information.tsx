@@ -3,7 +3,9 @@
 import {Button} from "@/app/components/atoms/button/button";
 import React, {useState} from "react";
 import Input from "@/app/components/atoms/input/input";
-import TextArea from "@/app/components/atoms/textArea/textArea";
+import TextArea from "@/app/components/atoms/textarea/textArea";
+import {useCategories} from "@/app/hooks/useCategories";
+import {usePartner} from "@/app/hooks/usePartner";
 
 interface FormValues {
   address: string,
@@ -13,6 +15,7 @@ interface FormValues {
   description: string,
   duration: string,
   name: string,
+  image: File | null,
   practical_information: string,
   price: string,
   compagny: string,
@@ -28,6 +31,7 @@ const initialFormValues: FormValues = {
   description: "",
   duration: "",
   name: "",
+  image: new File([], ''),
   practical_information: "",
   price: "",
   compagny: "",
@@ -37,16 +41,27 @@ const initialFormValues: FormValues = {
 
 
 const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void }) => {
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+  const { data: categories } = useCategories()
+  const { data: organisators} = usePartner()
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues)
+
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const handleNext = (values: FormValues) => {
+    setCurrentStep(currentStep + 1);
+    setFormValues({...formValues, ...values});
+    onNext({...formValues, ...values});
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormValues({
-      ...formValues,
-      address: "19999",
-    });
-    console.log(formValues)
-    onNext(formValues);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const values: any = Object.fromEntries(formData.entries());
+    console.log("values", values)
+    await setFormValues({...formValues, ...values})
+    onNext({...formValues, ...values});
   };
 
   console.log(formValues)
@@ -75,7 +90,7 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <Input
-              className="c-input"
+              className="c-input" name="name"
               type="text" placeholder="Nom de l'activité"/>
             <div className="text-xs text-slate-500 mt-2 text-right"> Maximum de caractères 0/70</div>
           </div>
@@ -94,7 +109,7 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
           </div>
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
-            <Input className="c-input" placeholder="Exemple: 10 min"/></div>
+            <Input className="c-input" name="duration" placeholder="Exemple: 10 min"/></div>
         </div>
         <div className="block sm:flex flex-col items-start pt-5 mt-5 xl:flex-row first:mt-0 first:pt-0"
         ><label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-64 xl:!mr-10"
@@ -111,22 +126,16 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <select
+              name="compagny"
               className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
             >
-              <option value="e2f0c600-8628-40b3-a2fc-25e53abf982a">Ateliers</option>
-              <option value="de55b0db-cf3b-4785-aaa7-03dc10fd5e97">Pilotage</option>
-              <option value="d6dd2b41-f820-4515-b693-03a302a8a26b">{'Let\'s Go'}</option>
-              <option value="d2b7e54c-f54d-4594-ab47-ecf71936e024">Musique</option>
-              <option value="ca76a745-5ae8-4c69-a8e5-abde75d4413f">Sports</option>
-              <option value="c59e26e9-889f-4146-bf13-f8519f131980">Aventure</option>
-              <option value="bc95794d-2e5b-4368-bfef-a17a6b710aec">Aquatique</option>
-              <option value="b65900b5-59d5-4bab-9357-4ae6e4051335">Bien Etre</option>
-              <option value="b2fd31af-bf44-472a-8e58-5bdb6daadbec">Gastronomie</option>
-              <option value="aed4a112-279c-4d50-9fd1-43239ffdfd73">Virtuel</option>
-              <option value="abb79b0c-b445-4cbc-9e2e-dde7efb09524">Air &amp; Vol</option>
-              <option value="88d9e624-d818-4583-9981-e5caac803276">Insolites</option>
-              <option value="4626d873-06fd-4d57-9309-b5b50e1faa01">Parcs &amp; Fun</option>
-              <option value="183718c4-53d0-4031-8045-8ebabc8b96e5">Culturel</option>
+              {
+                organisators && organisators.data.map((organisator: any) => {
+                  return(
+                    <option value={organisator.name_compagny}>{organisator.name_compagny}</option>
+                  )
+                })
+              }
             </select>
           </div>
         </div>
@@ -145,22 +154,16 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <select
+              name="category_id"
               className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
             >
-              <option value="e2f0c600-8628-40b3-a2fc-25e53abf982a">Ateliers</option>
-              <option value="de55b0db-cf3b-4785-aaa7-03dc10fd5e97">Pilotage</option>
-              <option value="d6dd2b41-f820-4515-b693-03a302a8a26b">{'Let\'s Go'}</option>
-              <option value="d2b7e54c-f54d-4594-ab47-ecf71936e024">Musique</option>
-              <option value="ca76a745-5ae8-4c69-a8e5-abde75d4413f">Sports</option>
-              <option value="c59e26e9-889f-4146-bf13-f8519f131980">Aventure</option>
-              <option value="bc95794d-2e5b-4368-bfef-a17a6b710aec">Aquatique</option>
-              <option value="b65900b5-59d5-4bab-9357-4ae6e4051335">Bien Etre</option>
-              <option value="b2fd31af-bf44-472a-8e58-5bdb6daadbec">Gastronomie</option>
-              <option value="aed4a112-279c-4d50-9fd1-43239ffdfd73">Virtuel</option>
-              <option value="abb79b0c-b445-4cbc-9e2e-dde7efb09524">Air &amp; Vol</option>
-              <option value="88d9e624-d818-4583-9981-e5caac803276">Insolites</option>
-              <option value="4626d873-06fd-4d57-9309-b5b50e1faa01">Parcs &amp; Fun</option>
-              <option value="183718c4-53d0-4031-8045-8ebabc8b96e5">Culturel</option>
+              {
+                categories && categories.data.map((category: any) => {
+                  return (
+                    <option value={category.id}>{category.name}</option>
+                  )
+                })
+              }
             </select></div>
         </div>
         <div className="block sm:flex flex-col items-start pt-5 mt-5 xl:flex-row first:mt-0 first:pt-0"
@@ -178,22 +181,16 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <select
+              name="partner"
               className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
             >
-              <option value="e2f0c600-8628-40b3-a2fc-25e53abf982a">Ateliers</option>
-              <option value="de55b0db-cf3b-4785-aaa7-03dc10fd5e97">Pilotage</option>
-              <option value="d6dd2b41-f820-4515-b693-03a302a8a26b">{'Let\'s Go'}</option>
-              <option value="d2b7e54c-f54d-4594-ab47-ecf71936e024">Musique</option>
-              <option value="ca76a745-5ae8-4c69-a8e5-abde75d4413f">Sports</option>
-              <option value="c59e26e9-889f-4146-bf13-f8519f131980">Aventure</option>
-              <option value="bc95794d-2e5b-4368-bfef-a17a6b710aec">Aquatique</option>
-              <option value="b65900b5-59d5-4bab-9357-4ae6e4051335">Bien Etre</option>
-              <option value="b2fd31af-bf44-472a-8e58-5bdb6daadbec">Gastronomie</option>
-              <option value="aed4a112-279c-4d50-9fd1-43239ffdfd73">Virtuel</option>
-              <option value="abb79b0c-b445-4cbc-9e2e-dde7efb09524">Air &amp; Vol</option>
-              <option value="88d9e624-d818-4583-9981-e5caac803276">Insolites</option>
-              <option value="4626d873-06fd-4d57-9309-b5b50e1faa01">Parcs &amp; Fun</option>
-              <option value="183718c4-53d0-4031-8045-8ebabc8b96e5">Culturel</option>
+              {
+                organisators && organisators.data.map((organisator: any) => {
+                  return(
+                    <option value={organisator.id}>{organisator.name_compagny}</option>
+                  )
+                })
+              }
             </select>
           </div>
         </div>
@@ -211,7 +208,7 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
           </div>
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
-            <Input className="c-input" type="text" placeholder="Ex: 15 Rue de Paris"/></div>
+            <Input className="c-input" type="text" name="address" placeholder="Ex: 15 Rue de Paris"/></div>
         </div>
         <div className="block sm:flex flex-col items-start pt-5 mt-5 xl:flex-row first:mt-0 first:pt-0"
         ><label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-64 xl:!mr-10"
@@ -228,7 +225,7 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <Input
-              className="c-input flex-1"
+              className="c-input flex-1" name="city"
               type="text" placeholder="Ex: Paris"/></div>
         </div>
         <div className="block sm:flex flex-col items-start pt-5 mt-5 xl:flex-row first:mt-0 first:pt-0"
@@ -246,7 +243,7 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <Input
-              className="c-input"
+              className="c-input" name="price"
               type="text" placeholder="14 euros"/></div>
         </div>
         <div className="flex flex-col justify-end gap-2 mt-12 md:flex-row">
@@ -259,8 +256,9 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
   )
 }
 
-const DetailsActivity = ({ onPrevious, onNext }: { onPrevious: () => void, onSubmit: (values: FormValues) => void, onNext: (values: FormValues) => void }) => {
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+const DetailsActivity = ({onPrevious, onNext}: { onPrevious: () => void, onNext: (values: FormValues) => void }) => {
+  const [formValues, setFormValues] = useState(initialFormValues);
+  console.log("formValues 2", formValues)
 
   const [currentStep, setCurrentStep] = useState(2);
 
@@ -274,18 +272,13 @@ const DetailsActivity = ({ onPrevious, onNext }: { onPrevious: () => void, onSub
     setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
     const values: any = Object.fromEntries(formData.entries());
-    console.log("values", values);
-    setFormValues({
-      ...formValues,
-      ...values,
-    });
-    onNext(values);
-    console.log("formValues", formValues);
+    await setFormValues({...formValues, ...values})
+    onNext({...formValues, ...values});
   };
 
   return (
@@ -321,19 +314,27 @@ const DetailsActivity = ({ onPrevious, onNext }: { onPrevious: () => void, onSub
   )
 }
 
-const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, onSubmit: (values: FormValues) => void }) => {
+const ActivitySchedule = ({onPrevious, onNext}: { onPrevious: () => void, onNext: (values: FormValues) => void }) => {
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
-  console.log("formValues", formValues);
+  console.log("formValues 3", formValues)
 
   const [date, setDate] = useState<string>("");
   const [hour, setHour] = useState<string>("");
 
   const [schedule, setSchedule] = useState<{ dates: { date: string, hours: string[] }[] }>({dates: []});
+  console.log("schedule", schedule)
+
+  const [currentStep, setCurrentStep] = useState(3);
+
+  const handleNext = (values: FormValues) => {
+    setCurrentStep(currentStep + 1);
+    setFormValues({...formValues, ...values});
+    onNext({...formValues, ...values});
+  };
+
 
   const handleAddSchedule = (event: any) => {
     event.preventDefault();
-
-    console.log('add schedule', date, hour)
 
     if (!date || !hour) {
       console.log("Veuillez entrer une date et une heure");
@@ -366,18 +367,17 @@ const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, on
     setHour("");
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormValues({
+    await setFormValues({
       ...formValues,
-      schedule: schedule
+      ...schedule
     });
-    console.log('submit', formValues)
-    onSubmit(formValues);
+    onNext({...formValues, ...schedule});
   };
 
   return (
-    <form className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
+    <form onSubmit={handleSubmit} className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
       <div
         className="flex items-center pb-5 text-base font-medium border-b border-slate-200/60 dark:border-darkmode-400"
       >
@@ -424,7 +424,7 @@ const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, on
                   </div>
                 </div>
                 <div className="mt-5 xl:ml-20 xl:pl-5 xl:pr-20 first:mt-0">
-                  <Button color="primary" onClick={handleAddSchedule}>Ajouter</Button>
+                  <Button color="primary" type="button" onClick={handleAddSchedule}>Ajouter</Button>
                 </div>
               </div>
               <pre>{JSON.stringify(schedule, null, 2)}</pre>
@@ -436,7 +436,104 @@ const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, on
         <Button color="primary" onClick={onPrevious} isActive={true}>
           Précédent
         </Button>
-        <Button type="submit" color="primary" onClick={handleSubmit}>Enregistrer</Button>
+        <Button type="submit" color="primary">Suivant</Button>
+      </div>
+    </form>
+  )
+}
+
+const UploadImage = ({onPrevious, onsubmit}: { onPrevious: () => void, onsubmit: (values: FormValues) => void }) => {
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+  console.log("formValues 4", formValues)
+  const [image, setImage] = useState<File | null>(null);
+
+  const [currentStep, setCurrentStep] = useState(4);
+
+  const handlePrevious = () => {
+    setCurrentStep(currentStep - 1);
+  };
+
+  const handleImageChange = (event: any) => {
+    const selectedImage = event.target.files && event.target.files[0];
+    if (selectedImage) setImage(selectedImage);
+  }
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    console.log("image2", image)
+
+    if (!image) {
+      // Handle the case where no image is selected
+      return;
+    }
+
+    await setFormValues({ ...formValues, image });
+    onsubmit(formValues);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
+      <div
+        className="flex items-center pb-5 text-base font-medium border-b border-slate-200/60 dark:border-darkmode-400">
+        Télécharger le produit
+      </div>
+      <div className="mt-5">
+        <div className="block sm:flex flex-col items-start mt-10 xl:flex-row"><label
+          className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right w-full xl:w-64">
+          <div className="text-left">
+            <div className="flex items-center">
+              <div className="font-medium">Photos du produit
+              </div>
+              <div
+                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"> Required
+              </div>
+            </div>
+            <div className="mt-3 text-xs leading-relaxed text-slate-500">
+              <div> {"Le format de l'image est .jpg .jpeg .png et sa taille minimale est de 300 x 300 pixels (pour des images optimales, utilisez une taille minimale de 700 x 700 pixels).\n" +
+                "                une taille minimale de 700 x 700 pixels)."}
+              </div>
+            </div>
+          </div>
+        </label>
+          <div className="flex-1 w-full pt-4 mt-3 border-2 border-dashed rounded-md xl:mt-0 dark:border-darkmode-400">
+            <div className="grid grid-cols-10 gap-5 pl-4 pr-5">
+              <div className="relative col-span-5 cursor-pointer md:col-span-2 h-28 image-fit zoom-in">
+                {image && (
+                  <div>
+                    <img className="rounded-md" src={URL.createObjectURL(image)} alt="Uploaded image"/>
+                    <span
+                      className="cursor-pointer absolute top-0 right-0 flex items-center justify-center w-5 h-5 -mt-2 -mr-2 text-white rounded-full bg-danger">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                           stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                           className="stroke-1.5 w-4 h-4">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="relative flex items-center justify-center px-4 pb-4 mt-5 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                   className="stroke-1.5 w-4 h-4 mr-2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="9" cy="9" r="2"></circle>
+                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
+              </svg>
+              <span className="mr-1 text-primary text-sm"> Télécharger une photo </span> ou glisser-déposer
+              <input name="image" onChange={handleImageChange} accept="image/*"
+                     className="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 [&amp;[readonly]]:dark:border-transparent transition duration-200 ease-in-out text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 flex-1 absolute top-0 left-0 w-full h-full opacity-0"
+                     type="file"/></div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col justify-between gap-2 mt-12 md:flex-row">
+        <Button color="primary" onClick={onPrevious} isActive={true}>
+          Précédent
+        </Button>
+        <Button type="submit" color="primary">Enregistrer</Button>
       </div>
     </form>
   )
@@ -445,5 +542,6 @@ const ActivitySchedule = ({ onPrevious, onSubmit }: { onPrevious: () => void, on
 export {
   DetailsActivity,
   InformationActivity,
-  ActivitySchedule
+  ActivitySchedule,
+  UploadImage
 }

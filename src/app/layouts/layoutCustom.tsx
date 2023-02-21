@@ -1,5 +1,5 @@
-import TopBar from "@/app/components/atoms/topBar/topBar";
-import Sidebar from "@/app/components/atoms/sideBar/sidebar";
+import TopBar from "@/app/components/atoms/topbar/topBar";
+import Sidebar from "@/app/components/atoms/sidebar/sidebar";
 import {FunctionComponent} from "react";
 import LayoutCustomProps from "@/app/types/LayoutCustomProps";
 

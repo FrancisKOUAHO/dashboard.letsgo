@@ -1,7 +1,7 @@
 import Card from "./card";
 import Image from "next/image";
 import Avatar from '../../../assets/pexel.jpg';
-import IconText from "../iconText/iconText";
+import IconText from "../icontext/iconText";
 export const BaseCard = () => {
     return(
         <Card className="c-card">
