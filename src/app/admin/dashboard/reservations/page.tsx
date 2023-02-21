@@ -12,6 +12,8 @@ const Page = () => {
 
   const {data, status, error} = useReservations()
 
+  console.log("data", data)
+
   const itemsPerPage = 7
   const totalActivities = data?.data.length
   const pageCount = Math.ceil(totalActivities / itemsPerPage)

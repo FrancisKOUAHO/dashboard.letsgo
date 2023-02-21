@@ -44,9 +44,7 @@ const Page = () => {
               .slice((page - 1) * itemsPerPage, page * itemsPerPage)
               .map((category: categories, index: number) => {
                 return (
-                  <>
                     <CategoryContent key={index} name={category.name} image={category.image}/>
-                  </>
                 )
               })
           }

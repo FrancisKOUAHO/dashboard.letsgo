@@ -52,9 +52,9 @@ const initialFormValues: FormValues = {
 
 
 const Page = () => {
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
-
   const authorized = IsAuthorized("admin")
+
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
   const {data, status, error} = useActivities()
 
