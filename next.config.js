@@ -13,7 +13,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-  ignoreBuildErrors: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 
