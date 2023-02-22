@@ -16,23 +16,10 @@ import {
   InformationActivity,
   UploadImage
 } from "@/app/components/atoms/forms/information";
+import {useMutation} from "@tanstack/react-query";
+import {api} from "@/app/config/api";
+import FormValues from "@/app/interface/FormValues";
 
-
-interface FormValues {
-  address: string,
-  cancellation_conditions: string,
-  category_id: string,
-  city: string,
-  description: string,
-  duration: string,
-  name: string,
-  image: File | null,
-  practical_information: string,
-  price: string,
-  compagny: string,
-  programme: string,
-  schedule: Object
-}
 
 const initialFormValues: FormValues = {
   address: "",
@@ -47,7 +34,8 @@ const initialFormValues: FormValues = {
   price: "",
   compagny: "",
   programme: "",
-  schedule: ""
+  schedule: "",
+  organisator_id: ""
 };
 
 
@@ -76,7 +64,8 @@ const Page = () => {
     setIsOpen(true)
   }
 
-  const handleNext = (values: FormValues) => {
+  const handleNext = (values: any) => {
+    console.log("values", values)
     setCurrentStep(currentStep + 1);
     setFormValues({...formValues, ...values});
   };
@@ -85,10 +74,23 @@ const Page = () => {
     setCurrentStep(currentStep - 1);
   };
 
-  const handleSubmit = (values: FormValues) => {
-    console.log("Form submitted with values:", values);
-    // TODO: Submit form data to backend
+  const mutation = useMutation({
+    mutationFn: async (values: FormValues) => {
+      await api.post("/activities/createActivity", values,{
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })},
+    onSuccess: () => {
+      console.log("Success")
+    },
+  })
+
+  const handleSubmit = (values: any) => {
+    console.log("Form submitted with values:", {...formValues, ...values});
+    mutation.mutate({...formValues, ...values})
   };
+
 
   if (!authorized) return <div>Not Authorized</div>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
@@ -182,10 +184,11 @@ const Page = () => {
         )}
       </div>
       <Modal closeModal={closeModal} isOpen={isOpen} name="Ajouter une activité">
-        {currentStep === 1 && <InformationActivity onNext={handleNext} />}
+        {currentStep === 1 && <InformationActivity onNext={handleNext}  />}
         {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onNext={handleNext} />}
         {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onNext={handleNext} />}
-        {currentStep === 4 && <UploadImage onPrevious={handlePrevious}  onsubmit={() => handleSubmit(formValues)}/>}
+        {currentStep === 4 && <UploadImage onPrevious={handlePrevious} onNext={handleNext}  onsubmit={handleSubmit}/>}
+
       </Modal>
     </LayoutCustom>
   )

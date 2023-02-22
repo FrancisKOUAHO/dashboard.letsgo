@@ -4,6 +4,7 @@ import {FunctionComponent} from "react";
 import LayoutCustomProps from "@/app/types/LayoutCustomProps";
 
 const LayoutCustom: FunctionComponent<LayoutCustomProps> = ({children}) => {
+
   return (
     <>
       <TopBar/>

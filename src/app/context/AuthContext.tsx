@@ -3,7 +3,7 @@
 import {createContext, ReactNode, useContext, useEffect, useState,} from 'react';
 
 import {api} from '../config/api';
-import {useRouter} from "next/navigation";
+import { useRouter}  from "next/navigation";
 
 export const AuthContext = createContext<any>({});
 
@@ -31,7 +31,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
         const token = localStorage.getItem('token');
         if (token) {
           setToken(token);
-          me(token);
+          await me(token);
         }
       }
     } catch (error: any) {

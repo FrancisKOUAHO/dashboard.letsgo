@@ -7,64 +7,19 @@ import TextArea from "@/app/components/atoms/textarea/textArea";
 import {useCategories} from "@/app/hooks/useCategories";
 import {usePartner} from "@/app/hooks/usePartner";
 
-interface FormValues {
-  address: string,
-  cancellation_conditions: string,
-  category_id: string,
-  city: string,
-  description: string,
-  duration: string,
-  name: string,
-  image: File | null,
-  practical_information: string,
-  price: string,
-  compagny: string,
-  programme: string,
-  schedule: Object
-}
 
-const initialFormValues: FormValues = {
-  address: "",
-  cancellation_conditions: "",
-  category_id: "",
-  city: "",
-  description: "",
-  duration: "",
-  name: "",
-  image: new File([], ''),
-  practical_information: "",
-  price: "",
-  compagny: "",
-  programme: "",
-  schedule: ""
-};
-
-
-const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void }) => {
+const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
   const { data: categories } = useCategories()
   const { data: organisators} = usePartner()
-
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues)
-
-  const [currentStep, setCurrentStep] = useState(1);
-
-  const handleNext = (values: FormValues) => {
-    setCurrentStep(currentStep + 1);
-    setFormValues({...formValues, ...values});
-    onNext({...formValues, ...values});
-  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
     const values: any = Object.fromEntries(formData.entries());
-    console.log("values", values)
-    await setFormValues({...formValues, ...values})
-    onNext({...formValues, ...values});
+    await onNext(values);
   };
 
-  console.log(formValues)
   return (
     <form onSubmit={handleSubmit} className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
       <div
@@ -171,7 +126,7 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         >
           <div className="text-left">
             <div className="flex items-center">
-              <div className="font-medium">Partenaire</div>
+              <div className="font-medium">Organisateur</div>
               <div
                 className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
@@ -181,13 +136,13 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <select
-              name="partner"
+              name="organisator_id"
               className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
             >
               {
                 organisators && organisators.data.map((organisator: any) => {
                   return(
-                    <option value={organisator.id}>{organisator.name_compagny}</option>
+                    <option value={organisator.name_compagny}>{organisator.name_compagny}</option>
                   )
                 })
               }
@@ -256,29 +211,15 @@ const InformationActivity = ({onNext}: { onNext: (values: FormValues) => void })
   )
 }
 
-const DetailsActivity = ({onPrevious, onNext}: { onPrevious: () => void, onNext: (values: FormValues) => void }) => {
-  const [formValues, setFormValues] = useState(initialFormValues);
-  console.log("formValues 2", formValues)
+const DetailsActivity = ({onPrevious, onNext}: { onPrevious: () => void, onNext: (values: any) => void }) => {
 
-  const [currentStep, setCurrentStep] = useState(2);
-
-  const handleNext = (values: FormValues) => {
-    setCurrentStep(currentStep + 1);
-    setFormValues({...formValues, ...values});
-    onNext({...formValues, ...values});
-  };
-
-  const handlePrevious = () => {
-    setCurrentStep(currentStep - 1);
-  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const values: any = Object.fromEntries(formData.entries());
-    await setFormValues({...formValues, ...values})
-    onNext({...formValues, ...values});
+    const values = Object.fromEntries(formData.entries());
+    await onNext(values);
   };
 
   return (
@@ -314,23 +255,13 @@ const DetailsActivity = ({onPrevious, onNext}: { onPrevious: () => void, onNext:
   )
 }
 
-const ActivitySchedule = ({onPrevious, onNext}: { onPrevious: () => void, onNext: (values: FormValues) => void }) => {
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
-  console.log("formValues 3", formValues)
+const ActivitySchedule = ({onPrevious, onNext}: { onPrevious: () => void, onNext: (values: any) => void }) => {
 
   const [date, setDate] = useState<string>("");
   const [hour, setHour] = useState<string>("");
 
   const [schedule, setSchedule] = useState<{ dates: { date: string, hours: string[] }[] }>({dates: []});
-  console.log("schedule", schedule)
 
-  const [currentStep, setCurrentStep] = useState(3);
-
-  const handleNext = (values: FormValues) => {
-    setCurrentStep(currentStep + 1);
-    setFormValues({...formValues, ...values});
-    onNext({...formValues, ...values});
-  };
 
 
   const handleAddSchedule = (event: any) => {
@@ -369,11 +300,7 @@ const ActivitySchedule = ({onPrevious, onNext}: { onPrevious: () => void, onNext
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await setFormValues({
-      ...formValues,
-      ...schedule
-    });
-    onNext({...formValues, ...schedule});
+    onNext({schedule: schedule.dates});
   };
 
   return (
@@ -442,34 +369,28 @@ const ActivitySchedule = ({onPrevious, onNext}: { onPrevious: () => void, onNext
   )
 }
 
-const UploadImage = ({onPrevious, onsubmit}: { onPrevious: () => void, onsubmit: (values: FormValues) => void }) => {
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
-  console.log("formValues 4", formValues)
-  const [image, setImage] = useState<File | null>(null);
-
-  const [currentStep, setCurrentStep] = useState(4);
-
-  const handlePrevious = () => {
-    setCurrentStep(currentStep - 1);
-  };
+const UploadImage = ({onPrevious, onNext, onsubmit}: { onPrevious: () => void, onsubmit: (values: any) => void, onNext: (values: any) => void}) => {
+  const [image, setImage] = useState<File>();
 
   const handleImageChange = (event: any) => {
-    const selectedImage = event.target.files && event.target.files[0];
-    if (selectedImage) setImage(selectedImage);
+    if (event.target.files) {
+      setImage(event.target.files[0])
+    }
   }
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("image2", image)
 
     if (!image) {
-      // Handle the case where no image is selected
+      console.log("Veuillez sélectionner une image");
       return;
     }
+    console.log("image", image);
 
-    await setFormValues({ ...formValues, image });
-    onsubmit(formValues);
+    onsubmit({image})
   };
+
+
 
   return (
     <form onSubmit={handleSubmit} className="p-5 border rounded-md border-slate-200/60 dark:border-darkmode-400">
