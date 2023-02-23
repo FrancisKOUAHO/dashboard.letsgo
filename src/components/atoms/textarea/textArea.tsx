@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from "react";
-import TextAreaProps from "@/app/types/TextAreaProps";
+import TextAreaProps from "app/types/TextAreaProps";
 
 const TextArea: FunctionComponent<TextAreaProps> = ({title, name, description}) => {
   return (

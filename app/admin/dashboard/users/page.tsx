@@ -9,12 +9,8 @@ import {useUsers} from "app/hooks/useUsers";
 import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
 import Input from "src/components/atoms/input/input";
 import Modal from "src/components/atoms/modal/modal";
-import {useMutation} from "@tanstack/react-query";
-import FormValues from "../../../interface/FormValues";
 import {api} from "../../../config/api";
 import {toast} from "react-toastify";
-import {router} from "next/client";
-
 
 const Page = () => {
   const authorized = IsAuthorized("admin")

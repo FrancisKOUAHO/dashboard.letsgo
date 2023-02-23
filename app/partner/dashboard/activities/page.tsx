@@ -15,12 +15,11 @@ import Input from "src/components/atoms/input/input";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {router} from "next/client";
-import {useAuth} from "../../../context/AuthContext";
 import {
   ActivitySchedulePartner,
   DetailsActivityPartner,
   InformationActivityPartner, UploadImagePartner
-} from "../../../../src/components/atoms/forms/informationpartner";
+} from "@/components/atoms/forms/informationpartner";
 
 const initialFormValues: FormValues = {
   address: "",
@@ -46,8 +45,6 @@ const Page = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [page, setPage] = useState(1)
   const [currentStep, setCurrentStep] = useState(1);
-
-  const {user} = useAuth()
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
