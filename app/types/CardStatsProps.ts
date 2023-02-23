@@ -2,7 +2,7 @@ import React from 'react';
 type CardStatsProps = {
     className?: string;
     icon?: React.ReactNode;
-    number?: string;
+    number?: number;
     numberofpourcents?: string;
     titleCards?: string;
     iconColor?: string;
