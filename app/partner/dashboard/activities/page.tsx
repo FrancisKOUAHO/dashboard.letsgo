@@ -6,7 +6,7 @@ import Card from "src/components/atoms/card/card";
 import IconText from "src/components/atoms/icontext/iconText";
 import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
 import Modal from "src/components/atoms/modal/modal";
-import {api} from "app/config/api";
+import {api, baseUrl} from "app/config/api";
 import {useActivities} from "app/hooks/useActivities";
 import FormValues from "app/interface/FormValues";
 import LayoutCustom from "app/layouts/layoutCustom";
@@ -165,7 +165,7 @@ const Page = () => {
                       height="100"
                       alt=""
                       onError={(e: any) => {
-                        e.target.src = `https://letsg0.fr/img/LetsGo.svg`;
+                        e.target.src = `${baseUrl}${activity.image}`;
                       }}
                     />
                     <IconText
