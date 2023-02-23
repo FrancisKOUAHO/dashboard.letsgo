@@ -65,6 +65,7 @@ const Page = () => {
       if (response.status === 200) {
         toast(`Utilisateur ajouté`, {position: toast.POSITION.TOP_RIGHT});
         closeModal()
+        form.reset()
       }
     })
   };
@@ -86,6 +87,7 @@ const Page = () => {
     if (response.status === 200) {
       toast(`Partenaire ajouté`, {position: toast.POSITION.TOP_RIGHT});
       closeModal()
+      form.reset()
     }
   };
 
