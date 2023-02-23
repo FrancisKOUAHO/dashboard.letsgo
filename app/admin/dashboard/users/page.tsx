@@ -4,7 +4,7 @@ import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
 import {Button} from "app/components/atoms/button/button";
 import CardUsers from "app/components/atoms/cardusers/cardUsers";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useUsers} from "app/hooks/useUsers";
 import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
 import Input from "app/components/atoms/input/input";
@@ -23,6 +23,7 @@ const Page = () => {
 
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenPartner, setIsOpenPartner] = useState(false)
+  const [partner, setPartner] = useState([])
 
   const closeModal = () => {
     setIsOpen(false)
@@ -40,36 +41,63 @@ const Page = () => {
     setIsOpenPartner(true)
   }
 
-  const HandleSubmitAddUser = (event: React.FormEvent<HTMLFormElement>) => {
+  const generatePassword = (length = 8) => {
+    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      password += chars[randomIndex];
+    }
+    return password;
+  }
+
+  const HandleSubmitAddUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const form = event.currentTarget;
-    const values = Object.fromEntries(new FormData(form));
-    useMutation({
-      mutationFn: async (values) => {
-        await api.post("/auth/login", values)
-      },
-      onSuccess: (data) => {
-        toast(`Utilisateur a éte ajouté`, {position: toast.POSITION.TOP_RIGHT});
+    const {full_name, role, password, email} = Object.fromEntries(new FormData(form));
+    console.log(full_name, role, password, email)
+    await api.post("/auth/addUser", {
+      full_name,
+      role,
+      email,
+      password: generatePassword()
+    }).then((response) => {
+      if (response.status === 200) {
+        toast(`Utilisateur ajouté`, {position: toast.POSITION.TOP_RIGHT});
         closeModal()
-      },
+      }
     })
   };
 
 
-  const HandleSubmitAddPartner = (event: React.FormEvent<HTMLFormElement>) => {
+  const HandleSubmitAddPartner = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const form = event.currentTarget;
-    const values = Object.fromEntries(new FormData(form));
-    useMutation({
-      mutationFn: async (values) => {
-        await api.post("/auth/login", values)
-      },
-      onSuccess: (data) => {
-        toast(`Utilisateur a éte ajouté`, {position: toast.POSITION.TOP_RIGHT});
-        closeModal()
-      },
+    const {user_id, name_compagny, address, city, postcode, phone} = Object.fromEntries(new FormData(form));
+    console.log(user_id, name_compagny, address, city, postcode, phone)
+    const response = await api.post("/organisators/create_organisator", {
+      user_id,
+      name_compagny,
+      address,
+      city,
+      postcode,
+      phone
     })
+    if (response.status === 200) {
+      toast(`Partenaire ajouté`, {position: toast.POSITION.TOP_RIGHT});
+      closeModal()
+    }
   };
+
+  const getUserRolePartner = async () => {
+    const response = await api.get("/auth/getAllUser")
+    setPartner(response.data.filter((user: any) => user.role === "partner"))
+  }
+
+  useEffect(() => {
+    getUserRolePartner()
+    console.log(partner)
+  }, [])
 
   if (!authorized) return <div>Not Authorized</div>
   if (status === "loading") return <LayoutCustom>
@@ -121,13 +149,13 @@ const Page = () => {
                   <label>
                     Nom complet
                   </label>
-                  <Input className="c-input" type="text" placeholder="Nom complet"/>
+                  <Input name="full_name" className="c-input" type="text" placeholder="Nom complet"/>
                 </div>
                 <div className="content-input">
                   <label>
                     email
                   </label>
-                  <Input className="c-input" type="email" placeholder="contact@letsgoeurope.fr"/>
+                  <Input className="c-input" type="email" name="email" placeholder="contact@letsgoeurope.fr"/>
                 </div>
               </div>
               <div>
@@ -147,7 +175,7 @@ const Page = () => {
                   <label>
                     mot de passe
                   </label>
-                  <Input className="c-input" type="password" placeholder="*********"/>
+                  <Input className="c-input" name="password" type="password" placeholder="*********"/>
                 </div>
               </div>
             </div>
@@ -158,26 +186,37 @@ const Page = () => {
           </form>
         </Modal>
         <Modal closeModal={closeModalPartenaire} isOpen={isOpenPartner} name="Enregistrer un partenaire">
-          <form className="c-modal-form">
+          <form onSubmit={HandleSubmitAddPartner} className="c-modal-form">
             <div className="container-form">
               <div>
                 <div className="content-input">
                   <label>
                     Partenaires
                   </label>
-                  <Input className="c-input" type="text" placeholder="Partenaires"/>
+                  <select
+                    name="user_id"
+                    className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
+                  >
+                    {
+                      partner && partner.map((user: any, index: number) => {
+                        return (
+                          <option key={index} value={user.id}>{user.full_name}</option>
+                        )
+                      })
+                    }
+                  </select>
                 </div>
                 <div className="content-input">
                   <label>
                     Nom de la société
                   </label>
-                  <Input className="c-input" type="text" placeholder="Nom de la société"/>
+                  <Input className="c-input" name="name_compagny" type="text" placeholder="Nom de la société"/>
                 </div>
                 <div className="content-input">
                   <label>
                     Adresse
                   </label>
-                  <Input className="c-input" type="text" placeholder="Adresse"/>
+                  <Input className="c-input" name="address" type="text" placeholder="Adresse"/>
                 </div>
               </div>
               <div>
@@ -185,19 +224,19 @@ const Page = () => {
                   <label>
                     Ville
                   </label>
-                  <Input className="c-input" type="text" placeholder="Ville"/>
+                  <Input className="c-input" name="city" type="text" placeholder="Ville"/>
                 </div>
                 <div className="content-input">
                   <label>
                     Code postal
                   </label>
-                  <Input className="c-input" type="text" placeholder=" Code postal"/>
+                  <Input className="c-input" name="postcode" type="text" placeholder=" Code postal"/>
                 </div>
                 <div className="content-input">
                   <label>
                     Téléphone
                   </label>
-                  <Input className="c-input" type="text" placeholder="Télephone"/>
+                  <Input className="c-input" type="text" name="phone" placeholder="Télephone"/>
                 </div>
               </div>
             </div>
