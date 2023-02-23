@@ -3,7 +3,7 @@
 import LayoutCustom from "app/layouts/layoutCustom";
 import { IsAuthorized } from "app/utils/auth";
 import React from "react";
-import CardStats from "../../components/atoms/cardstats/cardStats";
+import CardStats from "../../../src/components/atoms/cardstats/cardStats";
 import {AiOutlineDesktop, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
 
 const icons = {

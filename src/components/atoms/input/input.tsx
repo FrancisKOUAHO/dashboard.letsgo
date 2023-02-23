@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import InputProps from "../../../types/InputProps";
+import InputProps from "../../../../app/types/InputProps";
 
 const Input: FunctionComponent<InputProps> = ({className, type, label, placeholder, name}) => {
 

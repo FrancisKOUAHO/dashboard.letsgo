@@ -2,9 +2,9 @@
 
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
-import { ReservationContent, TitleTable} from "app/components/atoms/cardcategory/table";
+import { ReservationContent, TitleTable} from "src/components/atoms/cardcategory/table";
 import {useReservationId} from "app/hooks/useReservations";
-import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
+import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
 import {useState} from "react";
 import {useAuth} from "../../../context/AuthContext";
 

@@ -1,9 +1,9 @@
 'use client'
 
-import {Button} from "app/components/atoms/button/button";
+import {Button} from "@/components/atoms/button/button";
 import React, {useState} from "react";
-import Input from "app/components/atoms/input/input";
-import TextArea from "app/components/atoms/textarea/textArea";
+import Input from "@/components/atoms/input/input";
+import TextArea from "@/components/atoms/textarea/textArea";
 import {useCategories} from "app/hooks/useCategories";
 import {usePartner} from "app/hooks/usePartner";
 import {toast} from "react-toastify";

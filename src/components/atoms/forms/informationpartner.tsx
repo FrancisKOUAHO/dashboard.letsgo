@@ -1,12 +1,12 @@
 'use client'
 
-import {Button} from "app/components/atoms/button/button";
+import {Button} from "@/components/atoms/button/button";
 import React, {useState} from "react";
-import Input from "app/components/atoms/input/input";
-import TextArea from "app/components/atoms/textarea/textArea";
+import Input from "@/components/atoms/input/input";
+import TextArea from "@/components/atoms/textarea/textArea";
 import {useCategories} from "app/hooks/useCategories";
-import {useOrganisator} from "../../../hooks/useOrganisator";
-import {useAuth} from "../../../context/AuthContext";
+import {useOrganisator} from "../../../../app/hooks/useOrganisator";
+import {useAuth} from "../../../../app/context/AuthContext";
 import {toast} from "react-toastify";
 
 

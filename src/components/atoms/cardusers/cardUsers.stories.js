@@ -1,6 +1,6 @@
 import CardUsers from "./cardUsers";
 import Image from "next/image";
-import Zola from "../../../assets/profile-pic.png"
+import Zola from "../../../../app/assets/profile-pic.png"
 export const BaseCardUsers = () =>{
     return(
         <CardUsers className="c-cardUsers" name="Zola Voldi" role="admin">

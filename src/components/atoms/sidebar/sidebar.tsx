@@ -1,5 +1,5 @@
 import {FunctionComponent, useEffect, useState} from "react";
-import SidebarProps from "../../../types/SidebarProps";
+import SidebarProps from "../../../../app/types/SidebarProps";
 import {
   AiOutlineAppstore,
   AiOutlineCalendar,

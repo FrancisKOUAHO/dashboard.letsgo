@@ -1,23 +1,23 @@
 "use client"
 
 import {useMutation} from "@tanstack/react-query";
-import {Button} from "app/components/atoms/button/button";
-import Card from "app/components/atoms/card/card";
+import {Button} from "src/components/atoms/button/button";
+import Card from "src/components/atoms/card/card";
 import {
   ActivitySchedule,
   DetailsActivity,
   InformationActivity,
   UploadImage
-} from "app/components/atoms/forms/information";
-import IconText from "app/components/atoms/icontext/iconText";
-import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
-import Modal from "app/components/atoms/modal/modal";
+} from "src/components/atoms/forms/information";
+import IconText from "src/components/atoms/icontext/iconText";
+import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
+import Modal from "src/components/atoms/modal/modal";
 import {api} from "app/config/api";
 import {useActivities} from "app/hooks/useActivities";
 import FormValues from "app/interface/FormValues";
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
-import Input from "app/components/atoms/input/input";
+import Input from "src/components/atoms/input/input";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {router} from "next/client";
