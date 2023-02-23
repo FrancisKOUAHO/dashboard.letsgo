@@ -17,6 +17,7 @@ const Page = () => {
   const {data, status, error} = useUsers()
 
   const [isOpen, setIsOpen] = useState(false)
+  const [isOpenPartner, setIsOpenPartner] = useState(false)
 
   const closeModal = () => {
     setIsOpen(false)
@@ -26,22 +27,38 @@ const Page = () => {
     setIsOpen(true)
   }
 
+  const closeModalPartenaire = () => {
+    setIsOpenPartner(false)
+  }
+
+  const openModalPartneraire = () => {
+    setIsOpenPartner(true)
+  }
+
   if (!authorized) return <div>Not Authorized</div>
-  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
-  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen"><div>Erreur...</div></div></LayoutCustom>
+  if (status === "loading") return <LayoutCustom>
+    <div className="flex justify-center items-center h-screen"><LoadingSpinner/></div>
+  </LayoutCustom>
+  if (error === "error") return <LayoutCustom>
+    <div className="flex justify-center items-center h-screen">
+      <div>Erreur...</div>
+    </div>
+  </LayoutCustom>
 
   return (
     <LayoutCustom>
       <div className="c-users">
         <h2>{"Tous les utilisateurs"}</h2>
+
         <div className="c-users__users">
+
           <div>
             <div className="flex gap-10 text-sm mt-5">
               <Button color="primary" isActive={true} onClick={openModal}>
                 Ajouter un utilisateur
               </Button>
 
-              <Button color="primary" isActive={true}>
+              <Button color="primary" isActive={true} onClick={openModalPartneraire}>
                 Ajouter un partenaire
               </Button>
             </div>
@@ -61,7 +78,7 @@ const Page = () => {
         </div>
 
         <Modal closeModal={closeModal} isOpen={isOpen} name="Enregistrer un utilisateur">
-          <div className="c-modal-form">
+          <form className="c-modal-form">
             <div className="container-form">
               <div>
                 <div className="content-input">
@@ -102,7 +119,57 @@ const Page = () => {
               <Button color="secondary" className="btn-cancel" onClick={closeModal}> Annuler </Button>
               <Button color="primary" isActive={true}> Enregistrer </Button>
             </div>
-          </div>
+          </form>
+        </Modal>
+        <Modal closeModal={closeModalPartenaire} isOpen={isOpenPartner} name="Enregistrer un partenaire">
+          <form className="c-modal-form">
+            <div className="container-form">
+              <div>
+                <div className="content-input">
+                  <label>
+                    Partenaires
+                  </label>
+                  <Input className="c-input" type="text" placeholder="Partenaires"/>
+                </div>
+                <div className="content-input">
+                  <label>
+                    Nom de la société
+                  </label>
+                  <Input className="c-input" type="text" placeholder="Nom de la société"/>
+                </div>
+                <div className="content-input">
+                  <label>
+                    Adresse
+                  </label>
+                  <Input className="c-input" type="text" placeholder="Adresse"/>
+                </div>
+              </div>
+              <div>
+                <div className="content-input">
+                  <label>
+                    Ville
+                  </label>
+                  <Input className="c-input" type="text" placeholder="Ville"/>
+                </div>
+                <div className="content-input">
+                  <label>
+                    Code postal
+                  </label>
+                  <Input className="c-input" type="text" placeholder=" Code postal"/>
+                </div>
+                <div className="content-input">
+                  <label>
+                    Téléphone
+                  </label>
+                  <Input className="c-input" type="text" placeholder="Télephone"/>
+                </div>
+              </div>
+            </div>
+            <div className="content-button">
+              <Button color='primary' className="btn-cancel"> Annuler </Button>
+              <Button color={'primary'} isActive={true}> Enregistrer </Button>
+            </div>
+          </form>
         </Modal>
       </div>
     </LayoutCustom>

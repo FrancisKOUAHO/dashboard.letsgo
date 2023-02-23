@@ -1,20 +1,26 @@
 "use client"
 
-import { useMutation } from "@tanstack/react-query";
-import { Button } from "app/components/atoms/button/button";
+import {useMutation} from "@tanstack/react-query";
+import {Button} from "app/components/atoms/button/button";
 import Card from "app/components/atoms/card/card";
-import {ActivitySchedule, DetailsActivity, InformationActivity, UploadImage } from "app/components/atoms/forms/information";
+import {
+  ActivitySchedule,
+  DetailsActivity,
+  InformationActivity,
+  UploadImage
+} from "app/components/atoms/forms/information";
 import IconText from "app/components/atoms/icontext/iconText";
 import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
 import Modal from "app/components/atoms/modal/modal";
-import { api } from "app/config/api";
-import { useActivities } from "app/hooks/useActivities";
+import {api} from "app/config/api";
+import {useActivities} from "app/hooks/useActivities";
 import FormValues from "app/interface/FormValues";
 import LayoutCustom from "app/layouts/layoutCustom";
-import { IsAuthorized } from "app/utils/auth";
-import { Input } from "postcss";
-import { useState } from "react";
-
+import {IsAuthorized} from "app/utils/auth";
+import Input from "app/components/atoms/input/input";
+import {useState} from "react";
+import {toast} from "react-toastify";
+import {router} from "next/client";
 
 
 const initialFormValues: FormValues = {
@@ -72,13 +78,34 @@ const Page = () => {
 
   const mutation = useMutation({
     mutationFn: async (values: FormValues) => {
-      await api.post("/activities/createActivity", values,{
+      const formData = new FormData();
+      formData.append('address', values.address);
+      formData.append('cancellation_conditions', values.cancellation_conditions);
+      formData.append('category_id', values.category_id);
+      formData.append('city', values.city);
+      formData.append('description', values.description);
+      formData.append('duration', values.duration);
+      formData.append('name', values.name);
+      formData.append('practical_information', values.practical_information);
+      formData.append('price', values.price);
+      formData.append('compagny', values.compagny);
+      formData.append('programme', values.programme);
+      formData.append('schedule', JSON.stringify(values.schedule));
+      formData.append('organisator_id', values.organisator_id);
+      formData.append('image', values.image);
+
+      await api.post("/activities/createActivity", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
         }
-      })},
-    onSuccess: () => {
-      console.log("Success")
+      })
+    },
+    onSuccess: (data) => {
+      toast(`Activitée ajouter`, {position: toast.POSITION.TOP_RIGHT});
+      closeModal()
+      setCurrentStep(1)
+      setFormValues(initialFormValues)
+      router.push("/admin/dashboard/activities")
     },
   })
 
@@ -184,7 +211,6 @@ const Page = () => {
         {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onNext={handleNext} />}
         {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onNext={handleNext} />}
         {currentStep === 4 && <UploadImage onPrevious={handlePrevious} onNext={handleNext}  onsubmit={handleSubmit}/>}
-
       </Modal>
     </LayoutCustom>
   )

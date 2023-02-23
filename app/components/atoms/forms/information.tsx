@@ -85,9 +85,9 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
               className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
             >
               {
-                organisators && organisators.data.map((organisator: any) => {
+                organisators && organisators.data.map((organisator: any, index: number) => {
                   return(
-                    <option value={organisator.name_compagny}>{organisator.name_compagny}</option>
+                    <option key={index} value={organisator.name_compagny}>{organisator.name_compagny}</option>
                   )
                 })
               }
@@ -113,9 +113,9 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
               className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
             >
               {
-                categories && categories.data.map((category: any) => {
+                categories && categories.data.map((category: any, index: number) => {
                   return (
-                    <option value={category.id}>{category.name}</option>
+                    <option key={index} value={category.id}>{category.name}</option>
                   )
                 })
               }
@@ -140,9 +140,9 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
               className="disabled:bg-slate-100 disabled:cursor-not-allowed disabled:dark:bg-darkmode-800/50 [&amp;[readonly]]:bg-slate-100 [&amp;[readonly]]:cursor-not-allowed [&amp;[readonly]]:dark:bg-darkmode-800/50 transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md py-2 px-3 pr-8 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 flex-1"
             >
               {
-                organisators && organisators.data.map((organisator: any) => {
+                organisators && organisators.data.map((organisator: any, index: number) => {
                   return(
-                    <option value={organisator.name_compagny}>{organisator.name_compagny}</option>
+                    <option key={index} value={organisator.id}>{organisator.name_compagny}</option>
                   )
                 })
               }
