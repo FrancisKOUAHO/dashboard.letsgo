@@ -3,7 +3,7 @@
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
 import { ReservationContent, TitleTable} from "app/components/atoms/cardcategory/table";
-import {useReservationId, useReservations} from "app/hooks/useReservations";
+import {useReservationId} from "app/hooks/useReservations";
 import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
 import {useState} from "react";
 import {useAuth} from "../../../context/AuthContext";
@@ -15,7 +15,7 @@ const Page = () => {
   const {data, status, error} = useReservationId(user?.id)
 
   const itemsPerPage = 7
-  const totalActivities = data.length
+  const totalActivities = data?.length || 0
   const pageCount = Math.ceil(totalActivities / itemsPerPage)
 
   const [page, setPage] = useState(1)
