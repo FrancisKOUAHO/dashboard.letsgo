@@ -4,11 +4,16 @@ import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
 import {Button} from "app/components/atoms/button/button";
 import CardUsers from "app/components/atoms/cardusers/cardUsers";
-import {useState} from "react";
+import React, {useState} from "react";
 import {useUsers} from "app/hooks/useUsers";
 import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
 import Input from "app/components/atoms/input/input";
 import Modal from "app/components/atoms/modal/modal";
+import {useMutation} from "@tanstack/react-query";
+import FormValues from "../../../interface/FormValues";
+import {api} from "../../../config/api";
+import {toast} from "react-toastify";
+import {router} from "next/client";
 
 
 const Page = () => {
@@ -34,6 +39,37 @@ const Page = () => {
   const openModalPartneraire = () => {
     setIsOpenPartner(true)
   }
+
+  const HandleSubmitAddUser = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const form = event.currentTarget;
+    const values = Object.fromEntries(new FormData(form));
+    useMutation({
+      mutationFn: async (values) => {
+        await api.post("/auth/login", values)
+      },
+      onSuccess: (data) => {
+        toast(`Utilisateur a éte ajouté`, {position: toast.POSITION.TOP_RIGHT});
+        closeModal()
+      },
+    })
+  };
+
+
+  const HandleSubmitAddPartner = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const form = event.currentTarget;
+    const values = Object.fromEntries(new FormData(form));
+    useMutation({
+      mutationFn: async (values) => {
+        await api.post("/auth/login", values)
+      },
+      onSuccess: (data) => {
+        toast(`Utilisateur a éte ajouté`, {position: toast.POSITION.TOP_RIGHT});
+        closeModal()
+      },
+    })
+  };
 
   if (!authorized) return <div>Not Authorized</div>
   if (status === "loading") return <LayoutCustom>
@@ -78,7 +114,7 @@ const Page = () => {
         </div>
 
         <Modal closeModal={closeModal} isOpen={isOpen} name="Enregistrer un utilisateur">
-          <form className="c-modal-form">
+          <form onSubmit={HandleSubmitAddUser} className="c-modal-form">
             <div className="container-form">
               <div>
                 <div className="content-input">
