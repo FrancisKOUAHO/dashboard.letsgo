@@ -3,12 +3,6 @@
 import {useMutation} from "@tanstack/react-query";
 import {Button} from "app/components/atoms/button/button";
 import Card from "app/components/atoms/card/card";
-import {
-  ActivitySchedule,
-  DetailsActivity,
-  InformationActivity,
-  UploadImage
-} from "app/components/atoms/forms/information";
 import IconText from "app/components/atoms/icontext/iconText";
 import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
 import Modal from "app/components/atoms/modal/modal";
@@ -21,7 +15,12 @@ import Input from "app/components/atoms/input/input";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {router} from "next/client";
-
+import {useAuth} from "../../../context/AuthContext";
+import {
+  ActivitySchedulePartner,
+  DetailsActivityPartner,
+  InformationActivityPartner, UploadImagePartner
+} from "../../../components/atoms/forms/informationpartner";
 
 const initialFormValues: FormValues = {
   address: "",
@@ -44,19 +43,20 @@ const initialFormValues: FormValues = {
 const Page = () => {
   const authorized = IsAuthorized("partner")
 
+  const [isOpen, setIsOpen] = useState(false)
+  const [page, setPage] = useState(1)
+  const [currentStep, setCurrentStep] = useState(1);
+
+  const {user} = useAuth()
+
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
   const {data, status, error} = useActivities()
 
-  let [isOpen, setIsOpen] = useState(false)
 
   const itemsPerPage = 8
   const totalActivities = data?.data.length
   const pageCount = Math.ceil(totalActivities / itemsPerPage)
-
-  const [page, setPage] = useState(1)
-
-  const [currentStep, setCurrentStep] = useState(1);
 
   const closeModal = (): void => {
     setIsOpen(false)
@@ -67,7 +67,6 @@ const Page = () => {
   }
 
   const handleNext = (values: any) => {
-    console.log("values", values)
     setCurrentStep(currentStep + 1);
     setFormValues({...formValues, ...values});
   };
@@ -75,6 +74,8 @@ const Page = () => {
   const handlePrevious = () => {
     setCurrentStep(currentStep - 1);
   };
+
+
 
   const mutation = useMutation({
     mutationFn: async (values: FormValues) => {
@@ -110,14 +111,13 @@ const Page = () => {
   })
 
   const handleSubmit = (values: any) => {
-    console.log("Form submitted with values:", {...formValues, ...values});
     mutation.mutate({...formValues, ...values})
   };
 
 
-  if (!authorized) return <div>Not Authorized</div>
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
-  if (error === "error") return <div>Erreur...</div>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
     <LayoutCustom>
@@ -207,10 +207,10 @@ const Page = () => {
         )}
       </div>
       <Modal closeModal={closeModal} isOpen={isOpen} name="Ajouter une activité">
-        {currentStep === 1 && <InformationActivity onNext={handleNext}  />}
-        {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onNext={handleNext} />}
-        {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onNext={handleNext} />}
-        {currentStep === 4 && <UploadImage onPrevious={handlePrevious} onNext={handleNext}  onsubmit={handleSubmit}/>}
+        {currentStep === 1 && <InformationActivityPartner onNext={handleNext}  />}
+        {currentStep === 2 && <DetailsActivityPartner onPrevious={handlePrevious} onNext={handleNext} />}
+        {currentStep === 3 && <ActivitySchedulePartner onPrevious={handlePrevious} onNext={handleNext} />}
+        {currentStep === 4 && <UploadImagePartner onPrevious={handlePrevious} onNext={handleNext}  onsubmit={handleSubmit}/>}
       </Modal>
     </LayoutCustom>
   )

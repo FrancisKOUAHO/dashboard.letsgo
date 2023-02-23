@@ -67,7 +67,6 @@ const Page = () => {
   }
 
   const handleNext = (values: any) => {
-    console.log("values", values)
     setCurrentStep(currentStep + 1);
     setFormValues({...formValues, ...values});
   };
@@ -110,14 +109,13 @@ const Page = () => {
   })
 
   const handleSubmit = (values: any) => {
-    console.log("Form submitted with values:", {...formValues, ...values});
     mutation.mutate({...formValues, ...values})
   };
 
 
-  if (!authorized) return <div>Not Authorized</div>
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
-  if (error === "error") return <div>Erreur...</div>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
     <LayoutCustom>
