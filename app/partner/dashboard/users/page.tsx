@@ -2,13 +2,13 @@
 
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
-import {Button} from "app/components/atoms/button/button";
-import CardUsers from "app/components/atoms/cardusers/cardUsers";
+import {Button} from "src/components/atoms/button/button";
+import CardUsers from "src/components/atoms/cardusers/cardUsers";
 import React, {useEffect, useState} from "react";
 import {useUsers} from "app/hooks/useUsers";
-import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
-import Input from "app/components/atoms/input/input";
-import Modal from "app/components/atoms/modal/modal";
+import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
+import Input from "src/components/atoms/input/input";
+import Modal from "src/components/atoms/modal/modal";
 import {useMutation} from "@tanstack/react-query";
 import FormValues from "../../../interface/FormValues";
 import {api} from "../../../config/api";
@@ -21,15 +21,9 @@ const Page = () => {
 
   const {data, status, error} = useUsers()
 
-  if (!authorized) return <div>Not Authorized</div>
-  if (status === "loading") return <LayoutCustom>
-    <div className="flex justify-center items-center h-screen"><LoadingSpinner/></div>
-  </LayoutCustom>
-  if (error === "error") return <LayoutCustom>
-    <div className="flex justify-center items-center h-screen">
-      <div>Erreur...</div>
-    </div>
-  </LayoutCustom>
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
     <LayoutCustom>

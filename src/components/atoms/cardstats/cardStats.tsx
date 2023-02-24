@@ -1,5 +1,5 @@
 import {FunctionComponent} from "react";
-import CardStatsProps from "../../../types/CardStatsProps";
+import CardStatsProps from "../../../../app/types/CardStatsProps";
 const CardStats: FunctionComponent<CardStatsProps> = ({className, icon, number, numberofpourcents, titleCards}) => {
     return (
         <div className={className}>

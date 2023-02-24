@@ -2,9 +2,9 @@
 
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
-import { ReservationContent, TitleTable} from "app/components/atoms/cardcategory/table";
+import { ReservationContent, TitleTable} from "src/components/atoms/cardcategory/table";
 import {useReservations} from "app/hooks/useReservations";
-import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
+import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
 import {useState} from "react";
 
 const Page = () => {
@@ -12,17 +12,15 @@ const Page = () => {
 
   const {data, status, error} = useReservations()
 
-  console.log("data", data)
-
   const itemsPerPage = 7
   const totalActivities = data?.data.length
   const pageCount = Math.ceil(totalActivities / itemsPerPage)
 
   const [page, setPage] = useState(1)
 
-  if (!authorized) return <div>Not Authorized</div>
-  if (status === "loading") return <LoadingSpinner/>
-  if (error === "error") return <div>Erreur...</div>
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
     <LayoutCustom>

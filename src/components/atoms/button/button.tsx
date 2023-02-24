@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import ButtonProps from "../../../types/ButtonProps";
+import ButtonProps from "../../../../app/types/ButtonProps";
 
 const buttonColors = {
   primary: '#007bff',

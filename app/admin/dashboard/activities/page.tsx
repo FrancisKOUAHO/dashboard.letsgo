@@ -1,23 +1,23 @@
 "use client"
 
 import {useMutation} from "@tanstack/react-query";
-import {Button} from "app/components/atoms/button/button";
-import Card from "app/components/atoms/card/card";
+import {Button} from "src/components/atoms/button/button";
+import Card from "src/components/atoms/card/card";
 import {
   ActivitySchedule,
   DetailsActivity,
   InformationActivity,
   UploadImage
-} from "app/components/atoms/forms/information";
-import IconText from "app/components/atoms/icontext/iconText";
-import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
-import Modal from "app/components/atoms/modal/modal";
-import {api} from "app/config/api";
+} from "src/components/atoms/forms/information";
+import IconText from "src/components/atoms/icontext/iconText";
+import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
+import Modal from "src/components/atoms/modal/modal";
+import {api, baseUrl} from "app/config/api";
 import {useActivities} from "app/hooks/useActivities";
 import FormValues from "app/interface/FormValues";
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
-import Input from "app/components/atoms/input/input";
+import Input from "src/components/atoms/input/input";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {router} from "next/client";
@@ -67,7 +67,6 @@ const Page = () => {
   }
 
   const handleNext = (values: any) => {
-    console.log("values", values)
     setCurrentStep(currentStep + 1);
     setFormValues({...formValues, ...values});
   };
@@ -110,14 +109,13 @@ const Page = () => {
   })
 
   const handleSubmit = (values: any) => {
-    console.log("Form submitted with values:", {...formValues, ...values});
     mutation.mutate({...formValues, ...values})
   };
 
 
-  if (!authorized) return <div>Not Authorized</div>
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
-  if (error === "error") return <div>Erreur...</div>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
     <LayoutCustom>
@@ -165,7 +163,7 @@ const Page = () => {
                       height="100"
                       alt=""
                       onError={(e: any) => {
-                        e.target.src = `https://letsg0.fr/img/LetsGo.svg`;
+                        e.target.src = `${baseUrl}${activity.image}`;
                       }}
                     />
                     <IconText

@@ -2,19 +2,15 @@
 
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
-import {Button} from "app/components/atoms/button/button";
-import CardUsers from "app/components/atoms/cardusers/cardUsers";
+import {Button} from "src/components/atoms/button/button";
+import CardUsers from "src/components/atoms/cardusers/cardUsers";
 import React, {useEffect, useState} from "react";
 import {useUsers} from "app/hooks/useUsers";
-import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
-import Input from "app/components/atoms/input/input";
-import Modal from "app/components/atoms/modal/modal";
-import {useMutation} from "@tanstack/react-query";
-import FormValues from "../../../interface/FormValues";
+import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
+import Input from "src/components/atoms/input/input";
+import Modal from "src/components/atoms/modal/modal";
 import {api} from "../../../config/api";
 import {toast} from "react-toastify";
-import {router} from "next/client";
-
 
 const Page = () => {
   const authorized = IsAuthorized("admin")
@@ -55,7 +51,6 @@ const Page = () => {
     event.preventDefault()
     const form = event.currentTarget;
     const {full_name, role, password, email} = Object.fromEntries(new FormData(form));
-    console.log(full_name, role, password, email)
     await api.post("/auth/addUser", {
       full_name,
       role,
@@ -75,7 +70,6 @@ const Page = () => {
     event.preventDefault()
     const form = event.currentTarget;
     const {user_id, name_compagny, address, city, postcode, phone} = Object.fromEntries(new FormData(form));
-    console.log(user_id, name_compagny, address, city, postcode, phone)
     const response = await api.post("/organisators/create_organisator", {
       user_id,
       name_compagny,
@@ -98,18 +92,11 @@ const Page = () => {
 
   useEffect(() => {
     getUserRolePartner()
-    console.log(partner)
   }, [])
 
-  if (!authorized) return <div>Not Authorized</div>
-  if (status === "loading") return <LayoutCustom>
-    <div className="flex justify-center items-center h-screen"><LoadingSpinner/></div>
-  </LayoutCustom>
-  if (error === "error") return <LayoutCustom>
-    <div className="flex justify-center items-center h-screen">
-      <div>Erreur...</div>
-    </div>
-  </LayoutCustom>
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
     <LayoutCustom>

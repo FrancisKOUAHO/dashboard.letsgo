@@ -18,10 +18,10 @@ const CardUsers:FunctionComponent<CardUsersProps> = ({className, name, role, chi
                     </div>
                 </div>
                 <div>
-                    <Link className="c-a-button" href="#">
+                    <Link className="c-a-button" href="src/components/atoms/cardusers#">
                         Message
                     </Link>
-                    <a className="c-a2-button" href="#">
+                    <a className="c-a2-button" href="src/components/atoms/cardusers#">
                         Profil
                     </a>
                 </div>

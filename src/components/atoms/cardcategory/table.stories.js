@@ -1,6 +1,6 @@
 import CardCategory from "./table";
 import Image from "next/image";
-import Are from "../../../assets/pexel.jpg";
+import Are from "../../../../app/assets/pexel.jpg";
 
 export const table = () => {
     return(

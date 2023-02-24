@@ -1,6 +1,6 @@
 import Card from "./card";
 import Image from "next/image";
-import Avatar from '../../../assets/pexel.jpg';
+import Avatar from '../../../../app/assets/pexel.jpg';
 import IconText from "../icontext/iconText";
 export const BaseCard = () => {
     return(

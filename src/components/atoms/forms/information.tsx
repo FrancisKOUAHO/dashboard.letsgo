@@ -1,12 +1,12 @@
 'use client'
 
-import {Button} from "app/components/atoms/button/button";
+import {Button} from "@/components/atoms/button/button";
 import React, {useState} from "react";
-import Input from "app/components/atoms/input/input";
-import TextArea from "app/components/atoms/textarea/textArea";
+import Input from "@/components/atoms/input/input";
+import TextArea from "@/components/atoms/textarea/textArea";
 import {useCategories} from "app/hooks/useCategories";
 import {usePartner} from "app/hooks/usePartner";
-
+import {toast} from "react-toastify";
 
 const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
   const { data: categories } = useCategories()
@@ -268,7 +268,7 @@ const ActivitySchedule = ({onPrevious, onNext}: { onPrevious: () => void, onNext
     event.preventDefault();
 
     if (!date || !hour) {
-      console.log("Veuillez entrer une date et une heure");
+      toast(`Veuillez entrer une date et une heure`, {position: toast.POSITION.TOP_RIGHT});
       return;
     }
 
@@ -382,11 +382,9 @@ const UploadImage = ({onPrevious, onNext, onsubmit}: { onPrevious: () => void, o
     event.preventDefault();
 
     if (!image) {
-      console.log("Veuillez sélectionner une image");
+      toast(`Veuillez sélectionner une image`, {position: toast.POSITION.TOP_RIGHT});
       return;
     }
-    console.log("image", image);
-
     onsubmit({image})
   };
 

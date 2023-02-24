@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
 import {CategoriesProps, ReservationContentProps, TitleTableProps} from "app/types/CardCategoryProps";
-import {ButtonIcon} from "app/components/atoms/button/button";
+import {ButtonIcon} from "@/components/atoms/button/button";
 import {AiOutlineDelete, AiOutlineForm, AiOutlineBook} from "react-icons/ai";
 import Link from "next/link";
 
@@ -81,7 +81,7 @@ export const ReservationContent: FunctionComponent<ReservationContentProps> = ({
   return (
     <tr className="tr-content">
       <td className="td-first">
-        <Link href="#" className="a-second text-sm">
+        <Link href="src/components/atoms/cardcategory#" className="a-second text-sm">
           {`${reference?.slice(0, 10)}...`}
         </Link>
       </td>

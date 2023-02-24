@@ -1,6 +1,6 @@
 import {FunctionComponent} from "react";
-import CardProps from "../../../types/CardProps"
-import {ButtonIcon} from "app/components/atoms/button/button";
+import CardProps from "../../../../app/types/CardProps"
+import {ButtonIcon} from "@/components/atoms/button/button";
 import {AiOutlineEye, AiOutlineForm, AiOutlineDelete} from "react-icons/ai";
 const Card: FunctionComponent<CardProps> = ({ className, children}) => {
     return(

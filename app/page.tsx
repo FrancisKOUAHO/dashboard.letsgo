@@ -3,8 +3,8 @@
 import { ToastContainer, toast } from 'react-toastify';
 
 
-import { Button } from './components/atoms/button/button'
-import Input from './components/atoms/input/input'
+import { Button } from '../src/components/atoms/button/button'
+import Input from '../src/components/atoms/input/input'
 import Illustration from './assets/illustrationLogin1.png'
 import React from "react";
 import Image from "next/image";

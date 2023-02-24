@@ -1,7 +1,7 @@
 import Image from "next/image";
 import {AiOutlineUser, AiOutlineBell} from "react-icons/ai";
-import Input from "app/components/atoms/input/input";
-import Dropdown from "app/components/atoms/dropdown/dropdown";
+import Input from "@/components/atoms/input/input";
+import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import {useAuth} from "app/context/AuthContext";
 

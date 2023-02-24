@@ -3,8 +3,8 @@
 import LayoutCustom from "app/layouts/layoutCustom";
 import {IsAuthorized} from "app/utils/auth";
 import {useCategories} from "app/hooks/useCategories";
-import LoadingSpinner from "app/components/atoms/loadingspinner/loadingSpinner";
-import {CategoryContent, TitleTable} from "app/components/atoms/cardcategory/table";
+import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
+import {CategoryContent, TitleTable} from "src/components/atoms/cardcategory/table";
 import categories from "app/types/Categories";
 import {useState} from "react";
 
@@ -19,11 +19,9 @@ const Page = () => {
 
   const [page, setPage] = useState(1)
 
-  if (!authorized) return <div>Not Authorized</div>
-  if (status === "loading") return <LoadingSpinner/>
-  if (error === "error") return <div>Erreur...</div>
-
-  console.log("data", data)
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
     <LayoutCustom>
