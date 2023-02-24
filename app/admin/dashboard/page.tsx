@@ -3,9 +3,10 @@
 import LayoutCustom from "app/layouts/layoutCustom";
 import { IsAuthorized } from "app/utils/auth";
 import React from "react";
-import CardStats from "../../components/atoms/cardstats/cardStats";
 import {AiOutlineEuro, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
 import {useReservations} from "../../hooks/useReservations";
+import CardStats from "@/components/atoms/cardstats/cardStats";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 
 const icons = {
   shoppingCart: <AiOutlineShoppingCart  className="AiOutlineShoppingCart"/>,
@@ -32,6 +33,10 @@ const Page = () => {
     return <div>Not Authorized</div>;
   }
 
+  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
+  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
+
   return (
     <LayoutCustom>
       <div className="c-categories">
@@ -40,8 +45,7 @@ const Page = () => {
           <div className="container-card">
             <CardStats className="c-cardStats" icon={icons.shoppingCart} number={totalReservations} numberofpourcents="0" titleCards="Nombre de réservations" />
             <CardStats className="c-cardStats" icon={icons.euro} number={totalPrice} numberofpourcents="0" titleCards="Chiffres d'affaires" />
-            {/*<CardStats className="c-cardStats" icon={icons.user} number={totalReservations} numberofpourcents="0" titleCards="Nombre de visiteurs" />*/}
-
+            <CardStats className="c-cardStats" icon={icons.user} number={totalReservations} numberofpourcents="0" titleCards="Nombre de visiteurs" />
           </div>
         </div>
       </div>
