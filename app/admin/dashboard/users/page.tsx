@@ -1,20 +1,16 @@
 'use client'
 
-import LayoutCustom from "app/layouts/layoutCustom";
-import {IsAuthorized} from "app/utils/auth";
-import {Button} from "src/components/atoms/button/button";
-import CardUsers from "src/components/atoms/cardusers/cardUsers";
 import React, {useEffect, useState} from "react";
-import {useUsers} from "app/hooks/useUsers";
-import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
-import Input from "src/components/atoms/input/input";
-import Modal from "src/components/atoms/modal/modal";
-import {useMutation} from "@tanstack/react-query";
-import FormValues from "../../../interface/FormValues";
-import {api} from "../../../config/api";
 import {toast} from "react-toastify";
-import {router} from "next/client";
-
+import {IsAuthorized} from "@/utils/auth";
+import {useUsers} from "@/hooks/useUsers";
+import {api} from "@/config/api";
+import LayoutCustom from "@/layouts/layoutCustom";
+import {Button} from "@/components/atoms/button/button";
+import CardUsers from "@/components/atoms/cardusers/cardUsers";
+import Modal from "@/components/atoms/modal/modal";
+import Input from "@/components/atoms/input/input";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 
 const Page = () => {
   const authorized = IsAuthorized("admin")
@@ -62,7 +58,7 @@ const Page = () => {
       password: generatePassword()
     }).then((response) => {
       if (response.status === 200) {
-        toast(`Utilisateur ajouté`, {position: toast.POSITION.TOP_RIGHT});
+        toast(`Utilisateur ajouté`, {position: toast.POSITION.BOTTOM_CENTER});
         closeModal()
         form.reset()
       }
@@ -83,8 +79,8 @@ const Page = () => {
       phone
     })
     if (response.status === 200) {
-      toast(`Partenaire ajouté`, {position: toast.POSITION.TOP_RIGHT});
-      closeModal()
+      toast(`Partenaire ajouté`, {position: toast.POSITION.BOTTOM_CENTER});
+      closeModalPartenaire()
       form.reset()
     }
   };
@@ -234,8 +230,8 @@ const Page = () => {
               </div>
             </div>
             <div className="content-button">
-              <Button color='primary' className="btn-cancel"> Annuler </Button>
-              <Button color={'primary'} isActive={true}> Enregistrer </Button>
+              <Button color='primary' className="btn-cancel" onClick={closeModalPartenaire}> Annuler </Button>
+              <Button color='primary' isActive={true}> Enregistrer </Button>
             </div>
           </form>
         </Modal>

@@ -1,26 +1,25 @@
 "use client"
 
 import {useMutation} from "@tanstack/react-query";
-import {Button} from "src/components/atoms/button/button";
-import Card from "src/components/atoms/card/card";
-import IconText from "src/components/atoms/icontext/iconText";
-import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
-import Modal from "src/components/atoms/modal/modal";
-import {api, baseUrl} from "app/config/api";
-import {useActivities} from "app/hooks/useActivities";
-import FormValues from "app/interface/FormValues";
-import LayoutCustom from "app/layouts/layoutCustom";
-import {IsAuthorized} from "app/utils/auth";
-import Input from "src/components/atoms/input/input";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {router} from "next/client";
-import {useAuth} from "../../../context/AuthContext";
 import {
   ActivitySchedulePartner,
   DetailsActivityPartner,
   InformationActivityPartner, UploadImagePartner
-} from "../../../../src/components/atoms/forms/informationpartner";
+} from "@/components/atoms/forms/informationpartner";
+import FormValues from "@/interface/FormValues";
+import {IsAuthorized} from "@/utils/auth";
+import {useActivities} from "@/hooks/useActivities";
+import LayoutCustom from "@/layouts/layoutCustom";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import {Button} from "@/components/atoms/button/button";
+import Input from "@/components/atoms/input/input";
+import Card from "@/components/atoms/card/card";
+import {api, baseUrl} from "@/config/api";
+import IconText from "@/components/atoms/icontext/iconText";
+import Modal from "@/components/atoms/modal/modal";
 
 const initialFormValues: FormValues = {
   address: "",
@@ -46,8 +45,6 @@ const Page = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [page, setPage] = useState(1)
   const [currentStep, setCurrentStep] = useState(1);
-
-  const {user} = useAuth()
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
@@ -102,7 +99,7 @@ const Page = () => {
       })
     },
     onSuccess: (data) => {
-      toast(`Activitée ajouter`, {position: toast.POSITION.TOP_RIGHT});
+      toast(`Activitée ajouter`, {position: toast.POSITION.BOTTOM_CENTER});
       closeModal()
       setCurrentStep(1)
       setFormValues(initialFormValues)
@@ -170,9 +167,7 @@ const Page = () => {
                     />
                     <IconText
                       title={activity.name}
-                      price={activity.price}
-                      numberOfPlaces="2"
-                      status="Confirmer"
+                      price={`${activity.price} €`}
                     />
                   </Card>
                 );
