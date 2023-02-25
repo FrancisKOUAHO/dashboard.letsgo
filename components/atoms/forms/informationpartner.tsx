@@ -259,7 +259,7 @@ const ActivitySchedulePartner = ({onPrevious, onNext}: { onPrevious: () => void,
     event.preventDefault();
 
     if (!date || !hour) {
-      toast(`Veuillez entrer une date et une heure`, {position: toast.POSITION.TOP_RIGHT});
+      toast(`Veuillez entrer une date et une heure`, {position: toast.POSITION.BOTTOM_CENTER});
       return;
     }
 
@@ -377,7 +377,7 @@ const UploadImagePartner = ({
     event.preventDefault();
 
     if (!image) {
-      toast(`Veuillez sélectionner une image`, {position: toast.POSITION.TOP_RIGHT});
+      toast(`Veuillez sélectionner une image`, {position: toast.POSITION.BOTTOM_CENTER});
       return;
     }
     onsubmit({image})

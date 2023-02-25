@@ -99,7 +99,7 @@ const Page = () => {
       })
     },
     onSuccess: (data) => {
-      toast(`Activitée ajouter`, {position: toast.POSITION.TOP_RIGHT});
+      toast(`Activitée ajouter`, {position: toast.POSITION.BOTTOM_CENTER});
       closeModal()
       setCurrentStep(1)
       setFormValues(initialFormValues)
@@ -167,9 +167,7 @@ const Page = () => {
                     />
                     <IconText
                       title={activity.name}
-                      price={activity.price}
-                      numberOfPlaces="2"
-                      status="Confirmer"
+                      price={`${activity.price} €`}
                     />
                   </Card>
                 );

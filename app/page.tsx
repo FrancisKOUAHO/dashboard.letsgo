@@ -17,7 +17,7 @@ export default function Home() {
     const values = Object.fromEntries(new FormData(form));
     login(values.email, values.password)
     if (message !== null) {
-      toast(`${message}`, {position: toast.POSITION.TOP_RIGHT});
+      toast(`${message}`, {position: toast.POSITION.BOTTOM_CENTER});
     }
   }
 

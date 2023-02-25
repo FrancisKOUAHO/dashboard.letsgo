@@ -58,7 +58,7 @@ const Page = () => {
       password: generatePassword()
     }).then((response) => {
       if (response.status === 200) {
-        toast(`Utilisateur ajouté`, {position: toast.POSITION.TOP_RIGHT});
+        toast(`Utilisateur ajouté`, {position: toast.POSITION.BOTTOM_CENTER});
         closeModal()
         form.reset()
       }
@@ -79,8 +79,8 @@ const Page = () => {
       phone
     })
     if (response.status === 200) {
-      toast(`Partenaire ajouté`, {position: toast.POSITION.TOP_RIGHT});
-      closeModal()
+      toast(`Partenaire ajouté`, {position: toast.POSITION.BOTTOM_CENTER});
+      closeModalPartenaire()
       form.reset()
     }
   };
@@ -230,8 +230,8 @@ const Page = () => {
               </div>
             </div>
             <div className="content-button">
-              <Button color='primary' className="btn-cancel"> Annuler </Button>
-              <Button color={'primary'} isActive={true}> Enregistrer </Button>
+              <Button color='primary' className="btn-cancel" onClick={closeModalPartenaire}> Annuler </Button>
+              <Button color='primary' isActive={true}> Enregistrer </Button>
             </div>
           </form>
         </Modal>

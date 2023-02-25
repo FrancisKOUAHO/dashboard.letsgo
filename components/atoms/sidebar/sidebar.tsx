@@ -18,7 +18,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
   return (
     <>
       {
-        user.role === 'partner' ? (
+        user?.role === 'partner' ? (
           <div className="c-sidebar">
             <Link href={'/partner/dashboard'}>
               <AiOutlineHome/>
