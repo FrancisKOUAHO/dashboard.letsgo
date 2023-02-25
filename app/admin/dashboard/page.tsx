@@ -1,12 +1,12 @@
 "use client"
 
-import LayoutCustom from "app/layouts/layoutCustom";
-import { IsAuthorized } from "app/utils/auth";
 import React from "react";
 import {AiOutlineEuro, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
-import {useReservations} from "../../hooks/useReservations";
 import CardStats from "@/components/atoms/cardstats/cardStats";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import {IsAuthorized} from "@/utils/auth";
+import {useReservations} from "@/hooks/useReservations";
+import LayoutCustom from "@/layouts/layoutCustom";
 
 const icons = {
   shoppingCart: <AiOutlineShoppingCart  className="AiOutlineShoppingCart"/>,

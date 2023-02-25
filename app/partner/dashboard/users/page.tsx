@@ -1,19 +1,11 @@
 'use client'
 
-import LayoutCustom from "app/layouts/layoutCustom";
-import {IsAuthorized} from "app/utils/auth";
-import {Button} from "src/components/atoms/button/button";
-import CardUsers from "src/components/atoms/cardusers/cardUsers";
-import React, {useEffect, useState} from "react";
-import {useUsers} from "app/hooks/useUsers";
-import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
-import Input from "src/components/atoms/input/input";
-import Modal from "src/components/atoms/modal/modal";
-import {useMutation} from "@tanstack/react-query";
-import FormValues from "../../../interface/FormValues";
-import {api} from "../../../config/api";
-import {toast} from "react-toastify";
-import {router} from "next/client";
+import React from "react";
+import {useUsers} from "@/hooks/useUsers";
+import {IsAuthorized} from "@/utils/auth";
+import LayoutCustom from "@/layouts/layoutCustom";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import CardUsers from "@/components/atoms/cardusers/cardUsers";
 
 
 const Page = () => {

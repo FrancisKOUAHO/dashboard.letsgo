@@ -1,17 +1,6 @@
 "use client"
 
 import {useMutation} from "@tanstack/react-query";
-import {Button} from "src/components/atoms/button/button";
-import Card from "src/components/atoms/card/card";
-import IconText from "src/components/atoms/icontext/iconText";
-import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
-import Modal from "src/components/atoms/modal/modal";
-import {api, baseUrl} from "app/config/api";
-import {useActivities} from "app/hooks/useActivities";
-import FormValues from "app/interface/FormValues";
-import LayoutCustom from "app/layouts/layoutCustom";
-import {IsAuthorized} from "app/utils/auth";
-import Input from "src/components/atoms/input/input";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {router} from "next/client";
@@ -20,6 +9,17 @@ import {
   DetailsActivityPartner,
   InformationActivityPartner, UploadImagePartner
 } from "@/components/atoms/forms/informationpartner";
+import FormValues from "@/interface/FormValues";
+import {IsAuthorized} from "@/utils/auth";
+import {useActivities} from "@/hooks/useActivities";
+import LayoutCustom from "@/layouts/layoutCustom";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import {Button} from "@/components/atoms/button/button";
+import Input from "@/components/atoms/input/input";
+import Card from "@/components/atoms/card/card";
+import {api, baseUrl} from "@/config/api";
+import IconText from "@/components/atoms/icontext/iconText";
+import Modal from "@/components/atoms/modal/modal";
 
 const initialFormValues: FormValues = {
   address: "",

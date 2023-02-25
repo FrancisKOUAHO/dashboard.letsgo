@@ -1,10 +1,10 @@
 "use client"
 
-import LayoutCustom from "app/layouts/layoutCustom";
-import { IsAuthorized } from "app/utils/auth";
 import React from "react";
-import CardStats from "../../../src/components/atoms/cardstats/cardStats";
 import {AiOutlineDesktop, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
+import {IsAuthorized} from "@/utils/auth";
+import LayoutCustom from "@/layouts/layoutCustom";
+import CardStats from "@/components/atoms/cardstats/cardStats";
 
 const icons = {
   shoppingCart: <AiOutlineShoppingCart  className="AiOutlineShoppingCart"/>,
@@ -26,12 +26,12 @@ const Page = () => {
         <h2>{"Bilan d'affaires"}</h2>
         <div className="c-users__users">
           <div className="container-card">
-            <CardStats className="c-cardStats" icon={icons.shoppingCart} number="8" numberofpourcents="0" titleCards="Nombre de réservations" />
-            <CardStats className="c-cardStats" icon={icons.desktop} number="0" numberofpourcents="10" titleCards="Nombre d'offres" />
-            <CardStats className="c-cardStats" icon={icons.user} number="0" numberofpourcents="0" titleCards="Nombre de visiteurs" />
+            <CardStats className="c-cardStats" icon={icons.shoppingCart} numberofpourcents="0" titleCards="Nombre de réservations" />
+            <CardStats className="c-cardStats" icon={icons.desktop} numberofpourcents="10" titleCards="Nombre d'offres" />
+            <CardStats className="c-cardStats" icon={icons.user} numberofpourcents="0" titleCards="Nombre de visiteurs" />
           </div>
         </div>
-      </div>
+      </div>‡‡
     </LayoutCustom>
   )
 }

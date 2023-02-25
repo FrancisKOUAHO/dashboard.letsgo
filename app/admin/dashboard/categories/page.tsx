@@ -1,12 +1,12 @@
 'use client'
 
-import LayoutCustom from "app/layouts/layoutCustom";
-import {IsAuthorized} from "app/utils/auth";
-import {useCategories} from "app/hooks/useCategories";
-import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
-import {CategoryContent, TitleTable} from "src/components/atoms/cardcategory/table";
-import categories from "app/types/Categories";
 import {useState} from "react";
+import {IsAuthorized} from "@/utils/auth";
+import {useCategories} from "@/hooks/useCategories";
+import LayoutCustom from "@/layouts/layoutCustom";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import {CategoryContent, TitleTable} from "@/components/atoms/cardcategory/table";
+import categories from "@/types/Categories";
 
 const Page = () => {
   const authorized = IsAuthorized("admin");

@@ -1,15 +1,15 @@
 "use client"
 
 import React, {useState} from "react";
-import './styles/_main.scss'
+import '../styles/_main.scss'
 import 'react-toastify/dist/ReactToastify.css';
 
 import {ToastContainer} from 'react-toastify';
 import {Hydrate, QueryClient, QueryClientProvider,} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
+import AuthContextProvider from "@/context/AuthContext";
 
 
-import AuthContextProvider from "./context/AuthContext";
 
 export default function RootLayout({children}: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient(

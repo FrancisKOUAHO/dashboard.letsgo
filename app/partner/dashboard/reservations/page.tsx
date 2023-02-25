@@ -1,12 +1,12 @@
 "use client"
 
-import LayoutCustom from "app/layouts/layoutCustom";
-import {IsAuthorized} from "app/utils/auth";
-import { ReservationContent, TitleTable} from "src/components/atoms/cardcategory/table";
-import {useReservationId} from "app/hooks/useReservations";
-import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
 import {useState} from "react";
-import {useAuth} from "../../../context/AuthContext";
+import {IsAuthorized} from "@/utils/auth";
+import {useReservationId} from "@/hooks/useReservations";
+import {useAuth} from "@/context/AuthContext";
+import LayoutCustom from "@/layouts/layoutCustom";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import {ReservationContent, TitleTable} from "@/components/atoms/cardcategory/table";
 
 const Page = () => {
   const authorized = IsAuthorized("partner");

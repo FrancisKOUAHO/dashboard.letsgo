@@ -1,16 +1,16 @@
 'use client'
 
-import LayoutCustom from "app/layouts/layoutCustom";
-import {IsAuthorized} from "app/utils/auth";
-import {Button} from "src/components/atoms/button/button";
-import CardUsers from "src/components/atoms/cardusers/cardUsers";
 import React, {useEffect, useState} from "react";
-import {useUsers} from "app/hooks/useUsers";
-import LoadingSpinner from "src/components/atoms/loadingspinner/loadingSpinner";
-import Input from "src/components/atoms/input/input";
-import Modal from "src/components/atoms/modal/modal";
-import {api} from "../../../config/api";
 import {toast} from "react-toastify";
+import {IsAuthorized} from "@/utils/auth";
+import {useUsers} from "@/hooks/useUsers";
+import {api} from "@/config/api";
+import LayoutCustom from "@/layouts/layoutCustom";
+import {Button} from "@/components/atoms/button/button";
+import CardUsers from "@/components/atoms/cardusers/cardUsers";
+import Modal from "@/components/atoms/modal/modal";
+import Input from "@/components/atoms/input/input";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 
 const Page = () => {
   const authorized = IsAuthorized("admin")
