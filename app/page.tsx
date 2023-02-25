@@ -5,6 +5,7 @@ import {Button} from "@/components/atoms/button/button";
 import {useAuth} from "@/context/AuthContext";
 import React from "react";
 import {toast, ToastContainer} from "react-toastify";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -34,10 +35,10 @@ export default function Home() {
         <h1>Connectez-vous</h1>
         <Input className="c-input mb-5" type="email" name="email" placeholder="Email"/>
         <Input className="c-input" type="password" name="password" placeholder="Mot de passe"/>
-        <a href="#">Mot de passe oublié</a>
+        <Link href={'/forget-password'}>Mot de passe oublié</Link>
         <Button color="primary" type="submit"> Connexion </Button>
-        <p>En vous inscrivant, vous acceptez notre <a href="#">Conditions d&apos;utilisation</a> & <a href="#">Politique
-          de confidentialité</a></p>
+        <p>En vous inscrivant, vous acceptez notre <Link href="#">Conditions d&apos;utilisation</Link> & <Link href="#">Politique
+          de confidentialité</Link></p>
       </div>
       <ToastContainer/>
     </form>
