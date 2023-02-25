@@ -7,10 +7,8 @@ import React from "react";
 import {toast, ToastContainer} from "react-toastify";
 import Link from "next/link";
 
-
 export default function Home() {
   const {login, message} = useAuth();
-
 
   const handlerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
