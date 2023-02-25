@@ -9,7 +9,7 @@ import {IsAuthorized} from "@/utils/auth";
 import {useActivities} from "@/hooks/useActivities";
 import LayoutCustom from "@/layouts/layoutCustom";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
-import {Button} from "@/components/atoms/button/button";
+import {Button, ButtonIcon} from "@/components/atoms/button/button";
 import Input from "@/components/atoms/input/input";
 import Card from "@/components/atoms/card/card";
 import {api, baseUrl} from "@/config/api";
@@ -21,6 +21,7 @@ import {
   InformationActivity,
   UploadImage
 } from "@/components/atoms/forms/information";
+import {AiOutlineBell, AiOutlineDelete, AiOutlineEye, AiOutlineForm} from "react-icons/ai";
 
 
 const initialFormValues: FormValues = {
@@ -112,10 +113,22 @@ const Page = () => {
     mutation.mutate({...formValues, ...values})
   };
 
+  const notificationPush = (id: string) => {
+    api.get(`/notifications/send-notification/${id}`).then(r => {
+      if (r.status === 200) toast(`Notification envoyée`, {position: toast.POSITION.BOTTOM_CENTER});
+    })
+  }
 
-  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
-  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
-  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
+
+  if (!authorized) return <LayoutCustom>
+    <div className="flex justify-center items-center h-screen">Not Authorized</div>
+  </LayoutCustom>
+  if (status === "loading") return <LayoutCustom>
+    <div className="flex justify-center items-center h-screen"><LoadingSpinner/></div>
+  </LayoutCustom>
+  if (error === "error") return <LayoutCustom>
+    <div className="flex justify-center items-center h-screen">Erreur...</div>
+  </LayoutCustom>
 
   return (
     <LayoutCustom>
@@ -170,6 +183,20 @@ const Page = () => {
                       title={activity.name}
                       price={`${activity.price} €`}
                     />
+                    <div className="c-flex-button">
+                      <div className="flex flex-col gap-4">
+                        <ButtonIcon className="c-button-icon" color='primary' name="apercu"><AiOutlineEye
+                          className="all-icon"/></ButtonIcon>
+                        <ButtonIcon className="c-button-icon" color='primary' name="publicité" onClick={() => notificationPush(`${activity.id}`)}><AiOutlineBell
+                          className="all-icon text-amber-400"/></ButtonIcon>
+                      </div>
+                      <div className="flex flex-col gap-4">
+                        <ButtonIcon className="c-button-icon" name="Modifier"><AiOutlineForm
+                          className="all-icon"/></ButtonIcon>
+                        <ButtonIcon className="c-button-icon" color='danger' name="Supprimer"><AiOutlineDelete
+                          className="all-icon"/></ButtonIcon>
+                      </div>
+                    </div>
                   </Card>
                 );
               })}
