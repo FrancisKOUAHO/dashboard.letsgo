@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 const api = axios.create({
-  //baseURL: 'http://localhost:3333/api/v1',
   baseURL: 'https://api.letsgoeurope.fr/api/v1',
 });
 
-const baseUrl = "http://localhost:3333/uploads/"
+const baseUrl = "https://api.letsgoeurope.fr/uploads/"
 
 
 export {

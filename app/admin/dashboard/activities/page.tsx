@@ -1,75 +1,73 @@
-"use client"
+"use client";
 
-import {useMutation} from "@tanstack/react-query";
-import {useState} from "react";
-import {toast} from "react-toastify";
-import {router} from "next/client";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 import FormValues from "@/interface/FormValues";
-import {IsAuthorized} from "@/utils/auth";
-import {useActivities} from "@/hooks/useActivities";
+import { IsAuthorized } from "@/utils/auth";
+import { useActivities } from "@/hooks/useActivities";
 import LayoutCustom from "@/layouts/layoutCustom";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
-import {Button, ButtonIcon} from "@/components/atoms/button/button";
+import { Button } from "@/components/atoms/button/button";
 import Input from "@/components/atoms/input/input";
 import Card from "@/components/atoms/card/card";
-import {api, baseUrl} from "@/config/api";
+import { api, baseUrl } from "@/config/api";
 import IconText from "@/components/atoms/icontext/iconText";
 import Modal from "@/components/atoms/modal/modal";
 import {
   ActivitySchedule,
   DetailsActivity,
   InformationActivity,
-  UploadImage
+  UploadImage,
 } from "@/components/atoms/forms/information";
-import {AiOutlineBell, AiOutlineDelete, AiOutlineEye, AiOutlineForm} from "react-icons/ai";
-
-
-const initialFormValues: FormValues = {
-  address: "",
-  cancellation_conditions: "",
-  category_id: "",
-  city: "",
-  description: "",
-  duration: "",
-  name: "",
-  image: new File([], ''),
-  practical_information: "",
-  price: "",
-  compagny: "",
-  programme: "",
-  schedule: "",
-  organisator_id: ""
-};
-
 
 const Page = () => {
-  const authorized = IsAuthorized("admin")
+  const initialFormValues: FormValues = {
+    address: "",
+    cancellation_conditions: "",
+    category_id: "",
+    city: "",
+    description: "",
+    duration: "",
+    name: "",
+    image: typeof File !== "undefined" ? new File([], "") : null,
+    practical_information: "",
+    price: "",
+    compagny: "",
+    programme: "",
+    schedule: "",
+    organisator_id: "",
+  };
+  const authorized = IsAuthorized("admin");
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
-  const {data, status, error} = useActivities()
+  const { data, status, error } = useActivities();
 
-  let [isOpen, setIsOpen] = useState(false)
+  const router = useRouter();
 
-  const itemsPerPage = 8
-  const totalActivities = data?.data.length
-  const pageCount = Math.ceil(totalActivities / itemsPerPage)
+  let [isOpen, setIsOpen] = useState(false);
 
-  const [page, setPage] = useState(1)
+  const itemsPerPage = 8;
+  const totalActivities = data?.data.length;
+  const pageCount = Math.ceil(totalActivities / itemsPerPage);
+
+  const [page, setPage] = useState(1);
 
   const [currentStep, setCurrentStep] = useState(1);
 
   const closeModal = (): void => {
-    setIsOpen(false)
-  }
+    setIsOpen(false);
+  };
 
   const openModal = (): void => {
-    setIsOpen(true)
-  }
+    setIsOpen(true);
+  };
 
   const handleNext = (values: any) => {
     setCurrentStep(currentStep + 1);
-    setFormValues({...formValues, ...values});
+    setFormValues({ ...formValues, ...values });
   };
 
   const handlePrevious = () => {
@@ -79,56 +77,67 @@ const Page = () => {
   const mutation = useMutation({
     mutationFn: async (values: FormValues) => {
       const formData = new FormData();
-      formData.append('address', values.address);
-      formData.append('cancellation_conditions', values.cancellation_conditions);
-      formData.append('category_id', values.category_id);
-      formData.append('city', values.city);
-      formData.append('description', values.description);
-      formData.append('duration', values.duration);
-      formData.append('name', values.name);
-      formData.append('practical_information', values.practical_information);
-      formData.append('price', values.price);
-      formData.append('compagny', values.compagny);
-      formData.append('programme', values.programme);
-      formData.append('schedule', JSON.stringify(values.schedule));
-      formData.append('organisator_id', values.organisator_id);
-      formData.append('image', values.image);
+      formData.append("address", values.address);
+      formData.append(
+        "cancellation_conditions",
+        values.cancellation_conditions
+      );
+      formData.append("category_id", values.category_id);
+      formData.append("city", values.city);
+      formData.append("description", values.description);
+      formData.append("duration", values.duration);
+      formData.append("name", values.name);
+      formData.append("practical_information", values.practical_information);
+      formData.append("price", values.price);
+      formData.append("compagny", values.compagny);
+      formData.append("programme", values.programme);
+      formData.append("schedule", JSON.stringify(values.schedule));
+      formData.append("organisator_id", values.organisator_id);
+      formData.append("image", values.image!);
 
       await api.post("/activities/createActivity", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      })
+          "Content-Type": "multipart/form-data",
+        },
+      });
     },
     onSuccess: (data) => {
-      toast(`Activitée ajouter`, {position: toast.POSITION.BOTTOM_CENTER});
-      closeModal()
-      setCurrentStep(1)
-      setFormValues(initialFormValues)
-      router.push("/admin/dashboard/activities")
+      toast(`Activitée ajouter`, { position: toast.POSITION.BOTTOM_CENTER });
+      closeModal();
+      setCurrentStep(1);
+      setFormValues(initialFormValues);
+      router.push("/admin/dashboard/activities");
     },
-  })
+  });
 
   const handleSubmit = (values: any) => {
-    mutation.mutate({...formValues, ...values})
+    mutation.mutate({ ...formValues, ...values });
   };
 
-  const notificationPush = (id: string) => {
-    api.get(`/notifications/send-notification/${id}`).then(r => {
-      if (r.status === 200) toast(`Notification envoyée`, {position: toast.POSITION.BOTTOM_CENTER});
-    })
-  }
-
-
-  if (!authorized) return <LayoutCustom>
-    <div className="flex justify-center items-center h-screen">Not Authorized</div>
-  </LayoutCustom>
-  if (status === "loading") return <LayoutCustom>
-    <div className="flex justify-center items-center h-screen"><LoadingSpinner/></div>
-  </LayoutCustom>
-  if (error === "error") return <LayoutCustom>
-    <div className="flex justify-center items-center h-screen">Erreur...</div>
-  </LayoutCustom>
+  if (!authorized)
+    return (
+      <LayoutCustom>
+        <div className="flex justify-center items-center h-screen">
+          Not Authorized
+        </div>
+      </LayoutCustom>
+    );
+  if (status === "loading")
+    return (
+      <LayoutCustom>
+        <div className="flex justify-center items-center h-screen">
+          <LoadingSpinner />
+        </div>
+      </LayoutCustom>
+    );
+  if (error === "error")
+    return (
+      <LayoutCustom>
+        <div className="flex justify-center items-center h-screen">
+          Erreur...
+        </div>
+      </LayoutCustom>
+    );
 
   return (
     <LayoutCustom>
@@ -142,7 +151,11 @@ const Page = () => {
             </Button>
             <div>
               <div>
-                <Input className="c-input" type="text" placeholder="Rechercher une activité..."/>
+                <Input
+                  className="c-input"
+                  type="text"
+                  placeholder="Rechercher une activité..."
+                />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -183,20 +196,6 @@ const Page = () => {
                       title={activity.name}
                       price={`${activity.price} €`}
                     />
-                    <div className="c-flex-button">
-                      <div className="flex flex-col gap-4">
-                        <ButtonIcon className="c-button-icon" color='primary' name="apercu"><AiOutlineEye
-                          className="all-icon"/></ButtonIcon>
-                        <ButtonIcon className="c-button-icon" color='primary' name="publicité" onClick={() => notificationPush(`${activity.id}`)}><AiOutlineBell
-                          className="all-icon text-amber-400"/></ButtonIcon>
-                      </div>
-                      <div className="flex flex-col gap-4">
-                        <ButtonIcon className="c-button-icon" name="Modifier"><AiOutlineForm
-                          className="all-icon"/></ButtonIcon>
-                        <ButtonIcon className="c-button-icon" color='danger' name="Supprimer"><AiOutlineDelete
-                          className="all-icon"/></ButtonIcon>
-                      </div>
-                    </div>
                   </Card>
                 );
               })}
@@ -207,36 +206,59 @@ const Page = () => {
             <ul>
               <li>
                 <button
-                  onClick={() => setPage(page-1)}
-                  className="transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-indigo-100">Prev
+                  onClick={() => setPage(page - 1)}
+                  className="transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-indigo-100"
+                >
+                  Prev
                 </button>
               </li>
-              {Array.from({length: pageCount}, (_, i) => i + 1).map((num) => (
+              {Array.from({ length: pageCount }, (_, i) => i + 1).map((num) => (
                 <li key={num}>
                   <button
                     onClick={() => setPage(num)}
-                    className={`transition-colors duration-150 ${num === page ? "active" : ""}`}> {num}
+                    className={`transition-colors duration-150 ${
+                      num === page ? "active" : ""
+                    }`}
+                  >
+                    {" "}
+                    {num}
                   </button>
                 </li>
               ))}
               <li>
                 <button
-                  onClick={() => setPage(page+1)}
-                  className="transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-indigo-100">Suivant
+                  onClick={() => setPage(page + 1)}
+                  className="transition-colors duration-150 bg-white rounded-r-lg focus:shadow-outline hover:bg-indigo-100"
+                >
+                  Suivant
                 </button>
               </li>
             </ul>
           </nav>
         )}
       </div>
-      <Modal closeModal={closeModal} isOpen={isOpen} name="Ajouter une activité">
-        {currentStep === 1 && <InformationActivity onNext={handleNext}  />}
-        {currentStep === 2 && <DetailsActivity onPrevious={handlePrevious} onNext={handleNext} />}
-        {currentStep === 3 && <ActivitySchedule onPrevious={handlePrevious} onNext={handleNext} />}
-        {currentStep === 4 && <UploadImage onPrevious={handlePrevious} onNext={handleNext}  onsubmit={handleSubmit}/>}
+      <Modal
+        closeModal={closeModal}
+        isOpen={isOpen}
+        name="Ajouter une activité"
+      >
+        {currentStep === 1 && <InformationActivity onNext={handleNext} />}
+        {currentStep === 2 && (
+          <DetailsActivity onPrevious={handlePrevious} onNext={handleNext} />
+        )}
+        {currentStep === 3 && (
+          <ActivitySchedule onPrevious={handlePrevious} onNext={handleNext} />
+        )}
+        {currentStep === 4 && (
+          <UploadImage
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+            onsubmit={handleSubmit}
+          />
+        )}
       </Modal>
     </LayoutCustom>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;

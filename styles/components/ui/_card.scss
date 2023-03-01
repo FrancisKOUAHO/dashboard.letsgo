@@ -19,12 +19,30 @@
   }
 
   .c-flex-button{
-    margin-top: 25px;
+    border-top: solid 1px;
+    border-color: #e2e8f099;
     display: flex;
-    justify-content: space-between;
+    padding-top: 1.5rem;
+    align-items: center;
+    width: 100%;
+    margin-top: 5%;
 
     .all-icon{
-      font-size:20px;
+      font-size:19px;
     }
+
+    div:nth-child(1){
+      width: 100%;
+      height: 52px;
+    }
+
+    div:nth-child(2){
+      width: 100%;
+
+      button{
+        padding-bottom: 10px;
+      }
+    }
+
   }
 }
