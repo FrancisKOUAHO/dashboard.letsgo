@@ -6,7 +6,7 @@ interface FormValues {
   description: string,
   duration: string,
   name: string,
-  image: File,
+  image: File | null,
   practical_information: string,
   price: string,
   compagny: string,
