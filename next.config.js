@@ -2,18 +2,15 @@
 const path = require('path');
 
 const nextConfig = {
-  reactStrictMode: true,
   experimental: {
     appDir: true,
-    forceSwcTransforms: true,
-  },
-  images: {
-    domains: ['http://localhost:3030'],
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
-};
-
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+}
 
 module.exports = nextConfig

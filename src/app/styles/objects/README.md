@@ -1,1 +1,0 @@
-Objects – class-based selectors which define undecorated design patterns, for example the media object known from OOCSS
