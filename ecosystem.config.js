@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'dashboard.letsgoeurope.fr',
       instances : "max",
-      exec_mode : "cluster",
+      exec_mode : "fork",
       script: 'node_modules/next/dist/bin/next',
       watch: true,
       env_production: {
