@@ -9,6 +9,7 @@ type InputProps = {
   className?: string
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  pattern?: string;
 };
 
 export default InputProps;

@@ -191,7 +191,7 @@ const InformationActivityPartner = ({onNext}: { onNext: (values: any) => void })
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <Input
               className="c-input" name="price"
-              type="text" placeholder="14 euros"/></div>
+              type="text" placeholder="14.50 euros" pattern="^[0-9]+([.][0-9]+)?$" /></div>
         </div>
         <div className="flex flex-col justify-end gap-2 mt-12 md:flex-row">
           <Button color="primary" isActive={true} type="submit">
