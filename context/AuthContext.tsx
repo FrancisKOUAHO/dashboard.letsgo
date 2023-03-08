@@ -81,7 +81,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
     const token = localStorage.getItem('token');
     if (token) {
       setToken(token);
-      me(token).then(r => r);
+      me(token);
     }
   }, []);
 
