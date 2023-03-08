@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 import InputProps from "@/types/InputProps";
 
-const Input: FunctionComponent<InputProps> = ({className, type, label, placeholder, name, pattern}) => {
+const Input: FunctionComponent<InputProps> = ({className, type, label, placeholder, name, pattern, required }) => {
 
   if (type == "text")
     return (
       <>
         <label>{label}</label>
-        <input name={name} type={type} className={className} placeholder={placeholder} pattern={pattern} />
+        <input name={name} type={type} className={className} placeholder={placeholder} pattern={pattern} required={required} />
       </>
     )
 
@@ -15,14 +15,14 @@ const Input: FunctionComponent<InputProps> = ({className, type, label, placehold
     return (
       <>
         <label>{label}</label>
-        <input name={name} type={type} className={className} placeholder={placeholder} pattern={pattern} />
+        <input name={name} type={type} className={className} placeholder={placeholder} pattern={pattern} required={required} />
       </>
     )
 
   return (
     <>
       <label>{label}</label>
-      <input name={name} type={type} className={className} placeholder={placeholder} pattern={pattern} />
+      <input name={name} type={type} className={className} placeholder={placeholder} pattern={pattern} required={required} />
     </>
   )
 }

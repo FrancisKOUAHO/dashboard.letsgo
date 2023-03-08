@@ -34,7 +34,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
             <div className="flex items-center">
               <div className="font-medium">{'Nom de l\'activité'}</div>
               <div
-                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
               </div>
             </div>
@@ -46,7 +46,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <Input
               className="c-input" name="name"
-              type="text" placeholder="Nom de l'activité"/>
+              type="text" placeholder="Nom de l'activité" required={true}/>
             <div className="text-xs text-slate-500 mt-2 text-right"> Maximum de caractères 0/70</div>
           </div>
         </div>
@@ -57,14 +57,14 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
             <div className="flex items-center">
               <div className="font-medium">{'Durée de l\'activité'}</div>
               <div
-                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
               </div>
             </div>
           </div>
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
-            <Input className="c-input" name="duration" placeholder="Exemple: 10 min"/></div>
+            <Input className="c-input" name="duration" placeholder="Exemple: 10 min" required={true}/></div>
         </div>
         <div className="block sm:flex flex-col items-start pt-5 mt-5 xl:flex-row first:mt-0 first:pt-0"
         ><label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-64 xl:!mr-10"
@@ -73,7 +73,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
             <div className="flex items-center">
               <div className="font-medium">Companie</div>
               <div
-                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
               </div>
             </div>
@@ -101,7 +101,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
             <div className="flex items-center">
               <div className="font-medium">Categorie</div>
               <div
-                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
               </div>
             </div>
@@ -128,7 +128,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
             <div className="flex items-center">
               <div className="font-medium">Organisateur</div>
               <div
-                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
               </div>
             </div>
@@ -142,7 +142,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
               {
                 organisators && organisators.data.map((organisator: any, index: number) => {
                   return(
-                    <option key={index} value={organisator.id}>{organisator.name_compagny}</option>
+                    <option key={index} value={organisator.id}>{organisator.name_compagny} </option>
                   )
                 })
               }
@@ -156,14 +156,14 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
             <div className="flex items-center">
               <div className="font-medium">{'Adresse de l\'activité'}</div>
               <div
-                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
               </div>
             </div>
           </div>
         </label>
           <div className="flex-1 w-full mt-3 xl:mt-0">
-            <Input className="c-input" type="text" name="address" placeholder="Ex: 15 Rue de Paris"/></div>
+            <Input className="c-input" type="text" name="address" placeholder="Ex: 15 Rue de Paris" required={true}/></div>
         </div>
         <div className="block sm:flex flex-col items-start pt-5 mt-5 xl:flex-row first:mt-0 first:pt-0"
         ><label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-64 xl:!mr-10"
@@ -172,7 +172,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
             <div className="flex items-center">
               <div className="font-medium">Ville</div>
               <div
-                className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
               > Obligatoire
               </div>
             </div>
@@ -181,7 +181,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <Input
               className="c-input flex-1" name="city"
-              type="text" placeholder="Ex: Paris"/></div>
+              type="text" placeholder="Ex: Paris" required={true}/></div>
         </div>
         <div className="block sm:flex flex-col items-start pt-5 mt-5 xl:flex-row first:mt-0 first:pt-0">
           <label className="inline-block mb-2 sm:mb-0 sm:mr-5 sm:text-right xl:w-64 xl:!mr-10">
@@ -189,7 +189,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
               <div className="flex items-center">
                 <div className="font-medium">Price</div>
                 <div
-                  className="ml-2 px-2 py-0.5 bg-slate-200 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
+                  className="text-red-500 ml-2 px-2 py-0.5 bg-slate-100 text-slate-600 dark:bg-darkmode-300 dark:text-slate-400 text-xs rounded-md"
                 > Obligatoire
                 </div>
               </div>
@@ -198,7 +198,7 @@ const InformationActivity = ({onNext}: { onNext: (values: any) => void }) => {
           <div className="flex-1 w-full mt-3 xl:mt-0">
             <Input
               className="c-input" name="price"
-              type="text" placeholder="14.50 euros" pattern="^[0-9]+([.][0-9]+)?$" />
+              type="text" placeholder="14.50 euros" pattern="^[0-9]+([.][0-9]+)?$" required={true}/>
           </div>
         </div>
         <div className="flex flex-col justify-end gap-2 mt-12 md:flex-row">
@@ -229,6 +229,7 @@ const DetailsActivity = ({onPrevious, onNext}: { onPrevious: () => void, onNext:
       <TextArea name="description"
                 title="Description de l'activité"
                 description="Assurez-vous que la description du produit fournit une explication détaillée de votre produit afin qu'il soit facile de comprendre et de trouver votre produit."
+                required={true}
       />
       <TextArea name="programme"
                 title="Au programme"
