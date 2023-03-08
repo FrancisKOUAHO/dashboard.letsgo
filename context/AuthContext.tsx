@@ -77,14 +77,6 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
     router.push('/')
   };
 
-  useEffect(() => {
-    /*const token = localStorage.getItem('token');
-    if (token) {
-      setToken(token);
-      me(token);
-    }*/
-  }, []);
-
   return (
     <AuthContext.Provider value={{ login, register, logout, user, message }}>
       {children}
