@@ -187,7 +187,7 @@ const Page = () => {
                       src={activity.image}
                       width="100"
                       height="100"
-                      alt=""
+                      alt="image activity"
                       onError={(e: any) => {
                         e.target.src = `${baseUrl}${activity.image}`;
                       }}
