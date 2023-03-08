@@ -19,14 +19,17 @@ const Page = () => {
   const authorized = IsAuthorized('admin');
 
   const {data, status, error} = useReservations()
-  const totalReservations = data?.data.length
+  const totalReservations = data?.data?.length || 0;
 
-  let  totalPrice = 0;
-
-  for (let i = 0; i < totalReservations; i++) {
-    const reservation = data?.data[i];
-    const price = parseFloat(reservation.total_price);
-    totalPrice += price;
+  let totalPrice = 0;
+  if (data && data.data) {
+    for (let i = 0; i < totalReservations; i++) {
+      const reservation = data?.data[i];
+      const price = parseFloat(reservation.total_price);
+      if (!isNaN(price)) {
+        totalPrice += price;
+      }
+    }
   }
 
   if (!authorized) {
