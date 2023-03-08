@@ -11,7 +11,6 @@ import {useRouter} from "next/navigation";
 const ForgetPassword = () => {
   const router = useRouter();
 
-
   const handleSubmitForgetPassword = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -24,7 +23,7 @@ const ForgetPassword = () => {
       await router.push('/')
       form.reset();
     } else {
-      toast.error('Une erreur est survenue', { position: toast.POSITION.BOTTOM_CENTER })
+      toast.error('Nous avons rencontré un problème lors de la réinitialisation de votre mot de passe. Veuillez vérifier votre boîte de réception pour un e-mail de réinitialisation de mot de passe. Si vous n\'avez pas reçu l\'e-mail, veuillez vérifier votre dossier spam ou contactez notre équipe d\'assistance pour obtenir de l\'aide', {position: toast.POSITION.BOTTOM_CENTER})
     }
   };
 
