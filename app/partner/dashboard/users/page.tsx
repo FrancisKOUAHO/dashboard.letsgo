@@ -2,18 +2,18 @@
 
 import React from "react";
 import {useUsers} from "@/hooks/useUsers";
-import {IsAuthorized} from "@/utils/auth";
 import LayoutCustom from "@/layouts/layoutCustom";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import CardUsers from "@/components/atoms/cardusers/cardUsers";
+import useIsAuthorized from "@/utils/auth";
 
 
 const Page = () => {
-  const authorized = IsAuthorized("partner");
+  const isAuthorized = useIsAuthorized('partner')();
 
   const {data, status, error} = useUsers()
 
-  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (!isAuthorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
   if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 

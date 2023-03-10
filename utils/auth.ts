@@ -1,24 +1,34 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
 import {useAuth} from "@/context/AuthContext";
+import {useRouter} from "next/navigation";
 
-export const IsAuthorized = async (role: string) => {
-  const {user} = useAuth();
+const useIsAuthorized = (role: string): (() => boolean) => {
+  const { user } = useAuth();
   const router = useRouter();
 
-  if (!process.browser) {
-    return false;
-  }
+  const checkAuthorization = async (): Promise<boolean> => {
+    if (!process.browser) {
+      return false;
+    }
 
-  const getUserRole = user?.role
+    const getUserRole = user?.role;
+    if (!getUserRole || getUserRole !== role) {
+      await router.push('/');
+      return false;
+    }
 
-  if (!getUserRole || getUserRole !== role) {
-    await router.push('/')
-    return false;
-  }
+    return true;
+  };
 
-
-  return true;
+  return () => {
+    let isAuthorized = true;
+    checkAuthorization().then((result) => {
+      isAuthorized = result;
+    });
+    return isAuthorized;
+  };
 };
 
+
+export default useIsAuthorized;

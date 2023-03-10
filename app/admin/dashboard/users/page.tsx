@@ -2,7 +2,6 @@
 
 import React, {useEffect, useState} from "react";
 import {toast} from "react-toastify";
-import {IsAuthorized} from "@/utils/auth";
 import {useUsers} from "@/hooks/useUsers";
 import {api} from "@/config/api";
 import LayoutCustom from "@/layouts/layoutCustom";
@@ -11,9 +10,10 @@ import CardUsers from "@/components/atoms/cardusers/cardUsers";
 import Modal from "@/components/atoms/modal/modal";
 import Input from "@/components/atoms/input/input";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import useIsAuthorized from "@/utils/auth";
 
 const Page = () => {
-  const authorized = IsAuthorized("admin")
+  const isAuthorized = useIsAuthorized('admin')();
 
   const {data, status, error} = useUsers()
 
@@ -94,7 +94,7 @@ const Page = () => {
     getUserRolePartner()
   }, [])
 
-  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (!isAuthorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
   if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 

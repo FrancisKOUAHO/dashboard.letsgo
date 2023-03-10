@@ -11,7 +11,6 @@ import {
   UploadImagePartner,
 } from "@/components/atoms/forms/informationpartner";
 import FormValues from "@/interface/FormValues";
-import { IsAuthorized } from "@/utils/auth";
 import { useActivities } from "@/hooks/useActivities";
 import LayoutCustom from "@/layouts/layoutCustom";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
@@ -21,8 +20,11 @@ import Card from "@/components/atoms/card/card";
 import { api, baseUrl } from "@/config/api";
 import IconText from "@/components/atoms/icontext/iconText";
 import Modal from "@/components/atoms/modal/modal";
+import useIsAuthorized from "@/utils/auth";
 
 const Page = () => {
+  const isAuthorized = useIsAuthorized('partner')();
+
   const initialFormValues: FormValues = {
     address: "",
     cancellation_conditions: "",
@@ -39,7 +41,6 @@ const Page = () => {
     schedule: "",
     organisator_id: "",
   };
-  const authorized = IsAuthorized("partner");
 
   const [isOpen, setIsOpen] = useState(false);
   const [page, setPage] = useState(1);
@@ -112,7 +113,7 @@ const Page = () => {
     mutation.mutate({ ...formValues, ...values });
   };
 
-  if (!authorized)
+  if (!isAuthorized)
     return (
       <LayoutCustom>
         <div className="flex justify-center items-center h-screen">

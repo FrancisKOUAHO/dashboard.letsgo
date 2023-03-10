@@ -301,7 +301,7 @@ const ActivitySchedule = ({onPrevious, onNext}: { onPrevious: () => void, onNext
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onNext({schedule: schedule.dates});
+    onNext({schedule: schedule});
   };
 
   return (

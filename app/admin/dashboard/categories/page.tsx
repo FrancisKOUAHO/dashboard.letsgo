@@ -1,15 +1,15 @@
 'use client'
 
 import {useState} from "react";
-import {IsAuthorized} from "@/utils/auth";
 import {useCategories} from "@/hooks/useCategories";
 import LayoutCustom from "@/layouts/layoutCustom";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import {CategoryContent, TitleTable} from "@/components/atoms/cardcategory/table";
 import categories from "@/types/Categories";
+import useIsAuthorized from "@/utils/auth";
 
 const Page = () => {
-  const authorized = IsAuthorized("admin");
+  const isAuthorized = useIsAuthorized('admin')();
 
   const {data, status, error} = useCategories()
 
@@ -19,7 +19,7 @@ const Page = () => {
 
   const [page, setPage] = useState(1)
 
-  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (!isAuthorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
   if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 

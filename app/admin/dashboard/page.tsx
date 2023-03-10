@@ -4,9 +4,9 @@ import React from "react";
 import {AiOutlineEuro, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
 import CardStats from "@/components/atoms/cardstats/cardStats";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
-import {IsAuthorized} from "@/utils/auth";
 import {useReservations} from "@/hooks/useReservations";
 import LayoutCustom from "@/layouts/layoutCustom";
+import useIsAuthorized from "@/utils/auth";
 
 const icons = {
   shoppingCart: <AiOutlineShoppingCart  className="AiOutlineShoppingCart"/>,
@@ -16,7 +16,9 @@ const icons = {
 
 
 const Page = () => {
-  const authorized = IsAuthorized('admin');
+  const isAuthorized = useIsAuthorized('admin')();
+
+  console.log("isAuthorized", isAuthorized)
 
   const {data, status, error} = useReservations()
   const totalReservations = data?.data?.length || 0;
@@ -32,11 +34,7 @@ const Page = () => {
     }
   }
 
-  if (!authorized) {
-    return <div>Not Authorized</div>;
-  }
-
-  if (!authorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
+  if (!isAuthorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
   if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
   if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 

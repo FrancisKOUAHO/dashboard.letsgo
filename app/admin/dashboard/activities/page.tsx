@@ -5,7 +5,6 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import FormValues from "@/interface/FormValues";
-import { IsAuthorized } from "@/utils/auth";
 import { useActivities } from "@/hooks/useActivities";
 import LayoutCustom from "@/layouts/layoutCustom";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
@@ -21,8 +20,11 @@ import {
   InformationActivity,
   UploadImage,
 } from "@/components/atoms/forms/information";
+import useIsAuthorized from "@/utils/auth";
 
 const Page = () => {
+  const isAuthorized = useIsAuthorized('admin')();
+
   const initialFormValues: FormValues = {
     address: "",
     cancellation_conditions: "",
@@ -39,7 +41,6 @@ const Page = () => {
     schedule: "",
     organisator_id: "",
   };
-  const authorized = IsAuthorized("admin");
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
@@ -68,6 +69,7 @@ const Page = () => {
   const handleNext = (values: any) => {
     setCurrentStep(currentStep + 1);
     setFormValues({ ...formValues, ...values });
+    console.log(formValues)
   };
 
   const handlePrevious = () => {
@@ -111,10 +113,11 @@ const Page = () => {
   });
 
   const handleSubmit = (values: any) => {
+    console.log(values)
     mutation.mutate({ ...formValues, ...values });
   };
 
-  if (!authorized)
+  if (!isAuthorized)
     return (
       <LayoutCustom>
         <div className="flex justify-center items-center h-screen">
