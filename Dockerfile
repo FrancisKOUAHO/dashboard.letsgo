@@ -1,13 +1,27 @@
-FROM node:16.17.1
+# Utiliser l'image Node.js Alpine
+FROM node:18-alpine
 
-WORKDIR /app
+# Définir la variable d'environnement PORT
+ENV PORT 3033
 
+# Créer le répertoire de l'application
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-COPY yarn.lock .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs /app/
-RUN pnpm install
+# Copier les fichiers de dépendances
+COPY package.json yarn.lock /usr/src/app/
+RUN yarn install
 
-COPY . /app
+# Copier les fichiers sources
+COPY . /usr/src/app
 
-EXPOSE 3030
+# Construire l'application
+RUN yarn build
 
-CMD [ "pnpm", "run", "dev" ]
+# Exposer le port 3030
+EXPOSE 3033
+
+ENV NODE_ENV production  # Change to "development" for development if needed
+
+# Utilisation de CMD pour démarrer l'application avec hot reload
+CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then yarn dev; else yarn start; fi"]
