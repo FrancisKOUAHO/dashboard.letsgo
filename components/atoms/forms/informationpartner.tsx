@@ -264,7 +264,7 @@ const ActivitySchedulePartner = ({onPrevious, onNext}: { onPrevious: () => void,
             return;
         }
 
-        const formattedDate = new Date(date).toLocaleDateString("en-US");
+        const formattedDate = new Date(date).toLocaleDateString("en-US").replace(/\//g, '-');
 
         const newSchedule = {
             date: formattedDate,
@@ -283,9 +283,11 @@ const ActivitySchedulePartner = ({onPrevious, onNext}: { onPrevious: () => void,
                 dates: [...schedule.dates, newSchedule]
             });
         }
+
         setDate("");
         setHour("");
     };
+
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
