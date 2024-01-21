@@ -9,7 +9,7 @@ import useIsAuthorized from "@/utils/auth";
 
 
 const Page = () => {
-  const isAuthorized = useIsAuthorized('partner')();
+  const isAuthorized = useIsAuthorized('partner');
 
   const {data, status, error} = useUsers()
 

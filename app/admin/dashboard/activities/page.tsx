@@ -24,7 +24,7 @@ import useIsAuthorized from "@/utils/auth";
 import InformationActivityPrice from "@/components/atoms/forms/Informationprice";
 
 const Page = () => {
-  const isAuthorized = useIsAuthorized('admin')();
+  const isAuthorized = useIsAuthorized('admin');
 
   const initialFormValues: FormValues = {
     address: "",
