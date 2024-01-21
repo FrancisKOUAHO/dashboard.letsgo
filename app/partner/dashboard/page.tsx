@@ -16,7 +16,6 @@ const icons = {
 
 const Page = () => {
   const isAuthorized = useIsAuthorized('partner');
-    console.log('isAuthorized', isAuthorized)
 
   const {data, status, error} = useReservations()
   const totalReservations = data?.data?.length || 0;

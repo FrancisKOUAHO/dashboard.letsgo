@@ -27,7 +27,6 @@ const Page = () => {
   const isAuthorized = useIsAuthorized('partner');
   const {user} = useAuth()
 
-
   const initialFormValues: FormValues = {
     address: "",
     cancellation_conditions: "",
