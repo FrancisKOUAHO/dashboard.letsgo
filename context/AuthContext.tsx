@@ -51,13 +51,9 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
       if (response.status === 200) {
         setUser(response.data);
 
-          console.log('response.data.role', response.data.role)
-
         if (response.data.role === 'admin') {
-            console.log('admin')
           router.push('/admin/dashboard')
         } else if (response.data.role === 'partner') {
-            console.log('partner')
           router.push('/partner/dashboard')
         }
       }

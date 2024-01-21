@@ -69,7 +69,6 @@ const Page = () => {
   const handleNext = (values: any) => {
     setCurrentStep(currentStep + 1);
     setFormValues({ ...formValues, ...values });
-    console.log(formValues)
   };
 
   const handlePrevious = () => {
@@ -112,7 +111,6 @@ const Page = () => {
   });
 
   const handleSubmit = (values: any) => {
-    console.log(values)
     mutation.mutate({ ...formValues, ...values });
   };
 
