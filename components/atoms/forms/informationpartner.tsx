@@ -256,37 +256,33 @@ const ActivitySchedulePartner = ({onPrevious, onNext}: { onPrevious: () => void,
 
     const [schedule, setSchedule] = useState<{ dates: { date: string, hours: string[] }[] }>({dates: []});
 
-
     const handleAddSchedule = (event: any) => {
         event.preventDefault();
 
         if (!date || !hour) {
-            toast(`Veuillez entrer une date et une heure`, {position: toast.POSITION.BOTTOM_CENTER});
+            toast(`Veuillez entrer une date et une heure`, { position: toast.POSITION.BOTTOM_CENTER });
             return;
         }
 
+        const formattedDate = new Date(date).toLocaleDateString("en-US");
+
         const newSchedule = {
-            date,
+            date: formattedDate,
             hours: [hour]
         };
 
-        // Vérifiez si une entrée avec la même date existe déjà dans la liste
-        const existingEntryIndex = schedule.dates.findIndex(s => s.date === date);
+        const existingEntryIndex = schedule.dates.findIndex(s => s.date === formattedDate);
 
         if (existingEntryIndex !== -1) {
-            // Si une entrée existe déjà pour cette date, ajoutez simplement l'heure à la liste des heures
             schedule.dates[existingEntryIndex].hours.push(hour);
             setSchedule({
                 dates: [...schedule.dates]
             });
         } else {
-            // Sinon, créez une nouvelle entrée avec la date et l'heure
             setSchedule({
                 dates: [...schedule.dates, newSchedule]
             });
         }
-
-        // Réinitialiser les valeurs de date et d'heure après la soumission du formulaire
         setDate("");
         setHour("");
     };
