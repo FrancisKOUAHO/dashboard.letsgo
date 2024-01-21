@@ -1,9 +1,7 @@
-import {FunctionComponent, useEffect, useState} from "react";
+import {FunctionComponent} from "react";
 import {
   AiOutlineAppstore,
-  AiOutlineCalendar,
   AiOutlineHome,
-  AiOutlineMessage,
   AiOutlineProfile,
   AiOutlineTag,
   AiOutlineUser
@@ -28,17 +26,9 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
               <AiOutlineProfile/>
               Réservations
             </Link>
-            <Link href={'/partner/dashboard/users'}>
-              <AiOutlineUser/>
-              Utilisateurs
-            </Link>
             <Link href={'/partner/dashboard/activities'}>
               <AiOutlineTag/>
               Activités
-            </Link>
-            <Link href={'/partner/dashboard/chat'}>
-              <AiOutlineMessage/>
-              Chat
             </Link>
           </div>
         ) : (
@@ -62,14 +52,6 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             <Link href={'/admin/dashboard/activities'}>
               <AiOutlineTag/>
               Activités
-            </Link>
-            <Link href={'/admin/dashboard/chat'}>
-              <AiOutlineMessage/>
-              Chat
-            </Link>
-            <Link href={'/admin/dashboard/calendar'}>
-              <AiOutlineCalendar/>
-              Calendrier
             </Link>
           </div>
         )

@@ -11,7 +11,7 @@ import {
   UploadImagePartner,
 } from "@/components/atoms/forms/informationpartner";
 import FormValues from "@/interface/FormValues";
-import { useActivities } from "@/hooks/useActivities";
+import {useActivities, useActivitiesById} from "@/hooks/useActivities";
 import LayoutCustom from "@/layouts/layoutCustom";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import { Button } from "@/components/atoms/button/button";
@@ -21,9 +21,12 @@ import { api, baseUrl } from "@/config/api";
 import IconText from "@/components/atoms/icontext/iconText";
 import Modal from "@/components/atoms/modal/modal";
 import useIsAuthorized from "@/utils/auth";
+import {useAuth} from "@/context/AuthContext";
 
 const Page = () => {
-  const isAuthorized = useIsAuthorized('partner')();
+  const isAuthorized = useIsAuthorized('partner');
+  const {user} = useAuth()
+
 
   const initialFormValues: FormValues = {
     address: "",
@@ -48,7 +51,7 @@ const Page = () => {
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
-  const { data, status, error } = useActivities();
+  const { data, status, error } = useActivitiesById(user?.id);
 
   const router = useRouter();
 

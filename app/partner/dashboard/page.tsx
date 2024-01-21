@@ -6,7 +6,6 @@ import LayoutCustom from "@/layouts/layoutCustom";
 import CardStats from "@/components/atoms/cardstats/cardStats";
 import {useReservations} from "@/hooks/useReservations";
 import useIsAuthorized from "@/utils/auth";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 
 const icons = {
   shoppingCart: <AiOutlineShoppingCart  className="AiOutlineShoppingCart"/>,
@@ -16,7 +15,8 @@ const icons = {
 
 
 const Page = () => {
-  const isAuthorized = useIsAuthorized('partner')();
+  const isAuthorized = useIsAuthorized('partner');
+    console.log('isAuthorized', isAuthorized)
 
   const {data, status, error} = useReservations()
   const totalReservations = data?.data?.length || 0;
@@ -31,10 +31,6 @@ const Page = () => {
       }
     }
   }
-
-  if (isAuthorized) return <LayoutCustom><div className="flex justify-center items-center h-screen">Not Authorized</div></LayoutCustom>
-  if (status === "loading") return <LayoutCustom><div className="flex justify-center items-center h-screen"><LoadingSpinner/></div></LayoutCustom>
-  if (error === "error") return <LayoutCustom><div className="flex justify-center items-center h-screen">Erreur...</div></LayoutCustom>
 
   return (
       <LayoutCustom>
