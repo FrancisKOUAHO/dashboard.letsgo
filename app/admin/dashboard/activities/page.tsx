@@ -116,31 +116,6 @@ const Page = () => {
     mutation.mutate({ ...formValues, ...values });
   };
 
-  if (!isAuthorized)
-    return (
-      <LayoutCustom>
-        <div className="flex justify-center items-center h-screen">
-          Not Authorized
-        </div>
-      </LayoutCustom>
-    );
-  if (status === "loading")
-    return (
-      <LayoutCustom>
-        <div className="flex justify-center items-center h-screen">
-          <LoadingSpinner />
-        </div>
-      </LayoutCustom>
-    );
-  if (error === "error")
-    return (
-      <LayoutCustom>
-        <div className="flex justify-center items-center h-screen">
-          Erreur...
-        </div>
-      </LayoutCustom>
-    );
-
   return (
     <LayoutCustom>
       <div className="c-activities">
