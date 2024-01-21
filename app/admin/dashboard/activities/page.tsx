@@ -23,7 +23,7 @@ import {
 import useIsAuthorized from "@/utils/auth";
 
 const Page = () => {
-  const isAuthorized = useIsAuthorized('admin')();
+  const isAuthorized = useIsAuthorized('admin');
 
   const initialFormValues: FormValues = {
     address: "",

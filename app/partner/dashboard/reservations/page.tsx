@@ -9,7 +9,7 @@ import {ReservationContent, TitleTable} from "@/components/atoms/cardcategory/ta
 import useIsAuthorized from "@/utils/auth";
 
 const Page = () => {
-  const isAuthorized = useIsAuthorized('partner')();
+  const isAuthorized = useIsAuthorized('partner');
   const {user} = useAuth()
 
   const {data, status, error} = useReservationId(user?.id)
