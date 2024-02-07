@@ -82,8 +82,10 @@ import { usePathname } from "next/navigation";
 import Dropdown from "@/src/components/atoms/dropdown/dropdown";
 import { Bell, BellDot, LogOut, User, UserCircle, XCircle } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/src/context/AuthContext";
 
 const TopBar = () => {
+  const { logout } = useAuth();
   const pathname = usePathname();
   const [isNotification, setIsNotification] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -179,7 +181,7 @@ const TopBar = () => {
                   {
                     label: "Déconnexion",
                     icon: <LogOut />,
-                    onclick: () => {},
+                    onclick: () => logout(),
                   },
                 ]}
               >

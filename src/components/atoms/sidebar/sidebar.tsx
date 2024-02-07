@@ -22,6 +22,17 @@ const Sidebar: FunctionComponent = () => {
 
   return (
     <section className="c-sidebar">
+      <div className="mb-10">
+        <Link href="/admin/dashboard">
+          <img
+            src="/LetsGo_white.png"
+            alt="LetsGo Logo"
+            width={50}
+            height={50}
+          />
+          <span>Let&apos;s Go</span>
+        </Link>
+      </div>
       <Link
         href="/admin/dashboard"
         className={pathname === "/admin/dashboard" ? "active" : ""}
