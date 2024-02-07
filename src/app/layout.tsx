@@ -39,15 +39,16 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </head>
-
-      <body className="bg-slate-100">
-        <AuthContextProvider>
-          <QueryClientProvider client={queryClient}>
-            <Hydrate>{children}</Hydrate>
-            <ToastContainer />
-            <ReactQueryDevtools />
-          </QueryClientProvider>
-        </AuthContextProvider>
+      <body>
+        <main className="c-layout">
+          <AuthContextProvider>
+            <QueryClientProvider client={queryClient}>
+              <Hydrate>{children}</Hydrate>
+              <ToastContainer />
+              <ReactQueryDevtools />
+            </QueryClientProvider>
+          </AuthContextProvider>
+        </main>
       </body>
     </html>
   );
