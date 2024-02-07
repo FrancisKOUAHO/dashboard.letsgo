@@ -12,7 +12,6 @@ import {
 } from "@/src/components/atoms/forms/informationpartner";
 import FormValues from "@/src/interface/FormValues";
 import { useActivitiesById } from "@/src/hooks/useActivities";
-import LayoutCustom from "@/src/layouts/layoutCustom";
 import { Button } from "@/src/components/atoms/button/button";
 import Input from "@/src/components/atoms/input/input";
 import Card from "@/src/components/atoms/card/card";
@@ -115,7 +114,7 @@ const Page = () => {
   };
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-activities">
         <h2>Tous les activités</h2>
 
@@ -240,7 +239,7 @@ const Page = () => {
           />
         )}
       </Modal>
-    </LayoutCustom>
+    </>
   );
 };
 

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useReservations } from "@/src/hooks/useReservations";
-import LayoutCustom from "@/src/layouts/layoutCustom";
 import {
   ReservationContent,
   TitleTable,
@@ -21,7 +20,7 @@ const Page = () => {
   const [page, setPage] = useState(1);
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-reservations">
         <h2>Tous les reservations</h2>
 
@@ -85,7 +84,7 @@ const Page = () => {
           </nav>
         )}
       </div>
-    </LayoutCustom>
+    </>
   );
 };
 

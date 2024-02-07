@@ -6,7 +6,6 @@ import {
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
-import LayoutCustom from "@/src/layouts/layoutCustom";
 import CardStats from "@/src/components/atoms/cardstats/cardStats";
 import { useReservations } from "@/src/hooks/useReservations";
 import useIsAuthorized from "@/src/utils/auth";
@@ -35,35 +34,33 @@ const Page = () => {
   }
 
   return (
-    <LayoutCustom>
-      <div className="c-categories">
-        <h2>{"Bilan d'affaires"}</h2>
-        <div className="c-users__users">
-          <div className="container-card">
-            <CardStats
-              className="c-cardStats"
-              icon={icons.shoppingCart}
-              number={totalReservations}
-              numberofpourcents="0"
-              titleCards="Nombre de réservations"
-            />
-            <CardStats
-              className="c-cardStats"
-              icon={icons.euro}
-              number={totalPrice}
-              numberofpourcents="0"
-              titleCards="Chiffres d'affaires"
-            />
-            <CardStats
-              className="c-cardStats"
-              icon={icons.user}
-              numberofpourcents="0"
-              titleCards="Nombre de visiteurs"
-            />
-          </div>
+    <div className="c-categories">
+      <h2>{"Bilan d'affaires"}</h2>
+      <div className="c-users__users">
+        <div className="container-card">
+          <CardStats
+            className="c-cardStats"
+            icon={icons.shoppingCart}
+            number={totalReservations}
+            numberofpourcents="0"
+            titleCards="Nombre de réservations"
+          />
+          <CardStats
+            className="c-cardStats"
+            icon={icons.euro}
+            number={totalPrice}
+            numberofpourcents="0"
+            titleCards="Chiffres d'affaires"
+          />
+          <CardStats
+            className="c-cardStats"
+            icon={icons.user}
+            numberofpourcents="0"
+            titleCards="Nombre de visiteurs"
+          />
         </div>
       </div>
-    </LayoutCustom>
+    </div>
   );
 };
 

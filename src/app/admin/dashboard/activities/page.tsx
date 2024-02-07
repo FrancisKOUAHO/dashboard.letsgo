@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import FormValues from "@/src/interface/FormValues";
 import { useActivities } from "@/src/hooks/useActivities";
-import LayoutCustom from "@/src/layouts/layoutCustom";
 import { Button } from "@/src/components/atoms/button/button";
 import Input from "@/src/components/atoms/input/input";
 import Card from "@/src/components/atoms/card/card";
@@ -115,7 +114,7 @@ const Page = () => {
   };
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-activities">
         <h2>Tous les activités</h2>
 
@@ -232,7 +231,7 @@ const Page = () => {
           />
         )}
       </Modal>
-    </LayoutCustom>
+    </>
   );
 };
 

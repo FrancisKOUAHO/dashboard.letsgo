@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useCategories } from "@/src/hooks/useCategories";
-import LayoutCustom from "@/src/layouts/layoutCustom";
 import {
   CategoryContent,
   TitleTable,
@@ -22,7 +21,7 @@ const Page = () => {
   const [page, setPage] = useState(1);
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-categories">
         <h2>{"Toutes les catégories d'activités"}</h2>
 
@@ -84,7 +83,7 @@ const Page = () => {
           </nav>
         )}
       </div>
-    </LayoutCustom>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { ReactNode, useState } from "react";
 import "../styles/_main.scss";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -13,11 +13,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AuthContextProvider from "@/src/context/AuthContext";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
     () =>
       new QueryClient({

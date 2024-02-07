@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useUsers } from "@/src/hooks/useUsers";
 import { api } from "@/src/config/api";
-import LayoutCustom from "@/src/layouts/layoutCustom";
 import { Button } from "@/src/components/atoms/button/button";
 import CardUsers from "@/src/components/atoms/cardusers/cardUsers";
 import Modal from "@/src/components/atoms/modal/modal";
@@ -105,7 +104,7 @@ const Page = () => {
   }, []);
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-users">
         <h2>{"Tous les utilisateurs"}</h2>
 
@@ -304,7 +303,7 @@ const Page = () => {
           </form>
         </Modal>
       </div>
-    </LayoutCustom>
+    </>
   );
 };
 
