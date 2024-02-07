@@ -115,7 +115,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="c-activities">
+      <div className="c-activities o-padding">
         <h2>Tous les activités</h2>
 
         <div className="c-activities__title">

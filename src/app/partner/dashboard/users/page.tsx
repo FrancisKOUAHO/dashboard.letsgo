@@ -11,7 +11,7 @@ const Page = () => {
   const { data, status, error } = useUsers();
 
   return (
-    <div className="c-users">
+    <div className="c-users o-padding">
       <h2>{"Tous les utilisateurs"}</h2>
 
       <div className="c-users__users mt-12">

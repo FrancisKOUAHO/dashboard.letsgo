@@ -21,7 +21,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="c-reservations">
+      <div className="c-reservations o-padding">
         <h2>Tous les reservations</h2>
 
         <TitleTable

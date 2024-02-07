@@ -1,7 +1,6 @@
-@use '../../settings/index' as *;
+@use '../../settings' as *;
 
 .c-activities {
-  
   &__title {
     div:nth-child(1) {
       display: flex;

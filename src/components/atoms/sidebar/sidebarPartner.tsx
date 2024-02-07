@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   MousePointerSquare,
   Tv2,
-  Users,
 } from "lucide-react";
 
 import { usePathname } from "next/navigation";
@@ -23,20 +22,12 @@ const Sidebar: FunctionComponent = () => {
   return (
     <section className="c-sidebar">
       <Link
-        href="/admin/dashboard"
+        href="/partner/dashboard"
         className={pathname === "/admin/dashboard" ? "active" : ""}
         onClick={() => sethide(false)}
       >
         <LayoutDashboard />
         Dashboard
-      </Link>
-      <Link
-        href="/admin/dashboard/users"
-        className={pathname === "/dashboard/team" ? "active" : ""}
-        onClick={() => sethide(false)}
-      >
-        <Users />
-        Utilisateurs
       </Link>
       <button
         onClick={toggle}
@@ -59,24 +50,19 @@ const Sidebar: FunctionComponent = () => {
         }
       >
         <Link
-          href="/admin/dashboard/categories"
-          className={pathname === "/admin/dashboard/categories" ? "active" : ""}
-        >
-          <Tv2 />
-          Catégories
-        </Link>
-        <Link
-          href="/admin/dashboard/reservations"
+          href="/partner/dashboard/reservations"
           className={
-            pathname === "/admin/dashboard/reservations" ? "active" : ""
+            pathname === "/partner/dashboard/reservations" ? "active" : ""
           }
         >
           <Tv2 />
           Réservations
         </Link>
         <Link
-          href="/admin/dashboard/activities"
-          className={pathname === "/admin/dashboard/activities" ? "active" : ""}
+          href="/partner/dashboard/activities"
+          className={
+            pathname === "/partner/dashboard/activities" ? "active" : ""
+          }
         >
           <Grid3X3 />
           Activité

@@ -8,7 +8,6 @@ import {
 } from "react-icons/ai";
 import CardStats from "@/src/components/atoms/cardstats/cardStats";
 import { useReservations } from "@/src/hooks/useReservations";
-import LayoutCustom from "@/src/layouts/layoutCustom";
 import useIsAuthorized from "@/src/utils/auth";
 
 const icons = {
@@ -35,8 +34,8 @@ const Page = () => {
   }
 
   return (
-    <LayoutCustom>
-      <div className="c-categories">
+    <>
+      <div className="c-categories o-padding">
         <h2>{"Bilan d'affaires"}</h2>
         <div className="c-users__users">
           <div className="container-card">
@@ -64,7 +63,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-    </LayoutCustom>
+    </>
   );
 };
 

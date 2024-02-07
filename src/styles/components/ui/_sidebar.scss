@@ -1,4 +1,4 @@
-@use '../../settings/index' as *;
+@use '../../settings' as *;
 
 .c-sidebar {
   display: flex;
@@ -28,18 +28,19 @@
     padding: 10px;
     margin-bottom: 8px;
     font-size: $x-small;
-    color: white;
+    color: $white;
 
     &:hover {
-      background-color: $primary-color;
+      background-color: $white;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.043);
       transition: .2s all ease-in-out;
+      color: black;
     }
 
     &:focus {
-      background-color: $primary-color;
+      background-color: $white;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.043);
-      color: white;
+      color: black;
       font-weight: $xw-400;
     }
 
@@ -52,7 +53,7 @@
     &.active {
       background-color: $primary-color;
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.043);
-      color: white;
+      color: $white;
       font-weight: $xw-500;
 
       &::after {
@@ -73,13 +74,13 @@
   button {
     &.active {
       box-shadow: 0 1px 1px rgba(0, 0, 0, 0.043);
-      color: white;
+      color: $white;
       font-weight: $xw-500;
     }
   }
 
   .c-sidebar__sub-menu {
-    background-color: $primary-color;
+    background-color: $white;
     border-radius: 8px;
     width: 100%;
     padding: 8px 6px;
@@ -93,12 +94,12 @@
       border-radius: 0.75rem;
       padding: 10px;
       font-size: $x3-small;
-      color: white;
+      color: black;
       transition: .2s all ease-in-out;
 
       &:hover {
-        background-color: white;
-        color: $primary-color;
+        background-color: $primary-color;
+        color: $white;
       }
 
       svg {

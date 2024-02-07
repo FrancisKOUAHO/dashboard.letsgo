@@ -22,7 +22,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="c-categories">
+      <div className="c-categories o-padding">
         <h2>{"Toutes les catégories d'activités"}</h2>
 
         <TitleTable
