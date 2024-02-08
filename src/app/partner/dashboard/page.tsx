@@ -34,7 +34,7 @@ const Page = () => {
   }
 
   return (
-    <div className="c-categories">
+    <div className="c-categories o-padding">
       <h2>{"Bilan d'affaires"}</h2>
       <div className="c-users__users">
         <div className="container-card">
