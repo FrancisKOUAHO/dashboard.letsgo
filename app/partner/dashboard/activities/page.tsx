@@ -39,7 +39,6 @@ const Page = () => {
     name: "",
     image: typeof File !== "undefined" ? new File([], "") : null,
     practical_information: "",
-    price: "",
     compagny: "",
     programme: "",
     schedule: "",
@@ -100,7 +99,6 @@ const Page = () => {
       formData.append("duration", values.duration);
       formData.append("name", values.name);
       formData.append("practical_information", values.practical_information);
-      formData.append("price", values.price);
       formData.append("compagny", values.compagny);
       formData.append("programme", values.programme);
       formData.append("schedule", JSON.stringify(values.schedule));
@@ -279,7 +277,7 @@ const Page = () => {
         )}
       </Modal>
 
-      <Modal closeModal={closeModalPrice} isOpen={isOpenPrice} name="Ajouter price a une activité">
+      <Modal closeModal={closeModalPrice} isOpen={isOpenPrice} name="Ajouter le prix a un activité">
         <InformationActivityPrice />
       </Modal>
     </LayoutCustom>
