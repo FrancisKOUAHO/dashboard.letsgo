@@ -28,7 +28,7 @@ const Page = () => {
   const isAuthorized = useIsAuthorized('partner');
   const {user} = useAuth()
 
-  const initialFormValues: any = {
+  const initialFormValues = {
     address: "",
     cancellation_conditions: "",
     category_id: "",

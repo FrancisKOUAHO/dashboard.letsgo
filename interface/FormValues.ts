@@ -8,7 +8,6 @@ interface FormValues {
   name: string,
   image: File | null,
   practical_information: string,
-  price: string,
   compagny: string,
   programme: string,
   schedule: Object,
