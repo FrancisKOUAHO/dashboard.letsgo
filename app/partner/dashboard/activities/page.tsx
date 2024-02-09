@@ -28,7 +28,7 @@ const Page = () => {
   const isAuthorized = useIsAuthorized('partner');
   const {user} = useAuth()
 
-  const initialFormValues: FormValues = {
+  const initialFormValues: any = {
     address: "",
     cancellation_conditions: "",
     category_id: "",
@@ -49,7 +49,7 @@ const Page = () => {
   const [page, setPage] = useState(1);
   const [currentStep, setCurrentStep] = useState(1);
 
-  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+    const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
   const { data, status, error } = useActivitiesById(user?.id);
 
