@@ -10,6 +10,7 @@ import {
   InformationActivityPartner,
   UploadImagePartner,
 } from "@/components/atoms/forms/informationpartner";
+import InformationActivityPrice from "@/components/atoms/forms/Informationprice";
 import FormValues from "@/interface/FormValues";
 import {useActivities, useActivitiesById} from "@/hooks/useActivities";
 import LayoutCustom from "@/layouts/layoutCustom";
@@ -38,7 +39,6 @@ const Page = () => {
     name: "",
     image: typeof File !== "undefined" ? new File([], "") : null,
     practical_information: "",
-    price: "",
     compagny: "",
     programme: "",
     schedule: "",
@@ -46,6 +46,7 @@ const Page = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenPrice, setIsOpenPrice] = useState(false);
   const [page, setPage] = useState(1);
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -65,6 +66,14 @@ const Page = () => {
 
   const openModal = (): void => {
     setIsOpen(true);
+  };
+
+  const closeModalPrice = (): void => {
+    setIsOpenPrice(false);
+  };
+
+  const openModalPrice = (): void => {
+    setIsOpenPrice(true);
   };
 
   const handleNext = (values: any) => {
@@ -90,7 +99,6 @@ const Page = () => {
       formData.append("duration", values.duration);
       formData.append("name", values.name);
       formData.append("practical_information", values.practical_information);
-      formData.append("price", values.price);
       formData.append("compagny", values.compagny);
       formData.append("programme", values.programme);
       formData.append("schedule", JSON.stringify(values.schedule));
@@ -148,9 +156,14 @@ const Page = () => {
 
         <div className="c-activities__title">
           <div>
-            <Button color="primary" isActive={true} onClick={openModal}>
-              Ajouter
-            </Button>
+            <div className="c-activities-buttons">
+              <Button color="primary" isActive={true} onClick={openModal}>
+                Ajouter
+              </Button>
+              <Button color="primary" isActive={true} onClick={openModalPrice}>
+                Price
+              </Button>
+            </div>
             <div>
               <div>
                 <Input
@@ -239,11 +252,7 @@ const Page = () => {
           </nav>
         )}
       </div>
-      <Modal
-        closeModal={closeModal}
-        isOpen={isOpen}
-        name="Ajouter une activité"
-      >
+      <Modal closeModal={closeModal} isOpen={isOpen} name="Ajouter une activité">
         {currentStep === 1 && (
           <InformationActivityPartner onNext={handleNext} />
         )}
@@ -266,6 +275,10 @@ const Page = () => {
             onsubmit={handleSubmit}
           />
         )}
+      </Modal>
+
+      <Modal closeModal={closeModalPrice} isOpen={isOpenPrice} name="Ajouter le prix a un activité">
+        <InformationActivityPrice closeModal={closeModalPrice}/>
       </Modal>
     </LayoutCustom>
   );
