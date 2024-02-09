@@ -12,9 +12,7 @@ import {
 } from "@/components/atoms/forms/informationpartner";
 import InformationActivityPrice from "@/components/atoms/forms/Informationprice";
 import FormValues from "@/interface/FormValues";
-import {useActivities, useActivitiesById} from "@/hooks/useActivities";
-import LayoutCustom from "@/layouts/layoutCustom";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
+import { useActivitiesById} from "@/hooks/useActivities";
 import { Button } from "@/components/atoms/button/button";
 import Input from "@/components/atoms/input/input";
 import Card from "@/components/atoms/card/card";
@@ -124,7 +122,7 @@ const Page = () => {
   };
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-activities">
         <h2>Tous les activités</h2>
 
@@ -254,7 +252,7 @@ const Page = () => {
       <Modal closeModal={closeModalPrice} isOpen={isOpenPrice} name="Ajouter le prix a un activité">
         <InformationActivityPrice closeModal={closeModalPrice}/>
       </Modal>
-    </LayoutCustom>
+    </>
   );
 };
 

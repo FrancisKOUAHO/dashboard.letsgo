@@ -3,9 +3,7 @@
 import React from "react";
 import {AiOutlineEuro, AiOutlineShoppingCart, AiOutlineUser} from "react-icons/ai";
 import CardStats from "@/components/atoms/cardstats/cardStats";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import {useReservations} from "@/hooks/useReservations";
-import LayoutCustom from "@/layouts/layoutCustom";
 import useIsAuthorized from "@/utils/auth";
 
 const icons = {
@@ -33,7 +31,7 @@ const Page = () => {
   }
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-categories">
         <h2>{"Bilan d'affaires"}</h2>
         <div className="c-users__users">
@@ -44,7 +42,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-    </LayoutCustom>
+    </>
   )
 }
 

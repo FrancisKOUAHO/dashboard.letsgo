@@ -1,13 +1,17 @@
 'use client'
 
-import React, { FormEvent, useState } from "react";
+import React, {FormEvent, FunctionComponent, useState} from "react";
 import { Button } from "@/components/atoms/button/button";
 import Input from "@/components/atoms/input/input";
 import { useAuth } from "@/context/AuthContext";
 import { useActivitiesById } from "@/hooks/useActivities";
 import { api } from "@/config/api";
 
-const InformationActivityPrice = ({closeModal}) => {
+interface InformationActivityPriceProps {
+    closeModal: () => void;
+}
+
+const InformationActivityPrice: FunctionComponent<InformationActivityPriceProps> = ({closeModal}) => {
     const { user } = useAuth();
     const { data: activitiesData } = useActivitiesById(user?.id);
     const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);

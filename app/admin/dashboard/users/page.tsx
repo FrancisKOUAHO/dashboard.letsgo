@@ -4,12 +4,10 @@ import React, {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import {useUsers} from "@/hooks/useUsers";
 import {api} from "@/config/api";
-import LayoutCustom from "@/layouts/layoutCustom";
 import {Button} from "@/components/atoms/button/button";
 import CardUsers from "@/components/atoms/cardusers/cardUsers";
 import Modal from "@/components/atoms/modal/modal";
 import Input from "@/components/atoms/input/input";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import useIsAuthorized from "@/utils/auth";
 
 const Page = () => {
@@ -95,7 +93,7 @@ const Page = () => {
   }, [])
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-users">
         <h2>{"Tous les utilisateurs"}</h2>
 
@@ -232,7 +230,7 @@ const Page = () => {
           </form>
         </Modal>
       </div>
-    </LayoutCustom>
+    </>
   )
 }
 

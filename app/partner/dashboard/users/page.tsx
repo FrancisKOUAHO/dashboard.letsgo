@@ -2,8 +2,6 @@
 
 import React from "react";
 import {useUsers} from "@/hooks/useUsers";
-import LayoutCustom from "@/layouts/layoutCustom";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import CardUsers from "@/components/atoms/cardusers/cardUsers";
 import useIsAuthorized from "@/utils/auth";
 
@@ -14,7 +12,7 @@ const Page = () => {
     const {data, status, error} = useUsers()
 
     return (
-        <LayoutCustom>
+        <>
             <div className="c-users">
                 <h2>{"Tous les utilisateurs"}</h2>
 
@@ -38,7 +36,7 @@ const Page = () => {
                 </div>
 
             </div>
-        </LayoutCustom>
+        </>
     )
 }
 

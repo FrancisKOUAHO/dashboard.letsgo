@@ -3,8 +3,6 @@
 import {useState} from "react";
 import {useReservationId} from "@/hooks/useReservations";
 import {useAuth} from "@/context/AuthContext";
-import LayoutCustom from "@/layouts/layoutCustom";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import {ReservationContent, TitleTable} from "@/components/atoms/cardcategory/table";
 import useIsAuthorized from "@/utils/auth";
 
@@ -21,7 +19,7 @@ const Page = () => {
   const [page, setPage] = useState(1)
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-reservations">
         <h2>Tous les reservations</h2>
 
@@ -78,7 +76,7 @@ const Page = () => {
           </nav>
         )}
       </div>
-    </LayoutCustom>
+    </>
   )
 }
 

@@ -6,8 +6,6 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import FormValues from "@/interface/FormValues";
 import { useActivities } from "@/hooks/useActivities";
-import LayoutCustom from "@/layouts/layoutCustom";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import { Button } from "@/components/atoms/button/button";
 import Input from "@/components/atoms/input/input";
 import Card from "@/components/atoms/card/card";
@@ -21,7 +19,6 @@ import {
   UploadImage,
 } from "@/components/atoms/forms/information";
 import useIsAuthorized from "@/utils/auth";
-import InformationActivityPrice from "@/components/atoms/forms/Informationprice";
 
 const Page = () => {
   const isAuthorized = useIsAuthorized('admin');
@@ -115,7 +112,7 @@ const Page = () => {
   };
 
   return (
-    <LayoutCustom>
+    <>
       <div className="c-activities">
         <h2>Tous les activités</h2>
 
@@ -232,7 +229,7 @@ const Page = () => {
           />
         )}
       </Modal>
-    </LayoutCustom>
+    </>
   );
 };
 
