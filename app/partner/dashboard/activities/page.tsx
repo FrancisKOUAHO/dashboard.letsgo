@@ -278,7 +278,7 @@ const Page = () => {
       </Modal>
 
       <Modal closeModal={closeModalPrice} isOpen={isOpenPrice} name="Ajouter le prix a un activité">
-        <InformationActivityPrice />
+        <InformationActivityPrice closeModal={closeModalPrice}/>
       </Modal>
     </LayoutCustom>
   );

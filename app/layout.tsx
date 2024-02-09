@@ -29,7 +29,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     <html lang="fr">
     <head/>
     <body className="bg-slate-100">
-    {/*<AuthContextProvider>*/}
+    <AuthContextProvider>
       <QueryClientProvider client={queryClient}>
         <Hydrate>
           {children}
@@ -37,7 +37,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <ToastContainer/>
         <ReactQueryDevtools/>
       </QueryClientProvider>
-    {/*</AuthContextProvider>*/}
+    </AuthContextProvider>
     </body>
     </html>
   )
